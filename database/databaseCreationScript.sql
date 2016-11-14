@@ -11,10 +11,14 @@ USE `java2` ;
 DROP TABLE IF EXISTS `users` ;
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `UserID` INT(11) NOT NULL AUTO_INCREMENT,
-  `FirstName` CHAR(32) NOT NULL,
-  `LastName` CHAR(32) NOT NULL,
-  PRIMARY KEY (`UserID`)
+  `usr_id` INT(11) NOT NULL AUTO_INCREMENT,   -- Each field in users table is prefixed with 'usr'
+  `usr_hash` VARCHAR(100) NOT NULL UNIQUE,    -- This hash will be part of web address, i.e www.smartfridge.com/webapp?u=Xs8w0jspC3pY
+  `usr_name` VARCHAR(255),                    -- User name and surname, can be NULL if not provided
+  `usr_email` VARCHAR(255) NULL UNIQUE,       -- Unique user email, can be NULL
+  `usr_password` VARCHAR(255),                -- Encrypted password
+  `usr_phone` VARCHAR(100),                   -- Telephone number
+  `usr_language` VARCHAR(3),                  -- User selected language in format en, lv, ru
+  PRIMARY KEY (`usr_id`)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
