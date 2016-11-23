@@ -54,23 +54,32 @@ CREATE TABLE IF NOT EXISTS `shops` (
     PRIMARY KEY (`shp_id`)
 );
 
+DROP TABLE IF EXISTS `shopping_list_details` ;
+
+CREATE TABLE IF NOT EXISTS `shopping_list_details`(
+    `prd_id` INT(11),                                -- Product id which is added by user to the shopping list
+    `lst_id` BIGINT(20),                             -- Shopping list item id
+    `prd_quantity` INT(5),                           -- Quantity of how many items of the given product should be bought
+    `prd_price` FLOAT(7),                            -- Price of the item
+    `shp_id` INT(11),                                -- Shop id where the item can be bought
+    PRIMARY KEY (`prd_id`, `lst_id`),
+    FOREIGN KEY (`prd_id`) REFERENCES `products` (`prd_id`),
+    FOREIGN KEY (`shp_id`) REFERENCES `shops` (`shp_id`),
+    FOREIGN KEY (`lst_id`) REFERENCES `shopping_list` (`lst_id`)
+);
 
 DROP TABLE IF EXISTS `shopping_list` ;
 
 CREATE TABLE IF NOT EXISTS `shopping_list`(
     `lst_id` BIGINT(20) NOT NULL AUTO_INCREMENT,     -- Shopping list item id
     `usr_id` INT(11),                                -- User id which created the shopping list. This field should be indexed
-    `prd_id` INT(11),                                -- Product id which is added by user to the shopping list
-    `lst_quantity` INT(5),                           -- Quantity of how many items of the given product should be bought
-    `lst_price` FLOAT(7),                            -- Price of the item
-    `shp_id` INT(11),                                -- Shop id where the item can be bought
+    `lst_quantity` INT(5),                           -- Quantity of how many items of the all products should be bought
+    `lst_price` FLOAT(7),                            -- Total price of  all items
     `lst_added_time` DATETIME,
     `lst_added_ip` VARCHAR(255),
     `lst_added_country` VARCHAR(3),
     PRIMARY KEY (`lst_id`),
-    FOREIGN KEY (`usr_id`) REFERENCES `users` (`usr_id`),
-    FOREIGN KEY (`prd_id`) REFERENCES `products` (`prd_id`),
-    FOREIGN KEY (`shp_id`) REFERENCES `shops` (`shp_id`)
+    FOREIGN KEY (`usr_id`) REFERENCES `users` (`usr_id`)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
