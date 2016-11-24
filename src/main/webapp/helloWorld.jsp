@@ -5,8 +5,10 @@
 </head>
 <body>
 
-
+<p>
     <h1><%request.getAttribute("data");%></h1>
+</p>
+
 
 </body>
 </html>
