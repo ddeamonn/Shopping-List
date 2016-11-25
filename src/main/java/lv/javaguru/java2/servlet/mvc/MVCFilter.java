@@ -1,5 +1,8 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import lv.javaguru.java2.servlet.mvc.controllers.AddProductController;
+import lv.javaguru.java2.servlet.mvc.controllers.ViewProductController;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +17,8 @@ public class MVCFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         controllers = new HashMap<>();
-        controllers.put("/hello", new HelloWorldController());
+        controllers.put("/", new ViewProductController());
+        controllers.put("/addProduct", new AddProductController());
     }
 
     @Override

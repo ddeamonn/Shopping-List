@@ -5,7 +5,7 @@
         <th>Products</th>
     </tr>
 
-    <c:forEach var="product" items="${requestScope.products}">
+    <c:forEach var="product" items="${requestScope.data}">
         <tr>
             <td>${product.productName}</td>
         </tr>

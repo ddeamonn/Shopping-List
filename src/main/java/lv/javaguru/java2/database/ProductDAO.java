@@ -11,6 +11,8 @@ public interface ProductDAO {
 
     Product getById(String id);
 
+    Product getByName(String name);
+
     void delete(Long id);
 
     void update(Product product);

@@ -49,7 +49,7 @@ public class ProductDAOImpl extends DAOImpl implements ProductDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from PRODUCTS where prd_name = ?");
+                    .prepareStatement("select * from PRODUCTS where prd_id = ?");
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             Product product = null;
@@ -59,6 +59,30 @@ public class ProductDAOImpl extends DAOImpl implements ProductDAO {
             return product;
         } catch (Throwable e) {
             System.out.println("Exception while execute ProductDAOImpl.getById()");
+            e.printStackTrace();
+            throw new DBException(e);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    @Override
+    public Product getByName(String name) {
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("select * from PRODUCTS where prd_name = ?");
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Product product = null;
+            if (resultSet.next()) {
+                product = populateProduct(resultSet);
+            }
+            return product;
+        } catch (Throwable e) {
+            System.out.println("Exception while execute ProductDAOImpl.getByName()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
