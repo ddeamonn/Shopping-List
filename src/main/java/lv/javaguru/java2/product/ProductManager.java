@@ -1,8 +1,10 @@
-package lv.javaguru.java2.servlet.product;
+package lv.javaguru.java2.product;
 
+import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.database.jdbc.ProductDAOImpl;
 import lv.javaguru.java2.domain.Product;
+import lv.javaguru.java2.domain.ProductBuilder;
 
 import java.util.List;
 
@@ -12,6 +14,16 @@ import java.util.List;
 public class ProductManager {
 
     public ProductManager() {}
+
+    public Product populateProduct(ProductInputData inputData) {
+
+        Product product = new Product();
+        ProductBuilder builder = ProductBuilder
+                .createProduct()
+                .withProductName(inputData.getProductName());
+
+        return builder.build();
+    }
 
     public void createProduct(Product product) throws RuntimeException {
         ProductDAO productDAO = new ProductDAOImpl();
