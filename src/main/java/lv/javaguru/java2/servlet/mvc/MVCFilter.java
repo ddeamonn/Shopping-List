@@ -28,19 +28,13 @@ public class MVCFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         String contextURI = req.getServletPath();
-        String method = req.getMethod();
+        //String method = req.getMethod();
 
         if (contextURI.contains("/css")) {
             filterChain.doFilter(request, response);
         } else {
             MVCController controller = controllers.get(contextURI);
-            MVCModel model;
-            if (method.equalsIgnoreCase("GET")){
-                model = controller.processGet(req);
-            }
-            else {
-                model = controller.processPost(req);
-            }
+            MVCModel model = processRequestByMethodAndReturnModel(req, controller);
 
             req.setAttribute("data", model.getData());
 
@@ -51,9 +45,12 @@ public class MVCFilter implements Filter {
 
     }
 
-    @Override
-    public void destroy() {
-
+    private MVCModel processRequestByMethodAndReturnModel(HttpServletRequest req, MVCController controller ) {
+        String method = req.getMethod();
+        return method.equalsIgnoreCase("GET") ? controller.processGet(req) : controller.processPost(req);
     }
+
+    @Override
+    public void destroy() {}
 
 }
