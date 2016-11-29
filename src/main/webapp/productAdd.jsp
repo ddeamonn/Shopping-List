@@ -6,7 +6,14 @@
     </tr>
     <tr>
         <td>Name:<input type="text" name="pname"></td>
-        <td><input type="submit" value="save new product"><td>
+    </tr>
+
+    <tr>
+        <td>Category:<input type="text" name="pcategory"></td>
+    </tr>
+
+    <tr>
+        <td><input type="submit" value="save product"><td>
     </tr>
 </table>
 </form>
