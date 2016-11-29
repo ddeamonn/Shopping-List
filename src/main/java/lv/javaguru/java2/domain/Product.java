@@ -12,8 +12,7 @@ public class Product {
     private Long productId;
     private Timestamp addedTime;
     private String addedIP;
-    private Integer productQuantity;
-    private BigDecimal productPrice;
+    private String productCategory;
 
     public String getProductName() {
         return productName;
@@ -47,19 +46,11 @@ public class Product {
         this.addedIP = addedIP;
     }
 
-    public Integer getProductQuantity() {
-        return productQuantity;
+    public String getProductCategory() {
+        return productCategory;
     }
 
-    public void setProductQuantity(Integer productQuantity) {
-        this.productQuantity = productQuantity;
-    }
-
-    public BigDecimal getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(BigDecimal productPrice) {
-        this.productPrice = productPrice;
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
     }
 }
