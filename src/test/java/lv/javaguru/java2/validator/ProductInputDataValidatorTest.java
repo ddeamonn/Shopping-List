@@ -1,7 +1,8 @@
-package lv.javaguru.java2.database.jdbc.validator.product;
+package lv.javaguru.java2.validator;
 
 import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.validator.product.ProductInputDataValidator;
+import lv.javaguru.java2.validator.product.ValidationException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -11,23 +12,29 @@ import static org.junit.Assert.assertTrue;
  */
 public class ProductInputDataValidatorTest {
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = ValidationException.class)
     public void ProductNameIsEmptyTest () {
 
         ProductInputData inputData = new ProductInputData();
-        inputData.setProductName("");
+        inputData.setInputProductName("");
+        inputData.setInputProductCategory("Food");
 
         ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
+        productDataValidator.prepareRules();
+
         productDataValidator.validate(inputData);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = ValidationException.class)
     public void ProductNameIsNULLTest () {
 
         ProductInputData inputData = new ProductInputData();
-        inputData.setProductName(null);
+        inputData.setInputProductName(null);
+        inputData.setInputProductCategory("Food");
 
         ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
+        productDataValidator.prepareRules();
+
         productDataValidator.validate(inputData);
     }
 
@@ -35,9 +42,12 @@ public class ProductInputDataValidatorTest {
     public void ProductNameIsSpecifiedTest () {
 
         ProductInputData inputData = new ProductInputData();
-        inputData.setProductName("Milk");
+        inputData.setInputProductName("Milk");
+        inputData.setInputProductCategory("Food");
 
         ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
+        productDataValidator.prepareRules();
+
         boolean result = productDataValidator.validate(inputData);
 
         assertTrue(result);
