@@ -15,16 +15,6 @@ public class ProductManager {
 
     public ProductManager() {}
 
-    public Product populateProduct(ProductInputData inputData) {
-
-        Product product = new Product();
-        ProductBuilder builder = ProductBuilder
-                .createProduct()
-                .withProductName(inputData.getProductName());
-
-        return builder.build();
-    }
-
     public void createProduct(Product product) throws RuntimeException {
         ProductDAO productDAO = new ProductDAOImpl();
         productDAO.create(product);
