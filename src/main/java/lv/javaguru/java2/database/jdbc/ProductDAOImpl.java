@@ -25,8 +25,11 @@ public class ProductDAOImpl extends DAOImpl implements ProductDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into PRODUCTS values (?, default, default, default, default, default, default)");
+                    connection.prepareStatement("insert into PRODUCTS values (?, default, ?, default, ?, ?, default)");
             preparedStatement.setString(1, product.getProductName());
+            preparedStatement.setString(2, product.getProductCategory());
+            preparedStatement.setTimestamp(3, product.getAddedTime());
+            preparedStatement.setString(4, product.getAddedIP());
 
             preparedStatement.executeUpdate();
             //ResultSet rs = preparedStatement.getGeneratedKeys();
