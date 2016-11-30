@@ -20,9 +20,8 @@ public class ProductInputDataValidatorTest {
         inputData.setInputProductCategory("Food");
 
         ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
-        productDataValidator.prepareRules();
-
         productDataValidator.validate(inputData);
+
     }
 
     @Test(expected = ValidationException.class)
@@ -33,8 +32,6 @@ public class ProductInputDataValidatorTest {
         inputData.setInputProductCategory("Food");
 
         ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
-        productDataValidator.prepareRules();
-
         productDataValidator.validate(inputData);
     }
 
@@ -46,7 +43,6 @@ public class ProductInputDataValidatorTest {
         inputData.setInputProductCategory("Food");
 
         ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
-        productDataValidator.prepareRules();
 
         boolean result = productDataValidator.validate(inputData);
 

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
-import lv.javaguru.java2.data.IPAddressUtils;
+import lv.javaguru.java2.utils.IPAddressUtils;
 import lv.javaguru.java2.data.InputDataException;
 import lv.javaguru.java2.data.product.HTTProductInputDataParser;
 import lv.javaguru.java2.data.product.ProductInputData;
@@ -33,7 +33,6 @@ public class AddProductController implements MVCController {
             ProductInputData inputData = parser.parse();
 
             ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
-            productDataValidator.prepareRules();
 
             productDataValidator.validate(inputData);
 

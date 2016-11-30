@@ -15,18 +15,9 @@ public class ProductInputDataValidator {
 
     List<ProductInputDataRule> rules;
 
-    public void prepareRules() {
-
-        rules = new ArrayList<>();
-
-        ProductInputDataRule rule = new ProductNameValidatorRule();
-        rules.add(rule);
-
-        rule = new ProductCategoryValidatorRule();
-        rules.add(rule);
-    }
-
     public boolean validate(ProductInputData inputData) {
+
+        rules = ProductRuleFactory.getProductInputRules();
 
         for (ProductInputDataRule rule : rules) {
             rule.validate(inputData);
