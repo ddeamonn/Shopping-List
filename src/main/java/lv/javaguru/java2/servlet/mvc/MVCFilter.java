@@ -29,12 +29,12 @@ public class MVCFilter implements Filter {
         try {
             springContext = new AnnotationConfigApplicationContext(SpringConfig.class);
         } catch (BeansException e) {
-            //logger.error("Error " + e);
+            logger.error("Error " + e.getMessage());
         }
 
         controllers = new HashMap<>();
         controllers.put("/", getBean(ViewProductController.class));
-        controllers.put("/addProduct", new AddProductController());
+        controllers.put("/addProduct", getBean(AddProductController.class));
     }
 
     private MVCController getBean ( Class<?> clazz ) {

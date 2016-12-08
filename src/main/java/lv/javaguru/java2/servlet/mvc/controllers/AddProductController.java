@@ -12,10 +12,16 @@ import lv.javaguru.java2.servlet.mvc.MVCModel;
 import lv.javaguru.java2.product.ProductManager;
 import lv.javaguru.java2.validator.product.ProductInputDataValidator;
 import lv.javaguru.java2.validator.product.ValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Component
 public class AddProductController implements MVCController {
+
+    @Autowired
+    ProductManager productManager;
 
     @Override
     public MVCModel processGet(HttpServletRequest request) {
@@ -45,7 +51,7 @@ public class AddProductController implements MVCController {
                     .withCurrentAddedTime()
                     .build();
 
-            ProductManager productManager = new ProductManager();
+            //ProductManager productManager = new ProductManager();
             productManager.createProduct(product);
 
             jspResult = "/addProductResult.jsp";

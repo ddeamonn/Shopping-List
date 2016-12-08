@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.Product;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -16,7 +17,10 @@ import static org.junit.Assert.assertTrue;
  */
 public class ProductDAOImplTest extends DBUnitTestCase {
 
-    private ProductDAO productDAO = new ProductDAOImpl();
+    @Autowired
+    private ProductDAO productDAO;
+    //private ProductDAO productDAO = new ProductDAOImpl();
+
 
     @Override
     protected String getDatabaseFile() {

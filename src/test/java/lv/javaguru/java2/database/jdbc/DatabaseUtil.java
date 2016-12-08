@@ -9,6 +9,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
+import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -16,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class DatabaseUtil extends DAOImpl {
 
     void setupDatabaseFromFile(String fileName) throws Exception {

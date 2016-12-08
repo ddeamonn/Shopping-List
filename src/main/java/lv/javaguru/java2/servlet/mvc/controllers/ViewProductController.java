@@ -4,12 +4,16 @@ package lv.javaguru.java2.servlet.mvc.controllers;
 import lv.javaguru.java2.servlet.mvc.MVCController;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
 import lv.javaguru.java2.product.ProductManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class ViewProductController implements MVCController {
+
+    @Autowired
+    ProductManager productManager;
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
@@ -18,7 +22,7 @@ public class ViewProductController implements MVCController {
         Object data;
 
         try {
-            ProductManager productManager = new ProductManager();
+
             data = productManager.getProducts();
 
             view = "/startpage.jsp";

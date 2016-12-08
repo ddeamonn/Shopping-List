@@ -3,14 +3,19 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static lv.javaguru.java2.domain.UserBuilder.createUser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+@Component
 public class UserDAOImplTest extends DBUnitTestCase {
 
-    private UserDAO userDAO = new UserDAOImpl();
+   @Autowired
+    private UserDAO userDAO;
+    //private UserDAO userDAO = new UserDAOImpl();
 
     @Override
     protected String getDatabaseFile() {

@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.domain.User;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ProductDAOImpl extends DAOImpl implements ProductDAO {
 
     public void create(Product product) throws DBException {
