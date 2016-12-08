@@ -1,7 +1,12 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.servlet.mvc.controllers.AddProductController;
 import lv.javaguru.java2.servlet.mvc.controllers.ViewProductController;
+import org.apache.log4j.Logger;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -12,13 +17,28 @@ import java.util.Map;
 
 public class MVCFilter implements Filter {
 
+    Logger logger = Logger.getLogger(MVCFilter.class);
+
     private Map<String, MVCController> controllers;
+
+    private ApplicationContext springContext;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+
+        try {
+            springContext = new AnnotationConfigApplicationContext(SpringConfig.class);
+        } catch (BeansException e) {
+            logger.error("Error " + e);
+        }
+
         controllers = new HashMap<>();
-        controllers.put("/", new ViewProductController());
+        controllers.put("/", getBean(ViewProductController.class));
         controllers.put("/addProduct", new AddProductController());
+    }
+
+    private MVCController getBean ( Class<?> clazz ) {
+        return (MVCController) springContext.getBean(clazz);
     }
 
     @Override
