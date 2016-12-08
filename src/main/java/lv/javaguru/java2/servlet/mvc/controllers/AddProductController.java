@@ -33,7 +33,6 @@ public class AddProductController implements MVCController {
             ProductInputData inputData = parser.parse();
 
             ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
-
             productDataValidator.validate(inputData);
 
             String ipAddress = IPAddressUtils.getIpAddressFromRequest(request);

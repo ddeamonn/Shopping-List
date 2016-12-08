@@ -28,11 +28,8 @@ public class MVCFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         String contextURI = req.getServletPath();
-        //String method = req.getMethod();
 
-        if (contextURI.contains("/css")) {
-            filterChain.doFilter(request, response);
-        } else {
+        if (controllers.containsKey(contextURI)) {
             MVCController controller = controllers.get(contextURI);
             MVCModel model = processRequestByMethodAndReturnModel(req, controller);
 
@@ -41,8 +38,9 @@ public class MVCFilter implements Filter {
             ServletContext context = req.getServletContext();
             RequestDispatcher requestDispatcher = context.getRequestDispatcher(model.getJspName());
             requestDispatcher.forward(req, resp);
+        } else {
+            filterChain.doFilter(request, response);
         }
-
     }
 
     private MVCModel processRequestByMethodAndReturnModel(HttpServletRequest req, MVCController controller ) {

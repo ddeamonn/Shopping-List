@@ -1,13 +1,10 @@
 package lv.javaguru.java2.product;
 
-import lv.javaguru.java2.data.DateUtils;
-import lv.javaguru.java2.data.IPAddressUtils;
+import lv.javaguru.java2.utils.DateUtils;
 import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.domain.ProductBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**

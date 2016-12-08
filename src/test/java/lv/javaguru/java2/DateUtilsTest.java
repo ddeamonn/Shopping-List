@@ -1,6 +1,6 @@
 package lv.javaguru.java2;
 
-import lv.javaguru.java2.data.DateUtils;
+import lv.javaguru.java2.utils.DateUtils;
 import org.junit.Test;
 
 import java.sql.Timestamp;

@@ -13,11 +13,9 @@ import java.util.List;
  */
 public class ProductInputDataValidator {
 
-    List<ProductInputDataRule> rules;
-
     public boolean validate(ProductInputData inputData) {
 
-        rules = ProductRuleFactory.getProductInputRules();
+        List<ProductInputDataRule> rules = ProductRuleFactory.getProductInputRules();
 
         for (ProductInputDataRule rule : rules) {
             rule.validate(inputData);

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.data;
+package lv.javaguru.java2.utils;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -2,6 +2,7 @@ package lv.javaguru.java2.product;
 
 import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.domain.Product;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -26,6 +27,6 @@ public class BuildProductHelperTest {
                 .withCurrentAddedTime()
                 .build();
 
-        System.out.println("product:"+ product);
+        Assert.assertEquals("Milk", product.getProductName());
     }
 }
