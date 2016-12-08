@@ -29,7 +29,7 @@ public class MVCFilter implements Filter {
         try {
             springContext = new AnnotationConfigApplicationContext(SpringConfig.class);
         } catch (BeansException e) {
-            logger.error("Error " + e);
+            //logger.error("Error " + e);
         }
 
         controllers = new HashMap<>();
