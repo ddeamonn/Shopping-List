@@ -1,11 +1,14 @@
 package lv.javaguru.java2.domain;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
  * Created by DMC on 11/23/2016.
  */
+
 public class ProductBuilder {
 
     String productName;

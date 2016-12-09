@@ -29,6 +29,9 @@ public class AddProductController implements MVCController {
     @Autowired
     ProductInputDataValidator productDataValidator;
 
+    @Autowired
+    BuildProductHelper productHelper;
+
     @Override
     public MVCModel processGet(HttpServletRequest request) {
         return new MVCModel("/error.jsp", "Incorrect request");
@@ -46,7 +49,7 @@ public class AddProductController implements MVCController {
 
             String ipAddress = IPAddressUtils.getIpAddressFromRequest(request);
 
-            BuildProductHelper productHelper = new BuildProductHelper();
+
             Product product = productHelper
                     .createProduct()
                     .withInputData(inputData)

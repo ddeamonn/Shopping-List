@@ -16,12 +16,6 @@ public class HTTProductInputDataParser implements ProductInputDataParser {
 
     Logger logger =  Logger.getLogger(HTTProductInputDataParser.class);
 
-    HttpServletRequest request;
-
-    public HTTProductInputDataParser(HttpServletRequest request) {
-        this.request = request;
-    }
-
     @Override
     public ProductInputData parse(Map requestMap) {
 

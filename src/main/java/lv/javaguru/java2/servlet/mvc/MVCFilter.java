@@ -25,10 +25,10 @@ public class MVCFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
         try {
             springContext = new AnnotationConfigApplicationContext(SpringConfig.class);
         } catch (BeansException e) {
+            System.out.println("error"+e.getMessage());
             logger.error("Error " + e.getMessage());
         }
 
@@ -38,6 +38,7 @@ public class MVCFilter implements Filter {
     }
 
     private MVCController getBean ( Class<?> clazz ) {
+        System.out.println("context:"+springContext);
         return (MVCController) springContext.getBean(clazz);
     }
 

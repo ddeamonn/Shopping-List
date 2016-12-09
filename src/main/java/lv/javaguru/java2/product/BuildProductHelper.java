@@ -4,12 +4,15 @@ import lv.javaguru.java2.utils.DateUtils;
 import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.domain.ProductBuilder;
+import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 
 /**
  * Created by DMC on 11/28/2016.
  */
+
+@Component
 public class BuildProductHelper {
 
     ProductBuilder builder;
