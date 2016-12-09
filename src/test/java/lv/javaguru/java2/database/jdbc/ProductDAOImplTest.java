@@ -17,10 +17,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class ProductDAOImplTest extends DBUnitTestCase {
 
-    @Autowired
-    private ProductDAO productDAO;
-    //private ProductDAO productDAO = new ProductDAOImpl();
-
+    private ProductDAO productDAO = new ProductDAOImpl();
 
     @Override
     protected String getDatabaseFile() {
