@@ -2,8 +2,7 @@ package lv.javaguru.java2.domain;
 
 public class UserBuilder {
 
-    private String firstName;
-    private String lastName;
+    private String userName;
 
     private UserBuilder() {}
 
@@ -13,19 +12,12 @@ public class UserBuilder {
 
     public User build() {
         User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
+        user.setUserName(userName);
         return user;
     }
 
-    public UserBuilder withFirstName(String firstName) {
-        this.firstName = firstName;
+    public UserBuilder withName(String userName) {
+        this.userName = userName;
         return this;
     }
-
-    public UserBuilder withLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
 }

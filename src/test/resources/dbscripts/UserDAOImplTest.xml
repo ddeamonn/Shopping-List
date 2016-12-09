@@ -1,4 +1,3 @@
 <dataset>
-    <USERS FirstName="Bob" LastName="Doe"/>
-    <USERS FirstName="Alice" LastName="Foo"/>
+    <USERS usr_name="Joe" usr_hash="123"/>
 </dataset>

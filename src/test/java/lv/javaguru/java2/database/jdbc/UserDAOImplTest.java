@@ -10,12 +10,10 @@ import static lv.javaguru.java2.domain.UserBuilder.createUser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@Component
+
 public class UserDAOImplTest extends DBUnitTestCase {
 
-   @Autowired
-    private UserDAO userDAO;
-    //private UserDAO userDAO = new UserDAOImpl();
+    private UserDAO userDAO = new UserDAOImpl();
 
     @Override
     protected String getDatabaseFile() {
@@ -25,16 +23,14 @@ public class UserDAOImplTest extends DBUnitTestCase {
     @Test
     public void testCreate() throws Exception {
         User user = createUser()
-                .withFirstName("F")
-                .withLastName("L").build();
+                .withName("L").build();
 
         userDAO.create(user);
 
-        User userFromDB = userDAO.getById(user.getUserId());
+        User userFromDB = userDAO.getById(user.getUserID());
         assertNotNull(userFromDB);
-        assertEquals(user.getUserId(), userFromDB.getUserId());
-        assertEquals(user.getFirstName(), userFromDB.getFirstName());
-        assertEquals(user.getLastName(), userFromDB.getLastName());
+        assertEquals(user.getUserID(), userFromDB.getUserID());
+        assertEquals(user.getUserName(), userFromDB.getUserName());
     }
 
 }
