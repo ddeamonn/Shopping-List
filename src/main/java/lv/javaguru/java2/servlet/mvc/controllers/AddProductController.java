@@ -21,7 +21,13 @@ import javax.servlet.http.HttpServletRequest;
 public class AddProductController implements MVCController {
 
     @Autowired
+    ProductInputDataParser parser;
+
+    @Autowired
     ProductManager productManager;
+
+    @Autowired
+    ProductInputDataValidator productDataValidator;
 
     @Override
     public MVCModel processGet(HttpServletRequest request) {
@@ -34,11 +40,8 @@ public class AddProductController implements MVCController {
         String message = "";
 
         try {
+            ProductInputData inputData = parser.parse(request.getParameterMap());
 
-            ProductInputDataParser parser = new HTTProductInputDataParser(request);
-            ProductInputData inputData = parser.parse();
-
-            ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
             productDataValidator.validate(inputData);
 
             String ipAddress = IPAddressUtils.getIpAddressFromRequest(request);
@@ -51,7 +54,6 @@ public class AddProductController implements MVCController {
                     .withCurrentAddedTime()
                     .build();
 
-            //ProductManager productManager = new ProductManager();
             productManager.createProduct(product);
 
             jspResult = "/addProductResult.jsp";

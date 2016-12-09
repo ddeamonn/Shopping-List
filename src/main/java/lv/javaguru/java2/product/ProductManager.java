@@ -20,12 +20,10 @@ public class ProductManager {
     ProductDAO productDAO;
 
     public void createProduct(Product product) throws RuntimeException {
-        //ProductDAO productDAO = new ProductDAOImpl();
         productDAO.create(product);
     }
 
     public List<Product> getProducts() {
-        //ProductDAO productDAO = new ProductDAOImpl();
         return productDAO.getAll();
     }
 }

@@ -38,7 +38,6 @@ public class MVCFilter implements Filter {
     }
 
     private MVCController getBean ( Class<?> clazz ) {
-        System.out.println("Bean " +  springContext.getBean(clazz));
         return (MVCController) springContext.getBean(clazz);
     }
 

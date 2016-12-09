@@ -4,6 +4,7 @@ import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.validator.product.rule.ProductCategoryValidatorRule;
 import lv.javaguru.java2.validator.product.rule.ProductInputDataRule;
 import lv.javaguru.java2.validator.product.rule.ProductNameValidatorRule;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by DMC on 11/28/2016.
  */
+@Component
 public class ProductInputDataValidator {
 
     public boolean validate(ProductInputData inputData) {
