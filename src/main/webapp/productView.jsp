@@ -5,9 +5,14 @@
         <th>Products</th>
     </tr>
 
-    <c:forEach var="product" items="${requestScope.data}">
-        <tr>
-            <td>${product.productName}</td>
-        </tr>
-    </c:forEach>
+    <tr>
+        <td>
+        <select name="product">
+            <c:forEach var="product" items="${requestScope.data}">
+                <option value="${product.productId}">${product.productName}</option>
+            </c:forEach>
+        </select>
+        </td>
+        <td>Quantity:<input type="text" name="pqty"></td>
+    </tr>
 </table>

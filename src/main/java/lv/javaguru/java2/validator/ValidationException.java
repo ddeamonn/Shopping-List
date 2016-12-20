@@ -1,4 +1,4 @@
-package lv.javaguru.java2.validator.product;
+package lv.javaguru.java2.validator;
 
 /**
  * Created by DMC on 11/29/2016.

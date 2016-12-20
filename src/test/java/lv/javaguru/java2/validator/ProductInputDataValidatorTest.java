@@ -2,7 +2,6 @@ package lv.javaguru.java2.validator;
 
 import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.validator.product.ProductInputDataValidator;
-import lv.javaguru.java2.validator.product.ValidationException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

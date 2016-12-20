@@ -1,10 +1,14 @@
 package lv.javaguru.java2.data.product;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
 /**
  * Created by DMC on 11/28/2016.
  */
+
+@Component
 public class ProductInputData {
     String inputProductName;
     String inputProductCategory;

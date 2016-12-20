@@ -6,7 +6,6 @@
     <title>Shopping list page</title>
 </head>
 <body>
-    <%@ include file="productView.jsp" %>
-    <%@ include file="productAdd.jsp" %>
+    <%@ include file="shoppinglist.jsp" %>
 </body>
 </html>

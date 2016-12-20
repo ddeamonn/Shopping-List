@@ -1,9 +1,13 @@
-package lv.javaguru.java2.validator.product;
+package lv.javaguru.java2.validator.shoplist;
 
 import lv.javaguru.java2.validator.product.rule.ProductCategoryValidatorRule;
 import lv.javaguru.java2.validator.product.rule.ProductInputDataRule;
 import lv.javaguru.java2.validator.product.rule.ProductNameValidatorRule;
+import lv.javaguru.java2.validator.shoplist.rule.ShoplistInputDataRule;
+import lv.javaguru.java2.validator.shoplist.rule.ShoplistProductNameRule;
+import lv.javaguru.java2.validator.shoplist.rule.ShoplistQtyRule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,13 +16,14 @@ import java.util.List;
 /**
  * Created by DMC on 11/30/2016.
  */
+
 @Component
-public class ProductRuleFactory {
+public class ShoplistRuleFactory {
 
     @Autowired
-    List<ProductInputDataRule>  rules;
+    private List<ShoplistInputDataRule> rules;
 
-    public List<ProductInputDataRule> getProductInputRules() {
+    public List<ShoplistInputDataRule> getShoplistRules() {
         return rules;
     }
 }

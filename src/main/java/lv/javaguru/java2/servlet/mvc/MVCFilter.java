@@ -2,6 +2,8 @@ package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.servlet.mvc.controllers.AddProductController;
+import lv.javaguru.java2.servlet.mvc.controllers.AddShoplistController;
+import lv.javaguru.java2.servlet.mvc.controllers.ShoplistController;
 import lv.javaguru.java2.servlet.mvc.controllers.ViewProductController;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
@@ -33,8 +35,10 @@ public class MVCFilter implements Filter {
         }
 
         controllers = new HashMap<>();
-        controllers.put("/", getBean(ViewProductController.class));
+        controllers.put("/", getBean(ShoplistController.class));
+        controllers.put("/viewProduct", getBean(ViewProductController.class));
         controllers.put("/addProduct", getBean(AddProductController.class));
+        controllers.put("/addShoplist", getBean(AddShoplistController.class));
     }
 
     private MVCController getBean ( Class<?> clazz ) {
