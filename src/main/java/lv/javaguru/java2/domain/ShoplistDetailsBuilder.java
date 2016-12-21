@@ -23,6 +23,8 @@ public class ShoplistDetailsBuilder {
 
     public ShoplistDetails build() {
         ShoplistDetails shoplistDetails = new ShoplistDetails();
+        shoplistDetails.setProduct(this.product);
+        shoplistDetails.setProductQty(this.productQty);
         return shoplistDetails;
     }
 

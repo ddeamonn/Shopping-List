@@ -28,12 +28,17 @@ public class AddShoplistControllerTest {
     @Autowired
     ShoplistInputDataValidator inputDataValidator;
 
+    @Autowired
+    ShoplistManager shoplistManager;
+
     @Before
     public void init() {
         try {
             springContext = new AnnotationConfigApplicationContext(SpringConfig.class);
             inputDataValidator =
                     (ShoplistInputDataValidator)springContext.getBean(ShoplistInputDataValidator.class);
+            shoplistManager =
+                    (ShoplistManager)springContext.getBean(ShoplistManager.class);
         } catch (BeansException e) {
             System.out.println("error"+e.getMessage());
         }
@@ -52,7 +57,7 @@ public class AddShoplistControllerTest {
 
         inputDataValidator.validate(inputData);
 
-        ShoplistManager shoplistManager = new ShoplistManager();
+
         ShoplistEntity shoplistEntity = shoplistManager.populateShoplistFromInputData(inputData);
 
         Assert.assertEquals("sports", shoplistEntity.getShoplistName());

@@ -14,46 +14,15 @@ import java.util.List;
 @Component
 public class ShoplistManager {
 
-    //@Autowired
-    //ProductDAO productDAO;
+    @Autowired
+    PopulateShoplistDataHelper dataHelper;
 
     public ShoplistEntity populateShoplistFromInputData(ShoplistInputData inputData) {
-
-        String shoplistName = inputData.getShoplistName();
-        List<String> inputProductNames = (List<String>)inputData.getProductNames();
-        List<String> inputQtyOfProducts = (List<String>)inputData.getProductQtys();
-
-        ShoplistEntity shoplistEntity = ShoplistEntityBuilder
-                .createShoplistEntity()
-                .withShoplistName(shoplistName)
-                .build();
-
-        int i = 0;
-        while (i < inputProductNames.size()) {
-            String productName = inputProductNames.get(i);
-            Product product = ProductBuilder
-                    .createProduct()
-                    .withProductName(productName)
-                    .build();
-
-            Integer productQty = Integer.parseInt(inputQtyOfProducts.get(i));
-            ShoplistDetails shoplistDetails = ShoplistDetailsBuilder
-                    .createShoplistDetails()
-                    .withProduct(product)
-                    .withProductQty(productQty)
-                    .build();
-
-
-            shoplistEntity.addOrder(shoplistDetails);
-            i++;
-        }
-
-        return shoplistEntity;
+        return dataHelper.populateFromInputData(inputData);
     }
 
     public void createShoplist(ShoplistEntity shoplist) throws RuntimeException {
 
         System.out.println("shoplist added " + shoplist);
-        // productDAO.create(product);
     }
 }
