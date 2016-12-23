@@ -1,6 +1,8 @@
 package lv.javaguru.java2.data.product;
 
+import lv.javaguru.java2.data.InputDataParser;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +14,8 @@ import java.util.Map;
  */
 
 @Component
-public class HTTProductInputDataParser implements ProductInputDataParser {
+@Qualifier("productInput")
+public class HTTProductInputDataParser implements InputDataParser<Map, ProductInputData> {
 
     Logger logger =  Logger.getLogger(HTTProductInputDataParser.class);
 

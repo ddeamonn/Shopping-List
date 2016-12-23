@@ -1,9 +1,9 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
+import lv.javaguru.java2.data.InputDataParser;
 import lv.javaguru.java2.utils.IPAddressUtils;
 import lv.javaguru.java2.data.InputDataException;
 import lv.javaguru.java2.data.product.ProductInputData;
-import lv.javaguru.java2.data.product.ProductInputDataParser;
 import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.product.BuildProductHelper;
 import lv.javaguru.java2.servlet.mvc.MVCController;
@@ -12,15 +12,18 @@ import lv.javaguru.java2.product.ProductManager;
 import lv.javaguru.java2.validator.product.ProductInputDataValidator;
 import lv.javaguru.java2.validator.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Component
 public class AddProductController implements MVCController {
 
     @Autowired
-    ProductInputDataParser parser;
+    @Qualifier("productInput")
+    InputDataParser<Map, ProductInputData> parser;
 
     @Autowired
     ProductManager productManager;

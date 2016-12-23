@@ -1,8 +1,8 @@
 package lv.javaguru.java2.data.shoplist;
 
-import lv.javaguru.java2.data.product.ProductInputData;
-import lv.javaguru.java2.data.product.ProductInputDataParser;
+import lv.javaguru.java2.data.InputDataParser;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,7 +14,8 @@ import java.util.Map;
  */
 
 @Component
-public class HTTPShoplistInputDataParser implements ShoplistInputDataParser {
+@Qualifier("shoplistInput")
+public class HTTPShoplistInputDataParser implements InputDataParser<Map, ShoplistInputData> {
 
     Logger logger =  Logger.getLogger(HTTPShoplistInputDataParser.class);
 

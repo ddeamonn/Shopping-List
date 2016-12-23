@@ -1,8 +1,8 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 
+import lv.javaguru.java2.data.InputDataParser;
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
-import lv.javaguru.java2.data.shoplist.ShoplistInputDataParser;
 import lv.javaguru.java2.domain.*;
 import lv.javaguru.java2.servlet.mvc.MVCController;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
@@ -10,17 +10,18 @@ import lv.javaguru.java2.shoplist.ShoplistManager;
 import lv.javaguru.java2.validator.ValidationException;
 import lv.javaguru.java2.validator.shoplist.ShoplistInputDataValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
-import java.util.List;
+import java.util.Map;
 
 @Component
 public class AddShoplistController implements MVCController {
 
     @Autowired
-    ShoplistInputDataParser inputDataParser;
+    @Qualifier("shoplistInput")
+    InputDataParser<Map, ShoplistInputData> inputDataParser;
 
     @Autowired
     ShoplistInputDataValidator inputDataValidator;
@@ -49,7 +50,7 @@ public class AddShoplistController implements MVCController {
             data = exception.getMessage();
         } catch (Exception exception) {
             view = "/error.jsp";
-            data = "Error" + exception.getMessage();
+            data = "Error occurred during process shoplist";
         }
 
         return new MVCModel(view, data);
