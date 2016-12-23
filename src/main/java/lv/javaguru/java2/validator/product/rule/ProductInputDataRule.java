@@ -8,6 +8,5 @@ import org.springframework.stereotype.Component;
  */
 
  public interface ProductInputDataRule {
-
     boolean validate(ProductInputData productData);
 }

@@ -17,6 +17,7 @@ import java.util.Collection;
 @Component
 @Qualifier("shopProductQty")
 public class ShoplistQtyRule implements ShoplistInputDataRule {
+    private final static String ERROR_MESSAGE = "Incorrect quantity format";
 
     @Override
     public boolean validate(ShoplistInputData inputData) {
@@ -26,7 +27,7 @@ public class ShoplistQtyRule implements ShoplistInputDataRule {
                 Integer parsedQtyProduct = Integer.parseInt(qtyProduct);
             }
         } catch (Exception exception) {
-            throw new ValidationException(exception.getMessage());
+            throw new ValidationException(ERROR_MESSAGE);
         }
 
         return true;

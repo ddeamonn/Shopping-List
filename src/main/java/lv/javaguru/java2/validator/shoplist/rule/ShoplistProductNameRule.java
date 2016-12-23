@@ -29,7 +29,6 @@ public class ShoplistProductNameRule implements ShoplistInputDataRule {
     public boolean validate(ShoplistInputData inputData) {
         Collection<String> nameOfProducts = inputData.getProductNames();
 
-        //ProductInputDataRule productInputDataRule = new ProductNameValidatorRule();
         for (String productName : nameOfProducts) {
             productInputData.setInputProductName(productName);
             productNameRule.validate(productInputData);

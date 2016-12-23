@@ -26,7 +26,7 @@ public class ShoplistController implements MVCController {
             view = "/startpage.jsp";
         } catch (Exception exception) {
             view = "/error.jsp";
-            data = "Error";
+            data = "Shoplist validation error occurred";
         }
 
         return new MVCModel(view, data);

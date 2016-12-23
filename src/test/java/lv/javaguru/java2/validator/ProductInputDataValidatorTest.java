@@ -1,8 +1,16 @@
 package lv.javaguru.java2.validator;
 
+import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.data.product.ProductInputData;
+import lv.javaguru.java2.shoplist.ShoplistManager;
 import lv.javaguru.java2.validator.product.ProductInputDataValidator;
+import lv.javaguru.java2.validator.shoplist.ShoplistInputDataValidator;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertTrue;
 
@@ -11,6 +19,27 @@ import static org.junit.Assert.assertTrue;
  */
 public class ProductInputDataValidatorTest {
 
+    private ApplicationContext springContext;
+
+    @Autowired
+    ProductInputDataValidator inputDataValidator;
+
+    @Autowired
+    ShoplistManager shoplistManager;
+
+    @Before
+    public void init() {
+        try {
+            springContext = new AnnotationConfigApplicationContext(SpringConfig.class);
+            inputDataValidator =
+                    (ProductInputDataValidator)springContext.getBean(ProductInputDataValidator.class);
+            shoplistManager =
+                    (ShoplistManager)springContext.getBean(ShoplistManager.class);
+        } catch (BeansException e) {
+            System.out.println("error"+e.getMessage());
+        }
+    }
+
     @Test(expected = ValidationException.class)
     public void ProductNameIsEmptyTest () {
 
@@ -18,8 +47,8 @@ public class ProductInputDataValidatorTest {
         inputData.setInputProductName("");
         inputData.setInputProductCategory("Food");
 
-        ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
-        productDataValidator.validate(inputData);
+        //ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
+        inputDataValidator.validate(inputData);
 
     }
 
@@ -30,8 +59,8 @@ public class ProductInputDataValidatorTest {
         inputData.setInputProductName(null);
         inputData.setInputProductCategory("Food");
 
-        ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
-        productDataValidator.validate(inputData);
+        //ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
+        inputDataValidator.validate(inputData);
     }
 
     @Test
@@ -41,9 +70,9 @@ public class ProductInputDataValidatorTest {
         inputData.setInputProductName("Milk");
         inputData.setInputProductCategory("Food");
 
-        ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
+        //ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
 
-        boolean result = productDataValidator.validate(inputData);
+        boolean result = inputDataValidator.validate(inputData);
 
         assertTrue(result);
     }
