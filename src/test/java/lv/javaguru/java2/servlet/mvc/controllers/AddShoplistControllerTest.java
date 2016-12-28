@@ -57,7 +57,6 @@ public class AddShoplistControllerTest {
 
         inputDataValidator.validate(inputData);
 
-
         ShoplistEntity shoplistEntity = shoplistManager.populateShoplistFromInputData(inputData);
 
         Assert.assertEquals("sports", shoplistEntity.getShoplistName());
