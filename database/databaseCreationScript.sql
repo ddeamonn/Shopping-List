@@ -84,6 +84,21 @@ CREATE TABLE IF NOT EXISTS `shopping_list`(
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
+ALTER TABLE `java2`.`shopping_list`
+    CHANGE COLUMN `usr_id` `usr_id` BIGINT(11) UNSIGNED NULL DEFAULT NULL COMMENT '' ;
+
+ALTER TABLE `java2`.`shopping_list`
+    DROP FOREIGN KEY `shopping_list_ibfk_1`;
+
+ALTER TABLE `java2`.`users`
+    CHANGE COLUMN `usr_id` `usr_id` BIGINT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '' ;
+
+ALTER TABLE `java2`.`shopping_list`
+    ADD FOREIGN KEY (`usr_id`) REFERENCES `users` (`usr_id`);
+
+ALTER TABLE `java2`.`users`
+    CHANGE COLUMN `usr_hash` `usr_hash` VARCHAR(100) NULL DEFAULT NULL COMMENT '' ;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
