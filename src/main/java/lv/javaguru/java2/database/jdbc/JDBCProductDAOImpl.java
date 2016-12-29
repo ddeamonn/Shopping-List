@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ProductDAOImpl extends DAOImpl implements ProductDAO {
+public class JDBCProductDAOImpl extends DAOImpl implements ProductDAO {
 
     public void create(Product product) throws DBException {
         if (product == null) {

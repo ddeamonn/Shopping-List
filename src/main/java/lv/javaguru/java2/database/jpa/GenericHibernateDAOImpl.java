@@ -1,4 +1,4 @@
-package lv.javaguru.java2.database;
+package lv.javaguru.java2.database.jpa;
 
 import org.hibernate.JDBCException;
 import org.hibernate.Session;

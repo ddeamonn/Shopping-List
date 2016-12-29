@@ -1,7 +1,7 @@
 package lv.javaguru.java2.servlet;
 
 import lv.javaguru.java2.database.UserDAO;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
+import lv.javaguru.java2.database.jdbc.JDBCUserDAOImpl;
 import lv.javaguru.java2.domain.User;
 
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class SessionUsageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req,
 	                     HttpServletResponse resp) throws ServletException, IOException {
 
-		UserDAO userDAO = new UserDAOImpl();
+		UserDAO userDAO = new JDBCUserDAOImpl();
 		User user = userDAO.getById(1L);
 
 		// Set response content type

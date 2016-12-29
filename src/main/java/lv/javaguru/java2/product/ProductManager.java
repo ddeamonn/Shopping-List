@@ -1,10 +1,7 @@
 package lv.javaguru.java2.product;
 
-import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.database.ProductDAO;
-import lv.javaguru.java2.database.jdbc.ProductDAOImpl;
 import lv.javaguru.java2.domain.Product;
-import lv.javaguru.java2.domain.ProductBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

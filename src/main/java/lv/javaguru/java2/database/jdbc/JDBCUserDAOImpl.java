@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class UserDAOImpl extends DAOImpl implements UserDAO {
+public class JDBCUserDAOImpl extends DAOImpl implements UserDAO {
 
     public void create(User user) throws DBException {
         if (user == null) {

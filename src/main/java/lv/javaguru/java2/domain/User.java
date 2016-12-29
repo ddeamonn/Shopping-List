@@ -27,7 +27,7 @@ public class User {
     private String phone;
 
     @Column(name = "usr_language", nullable = true)
-    private String usr_language;
+    private String language;
 
     public String getUserName() {
         return userName;
@@ -77,11 +77,11 @@ public class User {
         this.phone = phone;
     }
 
-    public String getUsr_language() {
-        return usr_language;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setUsr_language(String usr_language) {
-        this.usr_language = usr_language;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }
