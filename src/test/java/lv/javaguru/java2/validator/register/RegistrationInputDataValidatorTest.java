@@ -67,18 +67,17 @@ public class RegistrationInputDataValidatorTest {
 
     @Test
     public void newUniqueUserRegistered() {
-
         RegistrationInputData inputData = new RegistrationInputData();
         inputData.setEmail("user@uniqueemail.com");
         inputData.setPassword("password");
+        User dbUser = userDAO.getUserByEmail(inputData.getEmail());
 
-        try {
-            boolean result = registrationInputDataValidator.validate(inputData);
-            Assert.assertTrue(result);
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+        if (dbUser != null) {
+            userDAO.delete(dbUser.getUserID());
         }
 
+        boolean result = registrationInputDataValidator.validate(inputData);
+        Assert.assertTrue(result);
     }
 
     @Test(expected = ValidationException.class)
