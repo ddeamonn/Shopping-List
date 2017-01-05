@@ -47,7 +47,6 @@ public class ProductInputDataValidatorTest {
         inputData.setInputProductName("");
         inputData.setInputProductCategory("Food");
 
-        //ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
         inputDataValidator.validate(inputData);
 
     }
@@ -59,7 +58,6 @@ public class ProductInputDataValidatorTest {
         inputData.setInputProductName(null);
         inputData.setInputProductCategory("Food");
 
-        //ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
         inputDataValidator.validate(inputData);
     }
 
@@ -69,9 +67,6 @@ public class ProductInputDataValidatorTest {
         ProductInputData inputData = new ProductInputData();
         inputData.setInputProductName("Milk");
         inputData.setInputProductCategory("Food");
-
-        //ProductInputDataValidator productDataValidator = new ProductInputDataValidator();
-
         boolean result = inputDataValidator.validate(inputData);
 
         assertTrue(result);

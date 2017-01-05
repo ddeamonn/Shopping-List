@@ -4,7 +4,7 @@ import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import org.junit.Test;
 
-import static lv.javaguru.java2.domain.UserBuilder.createUser;
+import static lv.javaguru.java2.user.UserBuilder.createUser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

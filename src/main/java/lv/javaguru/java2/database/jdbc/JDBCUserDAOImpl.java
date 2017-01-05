@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
+import org.hibernate.JDBCException;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -90,6 +91,11 @@ public class JDBCUserDAOImpl extends DAOImpl implements UserDAO {
             closeConnection(connection);
         }
         return users;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        throw new RuntimeException("JDBC implementation needed");
     }
 
     public void delete(Long id) throws DBException {

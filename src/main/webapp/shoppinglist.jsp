@@ -1,3 +1,17 @@
+<h1>Login:</h1>
+
+<form action="/doLogging" method="post">
+<table>
+    <tr>
+    <td>email:</td><td><input type="text" name="customerMail"></td>
+    </tr>
+    <tr>
+    <td>password:</td><td><input type="text" name="customerPassword"></td>
+    </tr>
+    <tr><td><a href="/registration">registration</a></td></tr>
+</table>
+</form>
+
 
 <h1>Shopping list</h1>
 <form action="/addShoplist" method="post">

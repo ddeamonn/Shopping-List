@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static lv.javaguru.java2.domain.UserBuilder.createUser;
+import static lv.javaguru.java2.user.UserBuilder.createUser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

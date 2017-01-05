@@ -1,10 +1,7 @@
 package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.config.SpringConfig;
-import lv.javaguru.java2.servlet.mvc.controllers.AddProductController;
-import lv.javaguru.java2.servlet.mvc.controllers.AddShoplistController;
-import lv.javaguru.java2.servlet.mvc.controllers.ShoplistController;
-import lv.javaguru.java2.servlet.mvc.controllers.ViewProductController;
+import lv.javaguru.java2.servlet.mvc.controllers.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -31,6 +28,7 @@ public class MVCFilter implements Filter {
             springContext = new AnnotationConfigApplicationContext(SpringConfig.class);
         } catch (BeansException e) {
             System.out.println("error"+e.getMessage());
+            e.printStackTrace();
             logger.error("Error " + e.getMessage());
         }
 
@@ -39,6 +37,8 @@ public class MVCFilter implements Filter {
         controllers.put("/viewProduct", getBean(ViewProductController.class));
         controllers.put("/addProduct", getBean(AddProductController.class));
         controllers.put("/addShoplist", getBean(AddShoplistController.class));
+        controllers.put("/registration", getBean(ViewRegistrationFormController.class));
+        controllers.put("/doRegistration", getBean(DoRegistrationController.class));
     }
 
     private MVCController getBean ( Class<?> clazz ) {
