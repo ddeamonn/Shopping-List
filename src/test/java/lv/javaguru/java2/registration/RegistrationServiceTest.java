@@ -25,7 +25,7 @@ public class RegistrationServiceTest {
     BuildUserHelper buildUserHelper;
 
     @Autowired
-    RegistrationService registrationService;
+    Registration registration;
 
     @Autowired
     @Qualifier("JPAUser")
@@ -49,7 +49,7 @@ public class RegistrationServiceTest {
             userDAO.delete(dbUser.getUserID());
         }
 
-        registrationService.register(user);
+        registration.register(user);
 
         dbUser = userDAO.getUserByEmail(user.getEmail());
 

@@ -10,13 +10,12 @@ import org.springframework.stereotype.Component;
  * Created by DMC on 1/4/2017.
  */
 @Component
-public class RegistrationServiceImpl implements RegistrationService {
+public class Registration {
 
     @Autowired
     @Qualifier("JPAUser")
     private UserDAO userDAO;
 
-    @Override
     public boolean register(User user) {
         userDAO.create(user);
         return true;
