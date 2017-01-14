@@ -1,19 +1,49 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Created by DMC on 12/20/2016.
  */
 
+@Entity
+@Table(name="shopping_list")
 public class ShoplistEntity {
 
-    String shoplistName;
-    Collection<ShoplistDetails> orders;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "lst_id", nullable = false)
+    private Long shoplistID;
 
-    public ShoplistEntity() {
-        orders = new ArrayList<ShoplistDetails>();
+    @Column(name = "lst_name" , nullable = false)
+    private String shoplistName;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplistEntity", cascade=CascadeType.ALL)
+    //@JoinTable(name = "shopping_list_details", joinColumns = @JoinColumn(name = "lst_id"))
+    private Collection<OrderItem> orderItems = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usr_id")
+    // @JoinTable(name = "products", joinColumns = @JoinColumn( name="prd_id"))
+    User user;
+
+    public Long getShoplistID() {
+        return shoplistID;
+    }
+
+    public void setShoplistID(Long shoplistID) {
+        this.shoplistID = shoplistID;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getShoplistName() {
@@ -24,15 +54,21 @@ public class ShoplistEntity {
         this.shoplistName = shoplistName;
     }
 
-    public void addOrder(ShoplistDetails order) {
-        orders.add(order);
+    public Collection<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(Collection<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     @Override
     public String toString() {
         return "ShoplistEntity{" +
-                "shoplistName='" + shoplistName + '\'' +
-                ", orders=" + orders +
+                "shoplistID=" + shoplistID +
+                ", shoplistName='" + shoplistName + '\'' +
+                ", orderItems=" + orderItems.size() +
+                ", user=" + user +
                 '}';
     }
 }

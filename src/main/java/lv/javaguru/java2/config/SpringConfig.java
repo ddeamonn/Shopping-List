@@ -73,6 +73,7 @@ public class SpringConfig {
     }
 
     @Bean
+    @Qualifier("userSessionFactory")
     public SessionFactory sessionFactory(DataSource dataSource,
                                          @Value("${hibernate.packagesToScan}") String packagesToScan,
                                          @Qualifier("hibernateProperties") Properties properties) throws Exception {

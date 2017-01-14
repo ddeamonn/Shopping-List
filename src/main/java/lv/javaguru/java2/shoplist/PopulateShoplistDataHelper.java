@@ -1,9 +1,16 @@
 package lv.javaguru.java2.shoplist;
 
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
+import lv.javaguru.java2.database.ShoplistEntityDAO;
 import lv.javaguru.java2.domain.*;
+import lv.javaguru.java2.dto.*;
+import lv.javaguru.java2.session.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -12,34 +19,47 @@ import java.util.List;
 @Component
 public class PopulateShoplistDataHelper {
 
-    ShoplistEntity populateFromInputData(ShoplistInputData inputData) {
+    @Autowired
+    Session session;
+
+    ShoplistEntityDTO populateFromInputData(ShoplistInputData inputData) {
         String shoplistName = inputData.getShoplistName();
         List<String> inputProductNames = (List<String>)inputData.getProductNames();
         List<String> inputQtyOfProducts = (List<String>)inputData.getProductQtys();
+        List<String> inputPriceOfProducts = (List<String>)inputData.getProductPrices();
 
-        ShoplistEntity shoplistEntity = ShoplistEntityBuilder
+        ShoplistEntityDTO shoplistEntityDTO = ShoplistEntityDTOBuilder
                 .createShoplistEntity()
                 .withShoplistName(shoplistName)
                 .build();
 
         int i = 0;
+        List<OrderItemDTO> orderItemDTOs = new ArrayList<>();
         while (i < inputProductNames.size()) {
             String productName = inputProductNames.get(i);
-            Product product = ProductBuilder
+            ProductDTO productDTO = ProductDTOBuilder
                     .createProduct()
                     .withProductName(productName)
                     .build();
-            Integer productQty = Integer.parseInt(inputQtyOfProducts.get(i));
-            ShoplistDetails shoplistDetails = ShoplistDetailsBuilder
-                    .createShoplistDetails()
-                    .withProduct(product)
-                    .withProductQty(productQty)
-                    .build();
 
-            shoplistEntity.addOrder(shoplistDetails);
+            OrderItemDTO orderItemDTO = new OrderItemDTO();
+            orderItemDTO.setProduct(productDTO);
+            Integer productQty = Integer.parseInt(inputQtyOfProducts.get(i));
+            orderItemDTO.setProductQty(productQty);
+
+            BigDecimal productPrice = new BigDecimal(inputPriceOfProducts.get(i));
+            productPrice = productPrice.setScale(2,BigDecimal.ROUND_HALF_UP);
+
+            orderItemDTO.setProductPrice(productPrice);
+
+            orderItemDTOs.add(orderItemDTO);
+
+            shoplistEntityDTO.setOrderItems(orderItemDTOs);
+            shoplistEntityDTO.setUser(session.getSessionUser());
+
             i++;
         }
 
-        return shoplistEntity;
+        return shoplistEntityDTO;
     }
 }

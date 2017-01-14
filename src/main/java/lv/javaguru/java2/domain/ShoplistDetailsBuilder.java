@@ -3,6 +3,7 @@ package lv.javaguru.java2.domain;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * Created by DMC on 12/20/2016.
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 @Component
 public class ShoplistDetailsBuilder {
 
-    Product product;
+    Set<Product> products;
     Integer productQty;
     BigDecimal productTotalPrice;
 
@@ -23,13 +24,13 @@ public class ShoplistDetailsBuilder {
 
     public ShoplistDetails build() {
         ShoplistDetails shoplistDetails = new ShoplistDetails();
-        shoplistDetails.setProduct(this.product);
+        //shoplistDetails.setProducts(this.products);
         shoplistDetails.setProductQty(this.productQty);
         return shoplistDetails;
     }
 
-    public ShoplistDetailsBuilder withProduct (Product product) {
-        this.product = product;
+    public ShoplistDetailsBuilder withProducts (Set<Product> products) {
+        this.products = products;
         return this;
     }
 

@@ -25,15 +25,23 @@ public class UserDAOImplTest {
 
     @Test
     public void testCreate() throws Exception {
+
+        String mail = "mail@mail.com";
+        User dbUser = userDAO.getUserByEmail(mail);
+
+        if (dbUser != null) {
+            userDAO.delete(dbUser.getUserID());
+        }
+
         User user = createUser()
-                .withName("J").build();
+                .withMail(mail)
+                .build();
 
         userDAO.create(user);
 
         User userFromDB = userDAO.getById(user.getUserID());
         assertNotNull(userFromDB);
-        assertEquals(user.getUserID(), userFromDB.getUserID());
-        assertEquals(user.getUserName(), userFromDB.getUserName());
+        assertEquals(user.getEmail(), userFromDB.getEmail());
     }
 
 }

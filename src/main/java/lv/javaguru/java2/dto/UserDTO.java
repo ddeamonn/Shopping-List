@@ -1,38 +1,28 @@
-package lv.javaguru.java2.domain;
+package lv.javaguru.java2.dto;
+
+import lv.javaguru.java2.domain.ShoplistEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Entity
-@Table(name = "users")
-public class User {
+public class UserDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "usr_id", nullable = false)
     private Long userID;
 
-    @Column(name = "usr_name", nullable = true)
     private String userName;
 
-    @Column(name = "usr_hash", nullable = true)
     private String hashCode;
 
-    @Column(name = "usr_email", nullable = true)
     private String email;
 
-    @Column(name = "usr_password", nullable = true)
     private String password;
 
-    @Column(name = "usr_phone", nullable = true)
     private String phone;
 
-    @Column(name = "usr_language", nullable = true)
     private String language;
 
-    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    //private Collection<ShoplistEntity> shoplistEntities = new ArrayList<>();
+    private Collection<ShoplistEntityDTO> shoplistEntities = new ArrayList<>();
 
     public String getUserName() {
         return userName;
@@ -90,6 +80,14 @@ public class User {
         this.language = language;
     }
 
+    public Collection<ShoplistEntityDTO> getShoplistEntities() {
+        return shoplistEntities;
+    }
+
+    public void setShoplistEntities(Collection<ShoplistEntityDTO> shoplistEntities) {
+        this.shoplistEntities = shoplistEntities;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -100,7 +98,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", language='" + language + '\'' +
-               // ", shoplistEntities=" + shoplistEntities.size() +
+                ", shoplistEntities=" + shoplistEntities.size() +
                 '}';
     }
 }

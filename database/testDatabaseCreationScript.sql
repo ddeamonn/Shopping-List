@@ -2,8 +2,8 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `java2` DEFAULT CHARACTER SET utf8 ;
-USE `java2` ;
+CREATE SCHEMA IF NOT EXISTS `java2_test` DEFAULT CHARACTER SET utf8 ;
+USE `java2_test` ;
 
 -- -----------------------------------------------------
 -- Table `Java2_test`.`users`
@@ -84,43 +84,43 @@ CREATE TABLE IF NOT EXISTS `shopping_list`(
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
-ALTER TABLE `java2`.`shopping_list`
+ALTER TABLE `java2_test`.`shopping_list`
     CHANGE COLUMN `usr_id` `usr_id` BIGINT(11) UNSIGNED NULL DEFAULT NULL COMMENT '' ;
 
-ALTER TABLE `java2`.`shopping_list`
+ALTER TABLE `java2_test`.`shopping_list`
     DROP FOREIGN KEY `shopping_list_ibfk_1`;
 
-ALTER TABLE `java2`.`users`
+ALTER TABLE `java2_test`.`users`
     CHANGE COLUMN `usr_id` `usr_id` BIGINT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '' ;
 
-ALTER TABLE `java2`.`shopping_list`
+ALTER TABLE `java2_test`.`shopping_list`
     ADD FOREIGN KEY (`usr_id`) REFERENCES `users` (`usr_id`);
 
-ALTER TABLE `java2`.`users`
+ALTER TABLE `java2_test`.`users`
     CHANGE COLUMN `usr_hash` `usr_hash` VARCHAR(100) NULL DEFAULT NULL COMMENT '' ;
 
 ALTER TABLE `java2`.`shopping_list_details`
     DROP FOREIGN KEY `shopping_list_details_ibfk_1`;
 
-ALTER TABLE `java2`.`shopping_list_details`
+ALTER TABLE `java2_test`.`shopping_list_details`
     CHANGE COLUMN `prd_id` `prd_id` BIGINT(11) UNSIGNED NULL DEFAULT NULL COMMENT '' ;
 
-ALTER TABLE `java2`.`products`
+ALTER TABLE `java2_test`.`products`
     CHANGE COLUMN `prd_id` `prd_id` BIGINT(11) UNSIGNED NULL AUTO_INCREMENT COMMENT '' ;
 
-ALTER TABLE `java2`.`shopping_list_details`
+ALTER TABLE `java2_test`.`shopping_list_details`
     ADD FOREIGN KEY (`prd_id`) REFERENCES `products` (`prd_id`);
 
-ALTER TABLE `java2`.`shopping_list`
+ALTER TABLE `java2_test`.`shopping_list`
     ADD COLUMN `lst_name` VARCHAR(45) NULL COMMENT '' AFTER `lst_added_country`;
 
-ALTER TABLE `java2`.`shopping_list`
+ALTER TABLE `java2_test`.`shopping_list`
     CHANGE COLUMN `lst_price` `lst_price` DECIMAL NULL DEFAULT NULL COMMENT '' ;
 
-ALTER TABLE `java2`.`shopping_list_details`
+ALTER TABLE `java2_test`.`shopping_list_details`
     CHANGE COLUMN `prd_price` `prd_price` DECIMAL NULL DEFAULT NULL COMMENT '' ;
 
-CREATE TABLE IF NOT EXISTS `java2`.`order_item`(
+CREATE TABLE IF NOT EXISTS `java2_test`.`order_item`(
     `order_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
     `prd_id` BIGINT(11),                                -- Product id which is added by user to the shopping list
     `lst_id` BIGINT(20),                             -- Shopping list item id
@@ -129,12 +129,12 @@ CREATE TABLE IF NOT EXISTS `java2`.`order_item`(
     PRIMARY KEY (`order_id`)
 );
 
-ALTER TABLE `java2`.`products`
-    DROP PRIMARY KEY,
-    ADD PRIMARY KEY (`prd_id`)  COMMENT '',
-    ADD UNIQUE INDEX `prd_name_UNIQUE` (`prd_name` ASC)  COMMENT '';
+ALTER TABLE `java2_test`.`products`
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`prd_id`)  COMMENT '',
+ADD UNIQUE INDEX `prd_name_UNIQUE` (`prd_name` ASC)  COMMENT '';
 
-ALTER TABLE `java2`.`order_item`
+ALTER TABLE `java2_test`.`order_item`
     CHANGE COLUMN `prd_price` `prd_price` DECIMAL(7,2) NULL DEFAULT NULL COMMENT '' ;
 
 SET SQL_MODE=@OLD_SQL_MODE;

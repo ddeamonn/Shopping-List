@@ -6,6 +6,6 @@
     <title>Shopping list page</title>
 </head>
 <body>
-    <%@ include file="shoppinglist.jsp" %>
+    <%@ include file="login.jsp" %>
 </body>
 </html>

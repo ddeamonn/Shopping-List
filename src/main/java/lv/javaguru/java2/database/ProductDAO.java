@@ -9,7 +9,7 @@ public interface ProductDAO {
 
     void create(Product product);
 
-    Product getById(String id);
+    Product getById(Long id);
 
     Product getByName(String name);
 

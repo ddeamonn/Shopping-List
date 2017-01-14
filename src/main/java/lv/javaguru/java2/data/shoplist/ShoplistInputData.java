@@ -9,6 +9,7 @@ public class ShoplistInputData {
     String shoplistName;
     Collection<String>  productNames;
     Collection<String> productQtys;
+    Collection<String> productPrices;
 
     public String getShoplistName() {
         return shoplistName;
@@ -32,5 +33,13 @@ public class ShoplistInputData {
 
     public void setProductQtys(Collection<String> productQtys) {
         this.productQtys = productQtys;
+    }
+
+    public Collection<String> getProductPrices() {
+        return productPrices;
+    }
+
+    public void setProductPrices(Collection<String> productPrices) {
+        this.productPrices = productPrices;
     }
 }

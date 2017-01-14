@@ -4,6 +4,7 @@ package lv.javaguru.java2.servlet.mvc.controllers;
 import lv.javaguru.java2.data.InputDataParser;
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
 import lv.javaguru.java2.domain.*;
+import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.servlet.mvc.MVCController;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
 import lv.javaguru.java2.shoplist.ShoplistManager;
@@ -40,8 +41,8 @@ public class AddShoplistController implements MVCController {
 
             inputDataValidator.validate(inputData);
 
-            ShoplistEntity shoplistEntity = shoplistManager.populateShoplistFromInputData(inputData);
-            shoplistManager.createShoplist(shoplistEntity);
+            ShoplistEntityDTO shoplistEntityDTO = shoplistManager.populateShoplistFromInputData(inputData);
+            shoplistManager.createShoplist(shoplistEntityDTO);
 
             data = "Shopping list saved";
             view = "/addShoplistResult.jsp";
@@ -49,6 +50,7 @@ public class AddShoplistController implements MVCController {
             view = "/error.jsp";
             data = exception.getMessage();
         } catch (Exception exception) {
+            exception.printStackTrace();
             view = "/error.jsp";
             data = "Error occurred during process shoplist";
         }

@@ -6,6 +6,7 @@ import lv.javaguru.java2.authorisation.AuthorisationService;
 import lv.javaguru.java2.product.ProductManager;
 import lv.javaguru.java2.servlet.mvc.MVCController;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
+import lv.javaguru.java2.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -16,11 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 public class ShoplistController implements MVCController {
 
     @Autowired
-    @Qualifier("HashAuthorisation")
-    AuthorisationService authorisation;
+    ProductManager productManager;
 
     @Autowired
-    ProductManager productManager;
+    Session session;
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
@@ -29,13 +29,13 @@ public class ShoplistController implements MVCController {
         Object data;
 
         try {
-
-            AuthorisationContext context = new AuthorisationContext();
-            context.setHashNumber("123344");
-            authorisation.authorise(context);
-
-            data = productManager.getProducts();
-            view = "/startpage.jsp";
+            if (session.isLoggedUser()) {
+                data = productManager.getProducts();
+                view = "/shoppinglist.jsp";
+            } else {
+                view = "/login.jsp";
+                data = "Welcome!";
+            }
         } catch (Exception exception) {
             view = "/error.jsp";
             data = "Shoplist validation error occurred";

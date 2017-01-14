@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.domain.User;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Qualifier("JDBCProduct")
 public class JDBCProductDAOImpl extends DAOImpl implements ProductDAO {
 
     public void create(Product product) throws DBException {
@@ -48,14 +50,14 @@ public class JDBCProductDAOImpl extends DAOImpl implements ProductDAO {
 
     }
 
-    public Product getById(String id) throws DBException {
+    public Product getById(Long id) throws DBException {
         Connection connection = null;
 
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
                     .prepareStatement("select * from PRODUCTS where prd_id = ?");
-            preparedStatement.setString(1, id);
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             Product product = null;
             if (resultSet.next()) {

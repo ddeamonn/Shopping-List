@@ -27,11 +27,15 @@ public class HTTPShoplistInputDataParser implements InputDataParser<Map, Shoplis
         String[] shoplistName = (String[])requestMap.get("shoplistName");
         shoplistInputData.setShoplistName(shoplistName[shoplistName.length-1]);
 
-        String[] productNames = (String[])requestMap.get("products");
+        String[] productNames = (String[])requestMap.get("productName");
         shoplistInputData.setProductNames(new ArrayList<String>(Arrays.asList(productNames)));
 
-        String[] productQty = (String[])requestMap.get("pqty");
+        String[] productQty = (String[])requestMap.get("productQty");
         shoplistInputData.setProductQtys(new ArrayList<String>(Arrays.asList(productQty)));
+
+        String[] productPrices = (String[])requestMap.get("productPrice");
+
+        shoplistInputData.setProductPrices(new ArrayList<String>(Arrays.asList(productPrices)));
         return shoplistInputData;
     }
 }

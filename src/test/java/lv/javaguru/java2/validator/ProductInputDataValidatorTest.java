@@ -71,4 +71,15 @@ public class ProductInputDataValidatorTest {
 
         assertTrue(result);
     }
+
+    @Test
+    public void ProductQtyIsSpecifiedTest () {
+
+        ProductInputData inputData = new ProductInputData();
+        inputData.setInputProductName("Milk");
+        inputData.setInputProductCategory("Food");
+        boolean result = inputDataValidator.validate(inputData);
+
+        assertTrue(result);
+    }
 }

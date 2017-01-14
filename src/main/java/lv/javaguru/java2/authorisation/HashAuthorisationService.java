@@ -1,5 +1,8 @@
 package lv.javaguru.java2.authorisation;
 
+import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.session.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Qualifier("HashAuthorisation")
 public class HashAuthorisationService implements AuthorisationService {
+
     @Override
     public boolean authorise(AuthorisationContext context) {
-
-        System.out.println("Authorised " + context.getHashNumber());
         return true;
     }
 }
