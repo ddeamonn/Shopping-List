@@ -41,12 +41,15 @@ public class OrderItemDAOImplTest {
         Product product = productDAO.getByName(productName);
 
         if (product == null) {
+            product = createProduct()
+                    .withProductName(productName)
+                    .build();
+
             productDAO.create(product);
         }
 
         OrderItem orderItem = new OrderItem();
         orderItem.setProduct(product);
-       // orderItem.setProductID(product.getProductId());
         orderItem.setProductQty(1);
 
         orderItemDAO.create(orderItem);

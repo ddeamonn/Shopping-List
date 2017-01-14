@@ -16,9 +16,6 @@ import java.util.Set;
 
 public class ShoplistDetails implements Serializable {
 
-    //@EmbeddedId
-    //ShoplistDetailsID shoplistDetailsID;
-
     @Id
     @Column(name = "prd_id",nullable = true)
     Long productID;
@@ -28,13 +25,10 @@ public class ShoplistDetails implements Serializable {
     Long shopListID;
 
     @OneToMany(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "prd_id")
-    //@JoinTable(name = "products", joinColumns = @JoinColumn( name="prd_id"))
     Set<Product> products;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lst_id")
-    //@JoinTable(name = "shopping_list", joinColumns = @JoinColumn( name="lst_id"))
     ShoplistEntity shoplistEntity;
 
     @Column(name = "prd_quantity", nullable = true)
@@ -42,23 +36,6 @@ public class ShoplistDetails implements Serializable {
 
     @Column(name = "prd_price", nullable = true)
     BigDecimal productTotalPrice;
-
-/*
-    public ShoplistDetailsID getShoplistDetailsID() {
-        return shoplistDetailsID;
-    }
-
-    public void setShoplistDetailsID(ShoplistDetailsID shoplistDetailsID) {
-        this.shoplistDetailsID = shoplistDetailsID;
-    }
-*/
-    //public Set<Product> getProducts() {
-     //   return products;
-    //}
-
-   // public void setProducts(Set<Product> products) {
-    //    this.products = products;
-    //}
 
     public Integer getProductQty() {
         return productQty;
@@ -92,18 +69,9 @@ public class ShoplistDetails implements Serializable {
         this.shopListID = shopListID;
     }
 
-    //public ShoplistEntity getShoplistEntity() {
-    //    return shoplistEntity;
-   // }
-
-   // public void setShoplistEntity(ShoplistEntity shoplistEntity) {
-   //     this.shoplistEntity = shoplistEntity;
-  //  }
-
     @Override
     public String toString() {
         return "ShoplistDetails{" +
-                //"product=" + products +
                 ", productQty=" + productQty +
                 ", productTotalPrice=" + productTotalPrice +
                 '}';

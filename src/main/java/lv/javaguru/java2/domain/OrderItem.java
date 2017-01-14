@@ -18,16 +18,8 @@ public class OrderItem implements Serializable {
     @Column(name = "order_id", nullable = false)
     Long orderID;
 
-    //@OneToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "prd_id")
-   // @JoinTable(name = "products", joinColumns = @JoinColumn( name="prd_id"))
-    //Product product;
-    //@Column(name="prd_id")
-   // Long productID;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prd_id")
-    //@JoinTable(name = "products", joinColumns = @JoinColumn( name="prd_id"))
     Product product;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
@@ -47,15 +39,7 @@ public class OrderItem implements Serializable {
     public void setOrderID(Long orderID) {
         this.orderID = orderID;
     }
-/*
-    public Product getProduct() {
-        return product;
-    }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-*/
     public ShoplistEntity getShoplistEntity() {
         return shoplistEntity;
     }
@@ -80,15 +64,6 @@ public class OrderItem implements Serializable {
         this.productPrice = productPrice;
     }
 
-    /*
-        public Long getProductID() {
-            return productID;
-        }
-
-        public void setProductID(Long productID) {
-            this.productID = productID;
-        }
-    */
     public Product getProduct() {
         return product;
     }
@@ -101,7 +76,6 @@ public class OrderItem implements Serializable {
     public String toString() {
         return "OrderItem{" +
                 "orderID=" + orderID +
-                //", productID=" + productID +
                 ", shoplistEntity=" + shoplistEntity +
                 ", productQty=" + productQty +
                 ", productPrice=" + productPrice +

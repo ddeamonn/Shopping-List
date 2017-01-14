@@ -31,9 +31,6 @@ public class User {
     @Column(name = "usr_language", nullable = true)
     private String language;
 
-    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    //private Collection<ShoplistEntity> shoplistEntities = new ArrayList<>();
-
     public String getUserName() {
         return userName;
     }
@@ -100,7 +97,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", language='" + language + '\'' +
-               // ", shoplistEntities=" + shoplistEntities.size() +
                 '}';
     }
 }

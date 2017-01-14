@@ -24,9 +24,6 @@ public class ProductDTO {
 
     private String addedCountry;
 
-   // public List<OrderItemDTO> orderItems = new ArrayList<>();
-    //public OrderItem orderItem;
-
     public String getProductName() {
         return productName;
     }
@@ -75,24 +72,6 @@ public class ProductDTO {
         this.addedCountry = addedCountry;
     }
 
-    /*
-    public List<OrderItemDTO> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItemDTO> orderItems) {
-        this.orderItems = orderItems;
-    }
-*/
-/*
-    public OrderItem getOrderItem() {
-        return orderItem;
-    }
-
-    public void setOrderItem(OrderItem orderItem) {
-        this.orderItem = orderItem;
-    }
-*/
     @Override
     public String toString() {
         return "ProductDTO{" +

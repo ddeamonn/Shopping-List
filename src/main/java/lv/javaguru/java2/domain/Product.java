@@ -33,17 +33,6 @@ public class Product {
     @Column(name = "prd_added_country", nullable = true)
     private String addedCountry;
 
-    //@ManyToO(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "lst_id")
-   // @JoinTable(name = "shopping_list_details", joinColumns = {@JoinColumn( name="prd_id"), @JoinColumn( name="lst_id")})
-    //public ShoplistDetails shoplistDetails;
-
-    //@OneToMany (fetch = FetchType.LAZY, mappedBy = "product")
-    //public List<OrderItem> orderItems = new ArrayList<>();
-
-    //@OneToOne (fetch = FetchType.EAGER, mappedBy = "product")
-    //public OrderItem orderItem;
-
     public String getProductName() {
         return productName;
     }
@@ -91,25 +80,7 @@ public class Product {
     public void setAddedCountry(String addedCountry) {
         this.addedCountry = addedCountry;
     }
-/*
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-*/
-
-/*
-    public OrderItem getOrderItem() {
-        return orderItem;
-    }
-
-    public void setOrderItem(OrderItem orderItem) {
-        this.orderItem = orderItem;
-    }
-*/
     @Override
     public String toString() {
         return "Product{" +
@@ -119,7 +90,6 @@ public class Product {
                 ", addedIP='" + addedIP + '\'' +
                 ", productCategory='" + productCategory + '\'' +
                 ", addedCountry='" + addedCountry + '\'' +
-                //", orderItems=" + orderItem +
                 '}';
     }
 }

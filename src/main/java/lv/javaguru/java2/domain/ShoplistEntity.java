@@ -22,12 +22,10 @@ public class ShoplistEntity {
     private String shoplistName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplistEntity", cascade=CascadeType.ALL)
-    //@JoinTable(name = "shopping_list_details", joinColumns = @JoinColumn(name = "lst_id"))
     private Collection<OrderItem> orderItems = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usr_id")
-    // @JoinTable(name = "products", joinColumns = @JoinColumn( name="prd_id"))
     User user;
 
     public Long getShoplistID() {

@@ -43,8 +43,6 @@ public class ShoplistEntityDAOImplTest {
         user.setUserID(1L);
         user.setUserName("User");
 
-        //Product product = createProduct()
-         //       .withProductName("name").build();
         String productName = "name";
         Product product = productDAO.getByName(productName);
 
@@ -61,12 +59,10 @@ public class ShoplistEntityDAOImplTest {
 
         OrderItem orderItem = new OrderItem();
         orderItem.setProduct(product);
-        //orderItem.setProductID(product.getProductId());
         orderItem.setProductQty(1);
 
         OrderItem orderItem2 = new OrderItem();
         orderItem2.setProduct(product2);
-        //orderItem2.setProductID(product2.getProductId());
         orderItem2.setProductQty(2);
 
         List<OrderItem> orderItems = new ArrayList<>();
