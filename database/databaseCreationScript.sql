@@ -84,58 +84,138 @@ CREATE TABLE IF NOT EXISTS `shopping_list`(
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
-ALTER TABLE `java2`.`shopping_list`
-    CHANGE COLUMN `usr_id` `usr_id` BIGINT(11) UNSIGNED NULL DEFAULT NULL COMMENT '' ;
-
-ALTER TABLE `java2`.`shopping_list`
-    DROP FOREIGN KEY `shopping_list_ibfk_1`;
-
-ALTER TABLE `java2`.`users`
-    CHANGE COLUMN `usr_id` `usr_id` BIGINT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '' ;
-
-ALTER TABLE `java2`.`shopping_list`
-    ADD FOREIGN KEY (`usr_id`) REFERENCES `users` (`usr_id`);
-
-ALTER TABLE `java2`.`users`
-    CHANGE COLUMN `usr_hash` `usr_hash` VARCHAR(100) NULL DEFAULT NULL COMMENT '' ;
-
-ALTER TABLE `java2`.`shopping_list_details`
-    DROP FOREIGN KEY `shopping_list_details_ibfk_1`;
-
-ALTER TABLE `java2`.`shopping_list_details`
-    CHANGE COLUMN `prd_id` `prd_id` BIGINT(11) UNSIGNED NULL DEFAULT NULL COMMENT '' ;
-
-ALTER TABLE `java2`.`products`
-    CHANGE COLUMN `prd_id` `prd_id` BIGINT(11) UNSIGNED NULL AUTO_INCREMENT COMMENT '' ;
-
-ALTER TABLE `java2`.`shopping_list_details`
-    ADD FOREIGN KEY (`prd_id`) REFERENCES `products` (`prd_id`);
-
-ALTER TABLE `java2`.`shopping_list`
-    ADD COLUMN `lst_name` VARCHAR(45) NULL COMMENT '' AFTER `lst_added_country`;
-
-ALTER TABLE `java2`.`shopping_list`
-    CHANGE COLUMN `lst_price` `lst_price` DECIMAL NULL DEFAULT NULL COMMENT '' ;
-
-ALTER TABLE `java2`.`shopping_list_details`
-    CHANGE COLUMN `prd_price` `prd_price` DECIMAL NULL DEFAULT NULL COMMENT '' ;
-
-CREATE TABLE IF NOT EXISTS `java2`.`order_item`(
-    `order_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
-    `prd_id` BIGINT(11),                                -- Product id which is added by user to the shopping list
-    `lst_id` BIGINT(20),                             -- Shopping list item id
-    `prd_quantity` INT(5),                           -- Quantity of how many items of the given product should be bought
-    `prd_price` DECIMAL(7),                          -- Price of the item
+/* changes 20170116*/
+DROP TABLE IF EXISTS `order_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `order_item` (
+    `order_id` bigint(11) NOT NULL AUTO_INCREMENT,
+    `prd_id` bigint(11) DEFAULT NULL,
+    `lst_id` bigint(20) DEFAULT NULL,
+    `prd_quantity` int(5) DEFAULT NULL,
+    `prd_price` decimal(7,2) DEFAULT NULL,
     PRIMARY KEY (`order_id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-ALTER TABLE `java2`.`products`
-    DROP PRIMARY KEY,
-    ADD PRIMARY KEY (`prd_id`)  COMMENT '',
-    ADD UNIQUE INDEX `prd_name_UNIQUE` (`prd_name` ASC)  COMMENT '';
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `products` (
+    `prd_name` varchar(255) NOT NULL,
+    `prd_id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+    `prd_category` varchar(255) DEFAULT NULL,
+    `prd_container` varchar(255) DEFAULT NULL,
+    `prd_added_time` datetime DEFAULT NULL,
+    `prd_added_ip` varchar(255) DEFAULT NULL,
+    `prd_added_country` varchar(23) DEFAULT NULL,
+    PRIMARY KEY (`prd_id`),
+    UNIQUE KEY `prd_id` (`prd_id`),
+    UNIQUE KEY `prd_name_UNIQUE` (`prd_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=1019 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-ALTER TABLE `java2`.`order_item`
-    CHANGE COLUMN `prd_price` `prd_price` DECIMAL(7,2) NULL DEFAULT NULL COMMENT '' ;
+DROP TABLE IF EXISTS `shopping_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shopping_list` (
+    `lst_id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `usr_id` bigint(11) unsigned DEFAULT NULL,
+    `lst_quantity` int(5) DEFAULT NULL,
+    `lst_price` decimal(10,0) DEFAULT NULL,
+    `lst_added_time` datetime DEFAULT NULL,
+    `lst_added_ip` varchar(255) DEFAULT NULL,
+    `lst_added_country` varchar(3) DEFAULT NULL,
+    `lst_name` varchar(45) DEFAULT NULL,
+    PRIMARY KEY (`lst_id`),
+    KEY `usr_id` (`usr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS `shopping_list_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shopping_list_details` (
+    `prd_id` bigint(11) unsigned NOT NULL DEFAULT '0',
+    `lst_id` bigint(20) NOT NULL DEFAULT '0',
+    `prd_quantity` int(5) DEFAULT NULL,
+    `prd_price` decimal(10,0) DEFAULT NULL,
+    `shp_id` int(11) DEFAULT NULL,
+    PRIMARY KEY (`prd_id`,`lst_id`),
+    KEY `shp_id` (`shp_id`),
+    KEY `lst_id` (`lst_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS `shops`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shops` (
+    `shp_id` int(11) NOT NULL AUTO_INCREMENT,
+    `shp_short_name` varchar(255) DEFAULT NULL,
+    `shp_full_name` varchar(255) DEFAULT NULL,
+    `shp_address` varchar(255) DEFAULT NULL,
+    `shp_country` varchar(3) DEFAULT NULL,
+    `shp_added_time` datetime DEFAULT NULL,
+    `shp_added_ip` varchar(255) DEFAULT NULL,
+    `shp_added_country` varchar(3) DEFAULT NULL,
+    PRIMARY KEY (`shp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+    `usr_id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+    `usr_hash` varchar(100) DEFAULT NULL,
+    `usr_name` varchar(255) DEFAULT NULL,
+    `usr_email` varchar(255) DEFAULT NULL,
+    `usr_password` varchar(255) DEFAULT NULL,
+    `usr_phone` varchar(100) DEFAULT NULL,
+    `usr_language` varchar(3) DEFAULT NULL,
+    PRIMARY KEY (`usr_id`),
+    UNIQUE KEY `usr_hash` (`usr_hash`),
+    UNIQUE KEY `usr_email` (`usr_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=1008 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+DROP TABLE IF EXISTS `shopping_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shopping_list` (
+    `lst_id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `usr_id` bigint(11) unsigned DEFAULT NULL,
+    `lst_quantity` int(5) DEFAULT NULL,
+    `lst_price` decimal(10,0) DEFAULT NULL,
+    `lst_added_time` datetime DEFAULT NULL,
+    `lst_added_ip` varchar(255) DEFAULT NULL,
+    `lst_added_country` varchar(3) DEFAULT NULL,
+    `lst_name` varchar(45) DEFAULT NULL,
+    PRIMARY KEY (`lst_id`),
+    KEY `usr_id` (`usr_id`),
+    CONSTRAINT `shopping_list_ibfk_1` FOREIGN KEY (`usr_id`) REFERENCES `users` (`usr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS `shopping_list_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shopping_list_details` (
+    `prd_id` bigint(11) unsigned NOT NULL DEFAULT '0',
+    `lst_id` bigint(20) NOT NULL DEFAULT '0',
+    `prd_quantity` int(5) DEFAULT NULL,
+    `prd_price` decimal(10,0) DEFAULT NULL,
+    `shp_id` int(11) DEFAULT NULL,
+    PRIMARY KEY (`prd_id`,`lst_id`),
+    KEY `shp_id` (`shp_id`),
+    KEY `lst_id` (`lst_id`),
+    CONSTRAINT `shopping_list_details_ibfk_2` FOREIGN KEY (`shp_id`) REFERENCES `shops` (`shp_id`),
+    CONSTRAINT `shopping_list_details_ibfk_3` FOREIGN KEY (`lst_id`) REFERENCES `shopping_list` (`lst_id`),
+    CONSTRAINT `shopping_list_details_ibfk_4` FOREIGN KEY (`prd_id`) REFERENCES `products` (`prd_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
