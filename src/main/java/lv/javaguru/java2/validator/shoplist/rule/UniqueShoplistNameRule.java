@@ -6,6 +6,8 @@ import lv.javaguru.java2.database.ShoplistEntityDAO;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.dto.UserDTO;
+import lv.javaguru.java2.dto.transformer.DataTranformer;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.validator.ValidationException;
 import lv.javaguru.java2.validator.register.rule.RegistrationInputDataRule;
@@ -30,12 +32,18 @@ public class UniqueShoplistNameRule implements ShoplistInputDataRule {
     @Autowired
     Session session;
 
+    @Autowired
+    @Qualifier("UserDTOtoEntity")
+    DataTranformer<User, UserDTO> userDTOTransformer;
+
     @Override
     public boolean validate(ShoplistInputData shoplistInputData) {
 
         try {
             String shoplistName = shoplistInputData.getShoplistName();
-            User user = session.getSessionUser();
+            UserDTO userDTO = session.getSessionUser();
+            User user = userDTOTransformer.transform(userDTO);
+
             ShoplistEntity shoplistEntity = shoplistEntityDAO.getByNameAndUser(shoplistName, user);
             if (shoplistEntity == null ){
                 return true;

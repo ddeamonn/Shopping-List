@@ -7,6 +7,8 @@ import lv.javaguru.java2.database.ShoplistEntityDAO;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
+import lv.javaguru.java2.dto.UserDTO;
+import lv.javaguru.java2.dto.transformer.DataTranformer;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.shoplist.ShoplistManager;
 import lv.javaguru.java2.validator.ValidationException;
@@ -17,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
@@ -51,12 +54,16 @@ public class AddShoplistControllerTest {
     @Autowired
     ShoplistEntityDAO shoplistEntityDAO;
 
+    @Autowired
+    @Qualifier("UserDTOtoEntity")
+    DataTranformer<User, UserDTO> userDTOToEntityTransformer;
+
     @Before
     public void init() {
-        User user = new User();
-        user.setUserID(7L);
-        user.setUserName("User");
-        session.setSessionUser(user);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserID(7L);
+        userDTO.setUserName("User");
+        session.setSessionUser(userDTO);
     }
 
     @Test
@@ -79,7 +86,11 @@ public class AddShoplistControllerTest {
 
         ShoplistEntityDTO shoplistEntityDTO = shoplistManager.populateShoplistFromInputData(inputData);
 
-        ShoplistEntity dbShoplistEntity = shoplistEntityDAO.getByNameAndUser(shoplistName, shoplistEntityDTO.getUser());
+        UserDTO userDTO = shoplistEntityDTO.getUserDTO();
+
+        User user = userDTOToEntityTransformer.transform(userDTO);
+
+        ShoplistEntity dbShoplistEntity = shoplistEntityDAO.getByNameAndUser(shoplistName, user);
         if (dbShoplistEntity != null) {
             shoplistEntityDAO.delete(dbShoplistEntity.getShoplistID());
         }
@@ -88,7 +99,7 @@ public class AddShoplistControllerTest {
 
         shoplistManager.createShoplist(shoplistEntityDTO);
 
-        ShoplistEntity shoplistEntity = shoplistEntityDAO.getByNameAndUser(shoplistName, shoplistEntityDTO.getUser());
+        ShoplistEntity shoplistEntity = shoplistEntityDAO.getByNameAndUser(shoplistName, user);
 
         assertNotEquals(null, shoplistEntity);
     }

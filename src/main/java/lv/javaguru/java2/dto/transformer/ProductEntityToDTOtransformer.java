@@ -12,15 +12,15 @@ import org.springframework.stereotype.Component;
 @Qualifier("ProductEntityToDTO")
 public class ProductEntityToDTOtransformer implements DataTranformer<ProductDTO, Product>{
     @Override
-    public ProductDTO transform(Product data) {
+    public ProductDTO transform(Product product) {
 
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setProductId(productDTO.getProductId());
-        productDTO.setProductName(productDTO.getProductName());
-        productDTO.setAddedTime(productDTO.getAddedTime());
-        productDTO.setProductCategory(productDTO.getProductCategory());
-        productDTO.setAddedIP(productDTO.getAddedIP());
-        productDTO.setAddedCountry(productDTO.getAddedCountry());
+        productDTO.setProductId(product.getProductId());
+        productDTO.setProductName(product.getProductName());
+        productDTO.setAddedTime(product.getAddedTime());
+        productDTO.setProductCategory(product.getProductCategory());
+        productDTO.setAddedIP(product.getAddedIP());
+        productDTO.setAddedCountry(product.getAddedCountry());
 
         return productDTO;
     }

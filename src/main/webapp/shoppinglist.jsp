@@ -1,4 +1,5 @@
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Shopping list page</title>
@@ -59,6 +60,24 @@
         document.getElementById(tableID).deleteRow(d);
     }
 </script>
+
+<form action="/doViewShoplist" method="post">
+<table>
+    <tr>
+        <td colspan="2"><b>User Orders:</b></td>
+    </tr>
+    <tr>
+        <td>
+            <select name="orders">
+                <c:forEach var="order" items="${requestScope.data}">
+                    <option value="${order.shoplistID}">${order.shoplistName}</option>
+                </c:forEach>
+            </select>
+        </td>
+        <td><input type="submit" value="view order"><td>
+    </tr>
+</table>
+</form>
 
 <h1>Shopping list</h1>
 <form action="/addShoplist" method="post">

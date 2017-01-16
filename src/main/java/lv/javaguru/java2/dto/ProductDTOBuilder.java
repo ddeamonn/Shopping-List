@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 
 public class ProductDTOBuilder {
 
+    Long productID;
     String productName;
     String ipAddress;
     Timestamp addedTime;
@@ -23,11 +24,17 @@ public class ProductDTOBuilder {
 
     public ProductDTO build() {
         ProductDTO product = new ProductDTO();
+        product.setProductId(productID);
         product.setProductName(productName);
         product.setProductCategory(productCategory);
         product.setAddedIP(ipAddress);
         product.setAddedTime(addedTime);
         return product;
+    }
+
+    public ProductDTOBuilder withProductID(Long productID) {
+        this.productID = productID;
+        return this;
     }
 
     public ProductDTOBuilder withProductName(String productName) {

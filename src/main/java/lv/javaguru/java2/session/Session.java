@@ -1,6 +1,7 @@
 package lv.javaguru.java2.session;
 
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,13 +11,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class Session {
     
-    User sessionUser;
+    UserDTO sessionUser;
 
-    public User getSessionUser() {
+    public UserDTO getSessionUser() {
         return sessionUser;
     }
 
-    public void setSessionUser(User sessionUser) {
+    public void setSessionUser(UserDTO sessionUser) {
         this.sessionUser = sessionUser;
     }
 

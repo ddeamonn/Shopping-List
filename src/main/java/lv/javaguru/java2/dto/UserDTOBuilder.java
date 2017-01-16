@@ -1,24 +1,24 @@
-package lv.javaguru.java2.user;
+package lv.javaguru.java2.dto;
 
 import lv.javaguru.java2.domain.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserBuilder {
+public class UserDTOBuilder {
 
     private Long userID;
     private String userName;
     private String email;
     private String password;
 
-    private UserBuilder() {}
+    private UserDTOBuilder() {}
 
-    public static UserBuilder createUser() {
-        return new UserBuilder();
+    public static UserDTOBuilder createUser() {
+        return new UserDTOBuilder();
     }
 
-    public User build() {
-        User user = new User();
+    public UserDTO build() {
+        UserDTO user = new UserDTO();
         user.setUserID(userID);
         user.setUserName(userName);
         user.setEmail(email);
@@ -26,22 +26,22 @@ public class UserBuilder {
         return user;
     }
 
-    public UserBuilder withUserID(Long userID) {
+    public UserDTOBuilder withUserID(Long userID) {
         this.userID = userID;
         return this;
     }
 
-    public UserBuilder withName(String userName) {
+    public UserDTOBuilder withName(String userName) {
         this.userName = userName;
         return this;
     }
 
-    public UserBuilder withMail(String email) {
+    public UserDTOBuilder withMail(String email) {
         this.email = email;
         return this;
     }
 
-    public UserBuilder withPassword(String password) {
+    public UserDTOBuilder withPassword(String password) {
         this.password = password;
         return this;
     }

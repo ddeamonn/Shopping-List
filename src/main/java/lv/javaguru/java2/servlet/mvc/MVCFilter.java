@@ -41,6 +41,7 @@ public class MVCFilter implements Filter {
         controllers.put("/registration", getBean(ViewRegistrationFormController.class));
         controllers.put("/doRegistration", getBean(DoRegistrationController.class));
         controllers.put("/doLogging", getBean(DoAuthorisationController.class));
+        controllers.put("/doViewShoplist", getBean(DoViewShoplistController.class));
     }
 
     private MVCController getBean ( Class<?> clazz ) {

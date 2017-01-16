@@ -3,6 +3,7 @@ package lv.javaguru.java2.domain;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -21,8 +22,8 @@ public class ShoplistEntity {
     @Column(name = "lst_name" , nullable = false)
     private String shoplistName;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplistEntity", cascade=CascadeType.ALL)
-    private Collection<OrderItem> orderItems = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoplistEntity", cascade=CascadeType.ALL)
+    private Collection<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usr_id")

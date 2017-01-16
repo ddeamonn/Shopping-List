@@ -16,9 +16,9 @@ public class ShoplistEntityDTO {
 
     private String shoplistName;
 
-    private Collection<OrderItemDTO> orderItems = new ArrayList<>();
+    private Collection<OrderItemDTO> orderItemsDTO;
 
-    User user;
+    UserDTO userDTO;
 
     public Long getShoplistID() {
         return shoplistID;
@@ -36,20 +36,20 @@ public class ShoplistEntityDTO {
         this.shoplistName = shoplistName;
     }
 
-    public Collection<OrderItemDTO> getOrderItems() {
-        return orderItems;
+    public UserDTO getUserDTO() {
+        return userDTO;
     }
 
-    public void setOrderItems(Collection<OrderItemDTO> orderItems) {
-        this.orderItems = orderItems;
+    public void setUserDTO(UserDTO user) {
+        this.userDTO = user;
     }
 
-    public User getUser() {
-        return user;
+    public Collection<OrderItemDTO> getOrderItemsDTO() {
+        return orderItemsDTO;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOrderItemsDTO(Collection<OrderItemDTO> orderItemsDTO) {
+        this.orderItemsDTO = orderItemsDTO;
     }
 
     @Override
@@ -57,8 +57,8 @@ public class ShoplistEntityDTO {
         return "ShoplistEntityDTO{" +
                 "shoplistID=" + shoplistID +
                 ", shoplistName='" + shoplistName + '\'' +
-                ", orderItems=" + orderItems.size() +
-                ", user=" + user +
+                ", orderItems=" + orderItemsDTO +
+                ", user=" + userDTO +
                 '}';
     }
 }

@@ -24,6 +24,8 @@ public class PopulateShoplistDataHelper {
 
     ShoplistEntityDTO populateFromInputData(ShoplistInputData inputData) {
         String shoplistName = inputData.getShoplistName();
+        String shopListID = inputData.getShoplistID();
+
         List<String> inputProductNames = (List<String>)inputData.getProductNames();
         List<String> inputQtyOfProducts = (List<String>)inputData.getProductQtys();
         List<String> inputPriceOfProducts = (List<String>)inputData.getProductPrices();
@@ -51,14 +53,12 @@ public class PopulateShoplistDataHelper {
             productPrice = productPrice.setScale(2,BigDecimal.ROUND_HALF_UP);
 
             orderItemDTO.setProductPrice(productPrice);
-
             orderItemDTOs.add(orderItemDTO);
-
-            shoplistEntityDTO.setOrderItems(orderItemDTOs);
-            shoplistEntityDTO.setUser(session.getSessionUser());
-
+            shoplistEntityDTO.setUserDTO(session.getSessionUser());
             i++;
         }
+
+        shoplistEntityDTO.setOrderItemsDTO(orderItemDTOs);
 
         return shoplistEntityDTO;
     }

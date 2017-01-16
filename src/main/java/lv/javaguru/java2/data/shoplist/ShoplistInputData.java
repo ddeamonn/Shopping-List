@@ -6,10 +6,19 @@ import java.util.Collection;
  * Created by DMC on 12/20/2016.
  */
 public class ShoplistInputData {
+    String shoplistID;
     String shoplistName;
     Collection<String>  productNames;
     Collection<String> productQtys;
     Collection<String> productPrices;
+
+    public String getShoplistID() {
+        return shoplistID;
+    }
+
+    public void setShoplistID(String shoplistID) {
+        this.shoplistID = shoplistID;
+    }
 
     public String getShoplistName() {
         return shoplistName;

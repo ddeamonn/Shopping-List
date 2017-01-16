@@ -9,8 +9,10 @@ import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.dto.OrderItemDTO;
 import lv.javaguru.java2.dto.ProductDTO;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
+import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.dto.transformer.DataTranformer;
 import lv.javaguru.java2.product.ProductManager;
+import lv.javaguru.java2.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -46,6 +48,10 @@ public class CreateShoplistHelper {
     @Qualifier("OrderItemDTOtoEntity")
     DataTranformer<OrderItem, OrderItemDTO> orderDTOToEntityTransformer;
 
+    @Autowired
+    @Qualifier("UserDTOtoEntity")
+    DataTranformer<User, UserDTO> userDTOToEntityTransformer;
+
     List<OrderItem> shoplistOrderItems;
 
     ShoplistEntity shoplistEntity;
@@ -64,7 +70,9 @@ public class CreateShoplistHelper {
 
         shoplistEntity = new ShoplistEntity();
         shoplistEntity.setShoplistName(shoplistEntityDTO.getShoplistName());
-        shoplistEntity.setUser(shoplistEntityDTO.getUser());
+
+        User user = userDTOToEntityTransformer.transform(shoplistEntityDTO.getUserDTO());
+        shoplistEntity.setUser(user);
 
         shoplistOrderItems = new ArrayList<>();
         populateShoplistOrderItems(shoplistEntityDTO);
@@ -74,7 +82,7 @@ public class CreateShoplistHelper {
     }
 
     private void populateShoplistOrderItems(ShoplistEntityDTO shoplistEntityDTO) {
-        Collection<OrderItemDTO> orderItemsDTO = shoplistEntityDTO.getOrderItems();
+        Collection<OrderItemDTO> orderItemsDTO = shoplistEntityDTO.getOrderItemsDTO();
         orderItemsDTO.forEach(orderItemDTO ->
         {
             OrderItem orderItem = orderDTOToEntityTransformer.transform(orderItemDTO);

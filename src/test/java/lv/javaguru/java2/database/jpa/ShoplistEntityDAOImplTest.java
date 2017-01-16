@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static lv.javaguru.java2.domain.ProductBuilder.createProduct;
@@ -84,5 +85,17 @@ public class ShoplistEntityDAOImplTest {
         shoplistEntityDAO.create(shoplistEntity);
 
         assertNotNull(shoplistEntity.getShoplistID());
+    }
+
+    @Test
+    public void testFindByUser() throws Exception {
+
+        User user = new User();
+        user.setUserID(1002L);
+        user.setUserName("User");
+
+       Collection<ShoplistEntity> shoplistEntities = shoplistEntityDAO.getByUser(user);
+
+        assertNotNull(shoplistEntities);
     }
 }

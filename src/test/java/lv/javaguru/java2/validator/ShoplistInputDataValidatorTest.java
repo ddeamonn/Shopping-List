@@ -5,6 +5,8 @@ import lv.javaguru.java2.data.shoplist.ShoplistInputData;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
+import lv.javaguru.java2.dto.UserDTO;
+import lv.javaguru.java2.dto.transformer.DataTranformer;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.shoplist.ShoplistManager;
 import lv.javaguru.java2.validator.shoplist.ShoplistInputDataValidator;
@@ -45,12 +47,19 @@ public class ShoplistInputDataValidatorTest {
     @Qualifier("JPAUser")
     UserDAO userDAO;
 
+    @Autowired
+    @Qualifier("UserToDTOTransformer")
+    DataTranformer<UserDTO, User> userToDTOransformer;
+
     @Before
     public void init() {
 
         List<User> users = userDAO.getAll();
         User mockUser = users.get(0);
-        session.setSessionUser(mockUser);
+
+        UserDTO mockUserDTO = userToDTOransformer.transform(mockUser);
+
+        session.setSessionUser(mockUserDTO);
 
     }
 

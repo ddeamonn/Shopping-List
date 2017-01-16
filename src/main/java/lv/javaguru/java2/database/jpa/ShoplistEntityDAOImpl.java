@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * Created by DMC on 12/28/2016.
  */
@@ -19,6 +22,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Qualifier("JPAShoplist")
 public class ShoplistEntityDAOImpl extends GenericHibernateDAOImpl<ShoplistEntity> implements ShoplistEntityDAO {
+
+    @Override
+    @Transactional(readOnly=true)
+    public Collection<ShoplistEntity> getByUser(User user) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq("user", user));
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        return (Collection<ShoplistEntity>) criteria.list();
+    }
 
     @Override
     @Transactional(readOnly=true)

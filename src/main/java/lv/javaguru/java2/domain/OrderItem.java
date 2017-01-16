@@ -18,11 +18,11 @@ public class OrderItem implements Serializable {
     @Column(name = "order_id", nullable = false)
     Long orderID;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "prd_id")
     Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "lst_id")
     ShoplistEntity shoplistEntity;
 
