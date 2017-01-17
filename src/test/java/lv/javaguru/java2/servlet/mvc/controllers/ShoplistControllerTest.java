@@ -2,13 +2,10 @@ package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.database.UserDAO;
-import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.dto.transformer.DataTranformer;
+import lv.javaguru.java2.dto.transformer.DataTransformer;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
-import lv.javaguru.java2.servlet.mvc.ModelAndView;
 import lv.javaguru.java2.session.Session;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -46,7 +42,7 @@ public class ShoplistControllerTest {
 
     @Autowired
     @Qualifier("UserToDTOTransformer")
-    DataTranformer<UserDTO, User> userToDTOransformer;
+    DataTransformer<UserDTO, User> userToDTOransformer;
 
     @Before
     public void init() {

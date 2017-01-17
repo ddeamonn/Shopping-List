@@ -1,16 +1,13 @@
 package lv.javaguru.java2.validator.shoplist.rule;
 
-import lv.javaguru.java2.data.registration.RegistrationInputData;
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
 import lv.javaguru.java2.database.ShoplistEntityDAO;
-import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.dto.transformer.DataTranformer;
+import lv.javaguru.java2.dto.transformer.DataTransformer;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.validator.ValidationException;
-import lv.javaguru.java2.validator.register.rule.RegistrationInputDataRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -34,7 +31,7 @@ public class UniqueShoplistNameRule implements ShoplistInputDataRule {
 
     @Autowired
     @Qualifier("UserDTOtoEntity")
-    DataTranformer<User, UserDTO> userDTOTransformer;
+    DataTransformer<User, UserDTO> userDTOTransformer;
 
     @Override
     public boolean validate(ShoplistInputData shoplistInputData) {

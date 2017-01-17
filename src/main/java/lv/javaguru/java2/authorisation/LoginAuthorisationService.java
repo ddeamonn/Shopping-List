@@ -3,7 +3,7 @@ package lv.javaguru.java2.authorisation;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.dto.transformer.DataTranformer;
+import lv.javaguru.java2.dto.transformer.DataTransformer;
 import lv.javaguru.java2.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,7 +27,7 @@ public class LoginAuthorisationService implements AuthorisationService {
 
     @Autowired
     @Qualifier("UserToDTOTransformer")
-    DataTranformer<UserDTO, User> userToDTOTransformer;
+    DataTransformer<UserDTO, User> userToDTOTransformer;
 
     @Override
     public boolean authorise(AuthorisationContext context) {
