@@ -13,6 +13,8 @@ public interface ShoplistEntityDAO {
 
     ShoplistEntity getById(Long id);
 
+    ShoplistEntity getWithOrderItemsById(Long id);
+
     void delete(Long id);
 
     void update(ShoplistEntity shoplistEntity);

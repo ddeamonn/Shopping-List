@@ -22,10 +22,10 @@ public class ShoplistEntity {
     @Column(name = "lst_name" , nullable = false)
     private String shoplistName;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoplistEntity", cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplistEntity", cascade=CascadeType.ALL)
     private Collection<OrderItem> orderItems = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usr_id")
     User user;
 

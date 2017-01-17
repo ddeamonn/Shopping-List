@@ -1,18 +1,14 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
-import lv.javaguru.java2.authorisation.AuthorisationContext;
-import lv.javaguru.java2.authorisation.AuthorisationService;
 import lv.javaguru.java2.data.InputDataParser;
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
-import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.servlet.mvc.MVCController;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
 import lv.javaguru.java2.servlet.mvc.ModelAndView;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.shoplist.ShoplistManager;
 import lv.javaguru.java2.validator.ValidationException;
-import lv.javaguru.java2.validator.shoplist.rule.ShoplistIDRule;
-import lv.javaguru.java2.validator.shoplist.rule.ShoplistInputDataRule;
+import lv.javaguru.java2.validator.shoplist.ShoplistIDValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -39,7 +35,7 @@ public class DoViewShoplistController implements MVCController {
 
     @Autowired
     @Qualifier("ShoplistIDRule")
-    ShoplistIDRule shoplistIDValidator;
+    ShoplistIDValidator shoplistIDValidator;
 
     public MVCModel processPost(HttpServletRequest req) {
 

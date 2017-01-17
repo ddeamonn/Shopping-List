@@ -2,15 +2,11 @@ package lv.javaguru.java2.shoplist;
 
 import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.database.ShoplistEntityDAO;
-import lv.javaguru.java2.database.UserDAO;
-import lv.javaguru.java2.domain.OrderItem;
-import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.dto.transformer.DataTranformer;
 import lv.javaguru.java2.domain.User;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -41,6 +37,10 @@ public class FindShoplistHelper {
     @Qualifier("ShoplistEntityToDTO")
     DataTranformer<ShoplistEntityDTO, ShoplistEntity> shoplistEntityToDTOTransformer;
 
+    @Autowired
+    @Qualifier("ShoplistEntityWithOrderItemToDTO")
+    DataTranformer<ShoplistEntityDTO, ShoplistEntity> shoplistEntityWithOrderItemToDTO;
+
     @Transactional
     Collection<ShoplistEntityDTO> findAllUserShoplistOrders(UserDTO userDTO) {
 
@@ -58,8 +58,8 @@ public class FindShoplistHelper {
     }
 
     ShoplistEntityDTO findShoplistEntityByID(Long shoplistEntiryID) {
-        ShoplistEntity shoplistEntity = shoplistEntityDAO.getById(shoplistEntiryID);
+        ShoplistEntity shoplistEntity = shoplistEntityDAO.getWithOrderItemsById(shoplistEntiryID);
 
-        return shoplistEntityToDTOTransformer.transform(shoplistEntity);
+        return shoplistEntityWithOrderItemToDTO.transform(shoplistEntity);
     }
 }

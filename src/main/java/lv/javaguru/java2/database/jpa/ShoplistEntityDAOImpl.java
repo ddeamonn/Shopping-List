@@ -7,6 +7,7 @@ import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,16 @@ import java.util.List;
 @Component
 @Qualifier("JPAShoplist")
 public class ShoplistEntityDAOImpl extends GenericHibernateDAOImpl<ShoplistEntity> implements ShoplistEntityDAO {
+
+    @Override
+    @Transactional
+    public ShoplistEntity getWithOrderItemsById(Long id) {
+        ShoplistEntity shoplistEntity = getById(id);
+
+        Hibernate.initialize(shoplistEntity.getOrderItems());
+
+        return shoplistEntity;
+    }
 
     @Override
     @Transactional(readOnly=true)
