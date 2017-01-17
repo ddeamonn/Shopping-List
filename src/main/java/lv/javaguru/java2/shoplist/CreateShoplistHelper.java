@@ -60,13 +60,11 @@ public class CreateShoplistHelper {
         shoplistEntityDAO.create(shoplistEntity);
 
         Collection<OrderItemDTO> orderItemDTOs =  shoplistEntityDTO.getOrderItemsDTO();
-
-        List<OrderItem> orderItems = new ArrayList<>(orderItemDTOs.size());
         orderItemDTOs.forEach( orderItemDTO ->
             {
                 Product product;
                 ProductDTO productDTO = orderItemDTO.getProduct();
-                if (productDTO.getProductId() == null) {
+                if (isNewProduct(productDTO)) {
                     product = productDtoToEntity.transform(productDTO);
                     productDAO.create(product);
                 } else {
@@ -78,9 +76,12 @@ public class CreateShoplistHelper {
                 orderItem.setProduct(product);
 
                 orderItemDAO.create(orderItem);
-                orderItems.add(orderItem);
             });
 
         return true;
+    }
+
+    private boolean isNewProduct(ProductDTO productDTO) {
+        return productDTO.getProductId() == null;
     }
 }
