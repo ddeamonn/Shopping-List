@@ -32,6 +32,7 @@ public class BuildUserHelperTest {
         User  user = buildUserHelper
                 .createUser()
                 .withRegistrationInputData(inputData)
+                .withCurrentAddedTime()
                 .build();
 
         Assert.assertEquals("email", user.getEmail());

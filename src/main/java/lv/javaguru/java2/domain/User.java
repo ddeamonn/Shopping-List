@@ -1,6 +1,7 @@
 package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,6 +31,9 @@ public class User {
 
     @Column(name = "usr_language", nullable = true)
     private String language;
+
+    @Column(name = "usr_added_time", nullable = true)
+    private Timestamp addedTime;
 
     public String getUserName() {
         return userName;
@@ -85,6 +89,14 @@ public class User {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public Timestamp getAddedTime() {
+        return addedTime;
+    }
+
+    public void setAddedTime(Timestamp addedTime) {
+        this.addedTime = addedTime;
     }
 
     @Override

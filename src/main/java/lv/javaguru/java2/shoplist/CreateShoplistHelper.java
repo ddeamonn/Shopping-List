@@ -13,6 +13,7 @@ import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.dto.transformer.DataTranformer;
 import lv.javaguru.java2.product.ProductManager;
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -70,6 +71,7 @@ public class CreateShoplistHelper {
 
         shoplistEntity = new ShoplistEntity();
         shoplistEntity.setShoplistName(shoplistEntityDTO.getShoplistName());
+        shoplistEntityDTO.setAddedTime(DateUtils.getCurrentTimestamp());
 
         User user = userDTOToEntityTransformer.transform(shoplistEntityDTO.getUserDTO());
         shoplistEntity.setUser(user);

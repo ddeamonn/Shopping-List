@@ -217,6 +217,9 @@ CREATE TABLE `shopping_list_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+ALTER TABLE `java2`.`users`
+    ADD COLUMN `usr_added_time` DATETIME NULL DEFAULT NULL COMMENT '' AFTER `usr_language`;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

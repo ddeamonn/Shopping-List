@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.ShoplistEntityDAO;
 import lv.javaguru.java2.domain.*;
 import lv.javaguru.java2.dto.*;
 import lv.javaguru.java2.session.Session;
+import lv.javaguru.java2.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +34,7 @@ public class PopulateShoplistDataHelper {
         ShoplistEntityDTO shoplistEntityDTO = ShoplistEntityDTOBuilder
                 .createShoplistEntity()
                 .withShoplistName(shoplistName)
+                .withAddedTime(DateUtils.getCurrentTimestamp())
                 .build();
 
         int i = 0;
@@ -42,6 +44,7 @@ public class PopulateShoplistDataHelper {
             ProductDTO productDTO = ProductDTOBuilder
                     .createProduct()
                     .withProductName(productName)
+                    .withAddedTime(DateUtils.getCurrentTimestamp())
                     .build();
 
             OrderItemDTO orderItemDTO = new OrderItemDTO();

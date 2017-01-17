@@ -17,6 +17,7 @@ public class ProductDTOtoEntityTransformer implements DataTranformer<Product, Pr
         product.setProductId(dataDTO.getProductId());
         product.setProductName(dataDTO.getProductName());
         product.setProductCategory(dataDTO.getProductCategory());
+        product.setAddedTime(dataDTO.getAddedTime());
 
         return product;
     }

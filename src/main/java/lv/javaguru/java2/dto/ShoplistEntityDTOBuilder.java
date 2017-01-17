@@ -5,6 +5,7 @@ import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.ShoplistEntityBuilder;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Collection;
 public class ShoplistEntityDTOBuilder {
     String shoplistName;
     Long shoplistID;
+    private Timestamp addedTime;
     private Collection<OrderItemDTO> orderItemDTOs;
 
     private ShoplistEntityDTOBuilder() {};
@@ -27,6 +29,7 @@ public class ShoplistEntityDTOBuilder {
         shoplistEntityDTO.setShoplistName(shoplistName);
         shoplistEntityDTO.setOrderItemsDTO(orderItemDTOs);
         shoplistEntityDTO.setShoplistID(shoplistID);
+        shoplistEntityDTO.setAddedTime(addedTime);
         return shoplistEntityDTO;
     }
 
@@ -42,6 +45,11 @@ public class ShoplistEntityDTOBuilder {
 
     public ShoplistEntityDTOBuilder withSholistOrderItems(Collection<OrderItemDTO> orderItemDTOs) {
         this.orderItemDTOs = orderItemDTOs;
+        return this;
+    }
+
+    public ShoplistEntityDTOBuilder withAddedTime(Timestamp addedTime) {
+        this.addedTime = addedTime;
         return this;
     }
 }

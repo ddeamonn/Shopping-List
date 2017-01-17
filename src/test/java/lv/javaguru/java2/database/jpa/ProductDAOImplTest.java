@@ -1,8 +1,10 @@
 package lv.javaguru.java2.database.jpa;
 
 import lv.javaguru.java2.config.SpringConfig;
+import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.domain.Product;
+import lv.javaguru.java2.product.BuildProductHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +27,32 @@ public class ProductDAOImplTest {
     @Qualifier("JPAProduct")
     private ProductDAO productDAO;
 
+    @Autowired
+    BuildProductHelper buildProductHelper;
+
     @Test
     public void testCreate() throws Exception {
 
-        String productName = "name1";
+        String productName = "Milk";
+        String ipAddress = "127.0.0.1";
+
+        ProductInputData inputData;
+        inputData = new ProductInputData();
+        inputData.setInputProductName(productName);
+
+        BuildProductHelper productHelper = new BuildProductHelper();
+        Product product = productHelper
+                .createProduct()
+                .withInputData(inputData)
+                .withIPAddress(ipAddress)
+                .withCurrentAddedTime()
+                .build();
+
         Product dbProduct = productDAO.getByName(productName);
 
         if (dbProduct != null) {
             productDAO.delete(dbProduct.getProductId());
         }
-
-        Product product = createProduct()
-                .withProductName("name1").build();
 
         productDAO.create(product);
         Product productFromDB = productDAO.getByName(product.getProductName());

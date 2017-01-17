@@ -3,6 +3,7 @@ package lv.javaguru.java2.dto;
 import lv.javaguru.java2.domain.ShoplistEntity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,6 +22,8 @@ public class UserDTO {
     private String phone;
 
     private String language;
+
+    private Timestamp addedTime;
 
     private Collection<ShoplistEntityDTO> shoplistEntities = new ArrayList<>();
 
@@ -86,6 +89,14 @@ public class UserDTO {
 
     public void setShoplistEntities(Collection<ShoplistEntityDTO> shoplistEntities) {
         this.shoplistEntities = shoplistEntities;
+    }
+
+    public Timestamp getAddedTime() {
+        return addedTime;
+    }
+
+    public void setAddedTime(Timestamp addedTime) {
+        this.addedTime = addedTime;
     }
 
     @Override

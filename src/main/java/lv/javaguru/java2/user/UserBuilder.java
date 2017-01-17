@@ -3,6 +3,8 @@ package lv.javaguru.java2.user;
 import lv.javaguru.java2.domain.User;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
+
 @Component
 public class UserBuilder {
 
@@ -10,6 +12,7 @@ public class UserBuilder {
     private String userName;
     private String email;
     private String password;
+    private Timestamp addedTime;
 
     private UserBuilder() {}
 
@@ -23,6 +26,7 @@ public class UserBuilder {
         user.setUserName(userName);
         user.setEmail(email);
         user.setPassword(password);
+        user.setAddedTime(addedTime);
         return user;
     }
 
@@ -43,6 +47,11 @@ public class UserBuilder {
 
     public UserBuilder withPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public UserBuilder withAddedTime(Timestamp addedTime) {
+        this.addedTime = addedTime;
         return this;
     }
 }

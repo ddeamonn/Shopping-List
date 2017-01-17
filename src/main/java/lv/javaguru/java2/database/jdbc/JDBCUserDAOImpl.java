@@ -25,7 +25,7 @@ public class JDBCUserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into USERS values (default, ?, ?, default, default, default, default)", PreparedStatement.RETURN_GENERATED_KEYS);
+                    connection.prepareStatement("insert into USERS values (default, ?, ?, default, default, default, default, default)", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, "0");
             preparedStatement.setString(2, user.getUserName());
 

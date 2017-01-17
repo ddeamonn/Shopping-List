@@ -27,6 +27,7 @@ public class UserDTOtoEntityTransformer implements DataTranformer<User, UserDTO>
                 .withUserID(userDTO.getUserID())
                 .withMail(userDTO.getEmail())
                 .withPassword(userDTO.getPassword())
+                .withAddedTime(userDTO.getAddedTime())
                 .build();
 
         System.out.println(user.getUserID()+" "+userDTO.getUserID());

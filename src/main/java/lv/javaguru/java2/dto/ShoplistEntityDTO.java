@@ -4,6 +4,7 @@ import lv.javaguru.java2.domain.OrderItem;
 import lv.javaguru.java2.domain.User;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -17,6 +18,8 @@ public class ShoplistEntityDTO {
     private String shoplistName;
 
     private Collection<OrderItemDTO> orderItemsDTO;
+
+    private Timestamp addedTime;
 
     UserDTO userDTO;
 
@@ -50,6 +53,14 @@ public class ShoplistEntityDTO {
 
     public void setOrderItemsDTO(Collection<OrderItemDTO> orderItemsDTO) {
         this.orderItemsDTO = orderItemsDTO;
+    }
+
+    public Timestamp getAddedTime() {
+        return addedTime;
+    }
+
+    public void setAddedTime(Timestamp addedTime) {
+        this.addedTime = addedTime;
     }
 
     @Override

@@ -26,6 +26,7 @@ public class UserToDTOTransformer implements DataTranformer<UserDTO, User> {
                 .withUserID(user.getUserID())
                 .withMail(user.getEmail())
                 .withPassword(user.getPassword())
+                .withAddedTime(user.getAddedTime())
                 .build();
 
         return userDTO;

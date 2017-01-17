@@ -29,6 +29,7 @@ public class ShoplistEntityToDTOTransformer implements DataTranformer<ShoplistEn
                 .createShoplistEntity()
                 .withShoplistID(shoplistEntity.getShoplistID())
                 .withShoplistName(shoplistEntity.getShoplistName())
+                .withAddedTime(shoplistEntity.getAddedTime())
                 .build();
 
         return shoplistEntityDTO;

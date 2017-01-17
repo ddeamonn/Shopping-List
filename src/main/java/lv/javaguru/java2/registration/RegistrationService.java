@@ -58,6 +58,7 @@ public class RegistrationService {
             User user = buildUserHelper
                 .createUser()
                 .withRegistrationInputData(formattedInputData)
+                .withCurrentAddedTime()
                 .build();
 
             registration.register(user);

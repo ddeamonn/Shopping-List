@@ -1,6 +1,7 @@
 package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -28,6 +29,9 @@ public class ShoplistEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usr_id")
     User user;
+
+    @Column(name = "lst_added_time", nullable = true)
+    private Timestamp addedTime;
 
     public Long getShoplistID() {
         return shoplistID;
@@ -59,6 +63,14 @@ public class ShoplistEntity {
 
     public void setOrderItems(Collection<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public Timestamp getAddedTime() {
+        return addedTime;
+    }
+
+    public void setAddedTime(Timestamp addedTime) {
+        this.addedTime = addedTime;
     }
 
     @Override
