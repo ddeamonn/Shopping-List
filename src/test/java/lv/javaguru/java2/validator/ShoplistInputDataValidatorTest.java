@@ -2,7 +2,9 @@ package lv.javaguru.java2.validator;
 
 import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
+import lv.javaguru.java2.database.ShoplistEntityDAO;
 import lv.javaguru.java2.database.UserDAO;
+import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.dto.UserDTO;
@@ -48,6 +50,13 @@ public class ShoplistInputDataValidatorTest {
     UserDAO userDAO;
 
     @Autowired
+    ShoplistEntityDAO shoplistEntityDAO;
+
+    @Autowired
+    @Qualifier("UserDTOtoEntity")
+    DataTranformer<User, UserDTO> userDTOToEntityTransformer;
+
+    @Autowired
     @Qualifier("UserToDTOTransformer")
     DataTranformer<UserDTO, User> userToDTOransformer;
 
@@ -79,6 +88,14 @@ public class ShoplistInputDataValidatorTest {
 
     @Test
     public void ShoplistFieldsFilledCorrectlyTest () {
+
+        User user = userDTOToEntityTransformer.transform(session.getSessionUser());
+        ShoplistEntity dbShoplistEntity = shoplistEntityDAO.getByNameAndUser("sports", user);
+
+        if (dbShoplistEntity != null ) {
+            shoplistEntityDAO.delete(dbShoplistEntity.getShoplistID());
+        }
+
         ShoplistInputData inputData = new ShoplistInputData();
         inputData.setShoplistName("sports");
 
@@ -97,6 +114,14 @@ public class ShoplistInputDataValidatorTest {
 
     @Test(expected = ValidationException.class)
     public void ShoplistProductQtyLenExceedTest () {
+
+        User user = userDTOToEntityTransformer.transform(session.getSessionUser());
+        ShoplistEntity dbShoplistEntity = shoplistEntityDAO.getByNameAndUser("sports", user);
+
+        if (dbShoplistEntity != null ) {
+            shoplistEntityDAO.delete(dbShoplistEntity.getShoplistID());
+        }
+
         ShoplistInputData inputData = new ShoplistInputData();
         inputData.setShoplistName("sports");
 
@@ -111,6 +136,14 @@ public class ShoplistInputDataValidatorTest {
 
     @Test(expected = ValidationException.class)
     public void ShoplistProductNameLenExceedTest () {
+
+        User user = userDTOToEntityTransformer.transform(session.getSessionUser());
+        ShoplistEntity dbShoplistEntity = shoplistEntityDAO.getByNameAndUser("sports", user);
+
+        if (dbShoplistEntity != null ) {
+            shoplistEntityDAO.delete(dbShoplistEntity.getShoplistID());
+        }
+
         ShoplistInputData inputData = new ShoplistInputData();
         inputData.setShoplistName("sports");
 

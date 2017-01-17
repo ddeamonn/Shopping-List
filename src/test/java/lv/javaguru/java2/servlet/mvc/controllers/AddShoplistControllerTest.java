@@ -4,6 +4,7 @@ import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.data.formatter.DataFormatter;
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
 import lv.javaguru.java2.database.ShoplistEntityDAO;
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
@@ -29,6 +30,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertNotEquals;
 
@@ -58,12 +60,22 @@ public class AddShoplistControllerTest {
     @Qualifier("UserDTOtoEntity")
     DataTranformer<User, UserDTO> userDTOToEntityTransformer;
 
+    @Autowired
+    @Qualifier("JPAUser")
+    UserDAO userDAO;
+
+    @Autowired
+    @Qualifier("UserToDTOTransformer")
+    DataTranformer<UserDTO, User> userToDTOransformer;
+
     @Before
     public void init() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUserID(7L);
-        userDTO.setUserName("User");
-        session.setSessionUser(userDTO);
+        List<User> users = userDAO.getAll();
+        User mockUser = users.get(0);
+
+        UserDTO mockUserDTO = userToDTOransformer.transform(mockUser);
+
+        session.setSessionUser(mockUserDTO);
     }
 
     @Test

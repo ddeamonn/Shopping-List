@@ -3,10 +3,13 @@ package lv.javaguru.java2.database.jpa;
 import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.database.ShoplistEntityDAO;
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.OrderItem;
 import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.dto.UserDTO;
+import lv.javaguru.java2.dto.transformer.DataTranformer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +40,19 @@ public class ShoplistEntityDAOImplTest {
     @Qualifier("JPAProduct")
     private ProductDAO productDAO;
 
+    @Autowired
+    @Qualifier("JPAUser")
+    UserDAO userDAO;
+
+    @Autowired
+    @Qualifier("UserToDTOTransformer")
+    DataTranformer<UserDTO, User> userToDTOransformer;
+
     @Test
     public void testCreate() throws Exception {
 
-        User user = new User();
-        user.setUserID(1L);
-        user.setUserName("User");
+        List<User> users = userDAO.getAll();
+        User mockUser = users.get(0);
 
         String productName = "name";
         Product product = productDAO.getByName(productName);
@@ -74,7 +84,7 @@ public class ShoplistEntityDAOImplTest {
 
         shoplistEntity.setShoplistName("Food");
         shoplistEntity.setOrderItems(orderItems);
-        shoplistEntity.setUser(user);
+        shoplistEntity.setUser(mockUser);
 
         ShoplistEntity dbShoplistEntity = shoplistEntityDAO.getByNameAndUser("Food", shoplistEntity.getUser());
 
@@ -90,11 +100,10 @@ public class ShoplistEntityDAOImplTest {
     @Test
     public void testFindByUser() throws Exception {
 
-        User user = new User();
-        user.setUserID(1002L);
-        user.setUserName("User");
+        List<User> users = userDAO.getAll();
+        User mockUser = users.get(0);
 
-       Collection<ShoplistEntity> shoplistEntities = shoplistEntityDAO.getByUser(user);
+        Collection<ShoplistEntity> shoplistEntities = shoplistEntityDAO.getByUser(mockUser);
 
         assertNotNull(shoplistEntities);
     }

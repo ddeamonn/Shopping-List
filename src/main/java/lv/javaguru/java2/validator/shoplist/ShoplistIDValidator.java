@@ -1,4 +1,4 @@
-package lv.javaguru.java2.validator.shoplist.rule;
+package lv.javaguru.java2.validator.shoplist;
 
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
 import lv.javaguru.java2.validator.ValidationException;
@@ -11,14 +11,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Qualifier("ShoplistIDRule")
-public class ShoplistIDRule {
+public class ShoplistIDValidator {
 
     private final static String ERROR_MESSAGE = "Incorrect shoplist ID";
 
     public boolean validate(ShoplistInputData inputData) {
 
         try {
-            System.out.println("Validator"+inputData.getShoplistID());
             Long parsedshoplistID = Long.parseLong(inputData.getShoplistID());
         } catch (Exception exception) {
             throw new ValidationException(ERROR_MESSAGE);
