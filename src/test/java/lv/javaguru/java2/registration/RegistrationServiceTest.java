@@ -35,12 +35,13 @@ public class RegistrationServiceTest {
     public void registerNewUserTest() throws Exception {
 
         RegistrationInputData inputData = new RegistrationInputData();
-        inputData.setEmail("emailunique@mail.lv");
+        inputData.setEmail("emailunique@mail2.lv");
         inputData.setPassword("password");
 
         User user = buildUserHelper
                 .createUser()
                 .withRegistrationInputData(inputData)
+                .withCurrentAddedTime()
                 .build();
 
         User dbUser = userDAO.getUserByEmail(user.getEmail());
