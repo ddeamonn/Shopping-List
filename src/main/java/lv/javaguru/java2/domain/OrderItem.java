@@ -22,7 +22,7 @@ public class OrderItem implements Serializable {
     @JoinColumn(name = "prd_id")
     Product product;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lst_id")
     ShoplistEntity shoplistEntity;
 

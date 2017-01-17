@@ -10,7 +10,7 @@ import lv.javaguru.java2.dto.OrderItemDTO;
 import lv.javaguru.java2.dto.ProductDTO;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.dto.transformer.DataTranformer;
+import lv.javaguru.java2.dto.transformer.DataTransformer;
 import lv.javaguru.java2.product.ProductManager;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.utils.DateUtils;
@@ -42,71 +42,45 @@ public class CreateShoplistHelper {
     ProductManager productService;
 
     @Autowired
+    @Qualifier("ShoplistWithOrderItemsDTOtoEntity")
+    DataTransformer<ShoplistEntity, ShoplistEntityDTO> shoplistWithOrderItemsDtoToEntity;
+
+    @Autowired
     @Qualifier("ProductDTOtoEntity")
-    DataTranformer<Product, ProductDTO> productDtoToEntityTransformer;
+    DataTransformer<Product, ProductDTO> productDtoToEntity;
 
     @Autowired
     @Qualifier("OrderItemDTOtoEntity")
-    DataTranformer<OrderItem, OrderItemDTO> orderDTOToEntityTransformer;
-
-    @Autowired
-    @Qualifier("UserDTOtoEntity")
-    DataTranformer<User, UserDTO> userDTOToEntityTransformer;
-
-    List<OrderItem> shoplistOrderItems;
-
-    ShoplistEntity shoplistEntity;
+    DataTransformer<OrderItem, OrderItemDTO> orderItemDtoToEntity;
 
     @Transactional
     boolean create(ShoplistEntityDTO shoplistEntityDTO) throws RuntimeException{
 
-        ShoplistEntity shoplistEntity = populateShoplistEntity(shoplistEntityDTO);
-
+        ShoplistEntity shoplistEntity = shoplistWithOrderItemsDtoToEntity.transform(shoplistEntityDTO);
         shoplistEntityDAO.create(shoplistEntity);
 
+        Collection<OrderItemDTO> orderItemDTOs =  shoplistEntityDTO.getOrderItemsDTO();
+
+        List<OrderItem> orderItems = new ArrayList<>(orderItemDTOs.size());
+        orderItemDTOs.forEach( orderItemDTO ->
+            {
+                Product product;
+                ProductDTO productDTO = orderItemDTO.getProduct();
+                if (productDTO.getProductId() == null) {
+                    product = productDtoToEntity.transform(productDTO);
+                    productDAO.create(product);
+                } else {
+                    product = productDAO.getById(productDTO.getProductId());
+                }
+
+                OrderItem orderItem = orderItemDtoToEntity.transform(orderItemDTO);
+                orderItem.setShoplistEntity(shoplistEntity);
+                orderItem.setProduct(product);
+
+                orderItemDAO.create(orderItem);
+                orderItems.add(orderItem);
+            });
+
         return true;
-    }
-
-    private ShoplistEntity populateShoplistEntity(ShoplistEntityDTO shoplistEntityDTO) {
-
-        shoplistEntity = new ShoplistEntity();
-        shoplistEntity.setShoplistName(shoplistEntityDTO.getShoplistName());
-        shoplistEntityDTO.setAddedTime(DateUtils.getCurrentTimestamp());
-
-        User user = userDTOToEntityTransformer.transform(shoplistEntityDTO.getUserDTO());
-        shoplistEntity.setUser(user);
-
-        shoplistOrderItems = new ArrayList<>();
-        populateShoplistOrderItems(shoplistEntityDTO);
-        shoplistEntity.setOrderItems(shoplistOrderItems);
-
-        return shoplistEntity;
-    }
-
-    private void populateShoplistOrderItems(ShoplistEntityDTO shoplistEntityDTO) {
-        Collection<OrderItemDTO> orderItemsDTO = shoplistEntityDTO.getOrderItemsDTO();
-        orderItemsDTO.forEach(orderItemDTO ->
-        {
-            OrderItem orderItem = orderDTOToEntityTransformer.transform(orderItemDTO);
-            orderItem.setShoplistEntity(shoplistEntity);
-            Product product = findOrCreateOrderProduct(orderItemDTO);
-            orderItem.setProduct(product);
-            shoplistOrderItems.add(orderItem);
-        });
-    }
-
-    private Product findOrCreateOrderProduct(OrderItemDTO orderItemDTO) {
-        ProductDTO productDTO = orderItemDTO.getProduct();
-        Product product = productDAO.getByName(productDTO.getProductName());
-        if (!isProduct(product)) {
-            product = productDtoToEntityTransformer.transform(productDTO);
-            productDAO.create(product);
-        }
-
-        return product;
-    }
-
-    private boolean isProduct(Product product) {
-        return !(product == null);
     }
 }

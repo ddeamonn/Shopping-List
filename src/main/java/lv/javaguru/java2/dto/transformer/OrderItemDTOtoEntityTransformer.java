@@ -1,9 +1,7 @@
 package lv.javaguru.java2.dto.transformer;
 
 import lv.javaguru.java2.domain.OrderItem;
-import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.dto.OrderItemDTO;
-import lv.javaguru.java2.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Qualifier("OrderItemDTOtoEntity")
-public class OrderItemDTOtoEntityTransformer  implements DataTranformer<OrderItem, OrderItemDTO> {
+public class OrderItemDTOtoEntityTransformer  implements DataTransformer<OrderItem, OrderItemDTO> {
     @Override
     public OrderItem transform(OrderItemDTO dataDTO) {
 

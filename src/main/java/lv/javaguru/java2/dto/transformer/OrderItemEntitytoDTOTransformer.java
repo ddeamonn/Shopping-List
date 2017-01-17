@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Qualifier("OrderItemToDTO")
-public class OrderItemEntitytoDTOTransformer implements DataTranformer<OrderItemDTO, OrderItem> {
+public class OrderItemEntitytoDTOTransformer implements DataTransformer<OrderItemDTO, OrderItem> {
 
     @Autowired
     @Qualifier("ProductEntityToDTO")
-    DataTranformer<ProductDTO, Product> productToDTOtransformer;
+    DataTransformer<ProductDTO, Product> productToDTOtransformer;
 
     @Override
     public OrderItemDTO transform(OrderItem orderItem) {

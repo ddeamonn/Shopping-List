@@ -5,7 +5,7 @@ import lv.javaguru.java2.database.ShoplistEntityDAO;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.dto.transformer.DataTranformer;
+import lv.javaguru.java2.dto.transformer.DataTransformer;
 import lv.javaguru.java2.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,15 +31,15 @@ public class FindShoplistHelper {
 
     @Autowired
     @Qualifier("UserDTOtoEntity")
-    DataTranformer<User, UserDTO> userDTOTransformer;
+    DataTransformer<User, UserDTO> userDTOTransformer;
 
     @Autowired
     @Qualifier("ShoplistEntityToDTO")
-    DataTranformer<ShoplistEntityDTO, ShoplistEntity> shoplistEntityToDTOTransformer;
+    DataTransformer<ShoplistEntityDTO, ShoplistEntity> shoplistEntityToDTOTransformer;
 
     @Autowired
     @Qualifier("ShoplistEntityWithOrderItemToDTO")
-    DataTranformer<ShoplistEntityDTO, ShoplistEntity> shoplistEntityWithOrderItemToDTO;
+    DataTransformer<ShoplistEntityDTO, ShoplistEntity> shoplistEntityWithOrderItemToDTO;
 
     @Transactional
     Collection<ShoplistEntityDTO> findAllUserShoplistOrders(UserDTO userDTO) {

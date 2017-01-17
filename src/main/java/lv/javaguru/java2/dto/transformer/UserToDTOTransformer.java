@@ -3,7 +3,6 @@ package lv.javaguru.java2.dto.transformer;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.dto.UserDTOBuilder;
-import lv.javaguru.java2.user.UserBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Qualifier("UserToDTOTransformer")
-public class UserToDTOTransformer implements DataTranformer<UserDTO, User> {
+public class UserToDTOTransformer implements DataTransformer<UserDTO, User> {
 
     @Autowired
     UserDTOBuilder userDTOBuilder;

@@ -1,12 +1,14 @@
 package lv.javaguru.java2.shoplist;
 
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
+import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.database.ShoplistEntityDAO;
 import lv.javaguru.java2.domain.*;
 import lv.javaguru.java2.dto.*;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -22,6 +24,10 @@ public class PopulateShoplistDataHelper {
 
     @Autowired
     Session session;
+
+    @Autowired
+    @Qualifier("JPAProduct")
+    ProductDAO productDAO;
 
     ShoplistEntityDTO populateFromInputData(ShoplistInputData inputData) {
         String shoplistName = inputData.getShoplistName();
@@ -41,14 +47,9 @@ public class PopulateShoplistDataHelper {
         List<OrderItemDTO> orderItemDTOs = new ArrayList<>();
         while (i < inputProductNames.size()) {
             String productName = inputProductNames.get(i);
-            ProductDTO productDTO = ProductDTOBuilder
-                    .createProduct()
-                    .withProductName(productName)
-                    .withAddedTime(DateUtils.getCurrentTimestamp())
-                    .build();
 
             OrderItemDTO orderItemDTO = new OrderItemDTO();
-            orderItemDTO.setProduct(productDTO);
+            orderItemDTO.setProduct(findOrPrepareProduct(productName));
             Integer productQty = Integer.parseInt(inputQtyOfProducts.get(i));
             orderItemDTO.setProductQty(productQty);
 
@@ -64,5 +65,30 @@ public class PopulateShoplistDataHelper {
         shoplistEntityDTO.setOrderItemsDTO(orderItemDTOs);
 
         return shoplistEntityDTO;
+    }
+
+    private ProductDTO findOrPrepareProduct(String productName) {
+        Long productID = null;
+        Product dbProduct = productDAO.getByName(productName);
+        if (dbProduct != null) {
+            productID = dbProduct.getProductId();
+        }
+
+        ProductDTO productDTO = ProductDTOBuilder
+                .createProduct()
+                .withProductID(productID)
+                .withProductName(productName)
+                .withAddedTime(DateUtils.getCurrentTimestamp())
+                .build();
+
+        return productDTO;
+    }
+
+    private boolean isProduct(Product product) {
+        return !(product == null);
+    }
+
+    private boolean isExistProduct(Product product) {
+        return product.getProductId() != null;
     }
 }

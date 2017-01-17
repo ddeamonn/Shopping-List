@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Qualifier("ProductDTOtoEntity")
-public class ProductDTOtoEntityTransformer implements DataTranformer<Product, ProductDTO>{
+public class ProductDTOtoEntityTransformer implements DataTransformer<Product, ProductDTO> {
     @Override
     public Product transform(ProductDTO dataDTO) {
         Product product = new Product();

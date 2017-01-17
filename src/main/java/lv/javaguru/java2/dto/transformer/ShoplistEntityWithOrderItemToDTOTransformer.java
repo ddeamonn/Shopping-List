@@ -2,18 +2,11 @@ package lv.javaguru.java2.dto.transformer;
 
 import lv.javaguru.java2.domain.OrderItem;
 import lv.javaguru.java2.domain.ShoplistEntity;
-import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.OrderItemDTO;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
-import lv.javaguru.java2.dto.ShoplistEntityDTOBuilder;
-import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.user.UserBuilder;
-import org.hibernate.SessionFactory;
-import org.mockito.internal.matchers.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,15 +17,15 @@ import java.util.Collection;
 
 @Component
 @Qualifier("ShoplistEntityWithOrderItemToDTO")
-public class ShoplistEntityWithOrderItemToDTOTransformer implements DataTranformer<ShoplistEntityDTO, ShoplistEntity> {
+public class ShoplistEntityWithOrderItemToDTOTransformer implements DataTransformer<ShoplistEntityDTO, ShoplistEntity> {
 
     @Autowired
     @Qualifier("ShoplistEntityToDTO")
-    DataTranformer<ShoplistEntityDTO, ShoplistEntity> shoplistEntityToDTOTransformer;
+    DataTransformer<ShoplistEntityDTO, ShoplistEntity> shoplistEntityToDTOTransformer;
 
     @Autowired
     @Qualifier("OrderItemToDTO")
-    DataTranformer<OrderItemDTO, OrderItem> orderItemToDTOtransformer;
+    DataTransformer<OrderItemDTO, OrderItem> orderItemToDTOtransformer;
 
     @Override
     public ShoplistEntityDTO transform(ShoplistEntity shoplistEntity) {

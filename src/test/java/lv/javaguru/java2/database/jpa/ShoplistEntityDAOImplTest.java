@@ -9,12 +9,11 @@ import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.dto.transformer.DataTranformer;
+import lv.javaguru.java2.dto.transformer.DataTransformer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static lv.javaguru.java2.domain.ProductBuilder.createProduct;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -46,7 +44,7 @@ public class ShoplistEntityDAOImplTest {
 
     @Autowired
     @Qualifier("UserToDTOTransformer")
-    DataTranformer<UserDTO, User> userToDTOransformer;
+    DataTransformer<UserDTO, User> userToDTOransformer;
 
     @Test
     public void testCreate() throws Exception {

@@ -1,7 +1,5 @@
 package lv.javaguru.java2.dto.transformer;
 
-import lv.javaguru.java2.domain.OrderItem;
-import lv.javaguru.java2.dto.OrderItemDTO;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.user.UserBuilder;
 import lv.javaguru.java2.domain.User;
@@ -15,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Qualifier("UserDTOtoEntity")
-public class UserDTOtoEntityTransformer implements DataTranformer<User, UserDTO> {
+public class UserDTOtoEntityTransformer implements DataTransformer<User, UserDTO> {
 
     @Autowired
     UserBuilder userBuilder;

@@ -6,17 +6,14 @@ import lv.javaguru.java2.database.ShoplistEntityDAO;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.dto.transformer.DataTranformer;
+import lv.javaguru.java2.dto.transformer.DataTransformer;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.shoplist.ShoplistManager;
 import lv.javaguru.java2.validator.shoplist.ShoplistInputDataValidator;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -54,11 +51,11 @@ public class ShoplistInputDataValidatorTest {
 
     @Autowired
     @Qualifier("UserDTOtoEntity")
-    DataTranformer<User, UserDTO> userDTOToEntityTransformer;
+    DataTransformer<User, UserDTO> userDTOToEntityTransformer;
 
     @Autowired
     @Qualifier("UserToDTOTransformer")
-    DataTranformer<UserDTO, User> userToDTOransformer;
+    DataTransformer<UserDTO, User> userToDTOransformer;
 
     @Before
     public void init() {
