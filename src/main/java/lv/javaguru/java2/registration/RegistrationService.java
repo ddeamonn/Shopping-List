@@ -47,8 +47,7 @@ public class RegistrationService {
 
     public void process () {
 
-        String view;
-        Object data;
+        ModelAndView modelAndView;
 
         try {
             inputDataValidator.validate(inputData);
@@ -63,24 +62,27 @@ public class RegistrationService {
 
             registration.register(user);
 
-            data = "User registered";
-            view = "/addShoplistResult.jsp";
-
-            modelAndView = new ModelAndView(data, view);
+            modelAndView = doRedirectToResultPage();
         } catch (ValidationException exception) {
-            view = "/error.jsp";
-            data = exception.getMessage();
-
-            modelAndView = new ModelAndView(data, view);
+            modelAndView = doRedirectToValidationErrorPage(exception.getMessage());
         } catch (Exception exception) {
-            view = "/error.jsp";
-            data = "Error occurred during process shoplist";
-
-            modelAndView = new ModelAndView(data, view);
+            modelAndView = doRedirectToErrorPage();
         }
     }
 
     public ModelAndView getModelAndView() {
         return modelAndView;
+    }
+
+    private ModelAndView doRedirectToResultPage() {
+        return new ModelAndView("User registered", "/addShoplistResult.jsp");
+    }
+
+    private ModelAndView doRedirectToValidationErrorPage(String errorMessage) {
+        return new ModelAndView(errorMessage, "/error.jsp");
+    }
+
+    private ModelAndView doRedirectToErrorPage() {
+        return new ModelAndView("Registration validation error occurred", "/error.jsp");
     }
 }
