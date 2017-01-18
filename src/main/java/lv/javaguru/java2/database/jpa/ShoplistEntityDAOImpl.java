@@ -25,7 +25,7 @@ import java.util.List;
 public class ShoplistEntityDAOImpl extends GenericHibernateDAOImpl<ShoplistEntity> implements ShoplistEntityDAO {
 
     @Override
-    @Transactional
+    @Transactional(readOnly=true)
     public ShoplistEntity getWithOrderItemsById(Long id) {
         ShoplistEntity shoplistEntity = getById(id);
 

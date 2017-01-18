@@ -11,6 +11,7 @@ import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.dto.transformer.DataTransformer;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.shoplist.ShoplistManager;
+import lv.javaguru.java2.validator.ValidationException;
 import lv.javaguru.java2.validator.shoplist.ShoplistInputDataValidator;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,7 +74,7 @@ public class AddShoplistControllerTest {
     @Test
     //@Transactional
     //@Rollback(false)
-    public void ShoplistFieldsFilledWothDifferentNamesAndCollectDTOTest () {
+    public void ShoplistFieldsFilledWithDifferentNamesAndCollectDTOTest () {
 
         String shoplistName = "sports";
         ShoplistInputData inputData = new ShoplistInputData();
@@ -111,6 +112,7 @@ public class AddShoplistControllerTest {
     @Test
     //@Transactional
     //@Rollback(false)
+    (expected = ValidationException.class)
     public void ShoplistFieldsFilledWithSameProductNameAndCollectDTOTest () {
 
         String shoplistName = "sports";
@@ -125,6 +127,8 @@ public class AddShoplistControllerTest {
 
         String[] productPrices = {"0.5", "2.9"};
         inputData.setProductPrices(Arrays.asList(productPrices));
+
+        inputDataValidator.validate(inputData);
 
         ShoplistEntityDTO shoplistEntityDTO = shoplistManager.populateShoplistFromInputData(inputData);
 

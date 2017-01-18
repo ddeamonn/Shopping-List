@@ -70,6 +70,20 @@ public class ShoplistInputDataValidatorTest {
     }
 
     @Test(expected = ValidationException.class)
+    public void ShoplistFieldsFilledWithSameNamesTest () {
+        ShoplistInputData inputData = new ShoplistInputData();
+        inputData.setShoplistName("nameu");
+
+        String[] productNames = {"rollers", "rollers"};
+        inputData.setProductNames(Arrays.asList(productNames));
+
+        String[] productQty = {"1", "1"};
+        inputData.setProductQtys(Arrays.asList(productQty));
+
+        inputDataValidator.validate(inputData);
+    }
+
+    @Test(expected = ValidationException.class)
     public void ShoplistFieldsFilledWithoutShoplistNameTest () {
         ShoplistInputData inputData = new ShoplistInputData();
         inputData.setShoplistName("");

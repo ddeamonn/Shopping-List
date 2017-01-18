@@ -70,7 +70,7 @@ public class PopulateShoplistDataHelper {
     private ProductDTO findOrPrepareProduct(String productName) {
         Long productID = null;
         Product dbProduct = productDAO.getByName(productName);
-        if (dbProduct != null) {
+        if (isProduct(dbProduct)) {
             productID = dbProduct.getProductId();
         }
 
@@ -88,7 +88,4 @@ public class PopulateShoplistDataHelper {
         return !(product == null);
     }
 
-    private boolean isExistProduct(Product product) {
-        return product.getProductId() != null;
-    }
 }
