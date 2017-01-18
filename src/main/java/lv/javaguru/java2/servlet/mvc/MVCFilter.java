@@ -35,8 +35,6 @@ public class MVCFilter implements Filter {
         controllers = new HashMap<>();
         controllers.put("/", getBean(ShoplistController.class));
         controllers.put("/index.jsp", getBean(ShoplistController.class));
-        controllers.put("/viewProduct", getBean(ViewProductController.class));
-        controllers.put("/addProduct", getBean(AddProductController.class));
         controllers.put("/addShoplist", getBean(AddShoplistController.class));
         controllers.put("/registration", getBean(ViewRegistrationFormController.class));
         controllers.put("/doRegistration", getBean(DoRegistrationController.class));
@@ -45,7 +43,6 @@ public class MVCFilter implements Filter {
     }
 
     private MVCController getBean ( Class<?> clazz ) {
-        System.out.println("context:"+springContext);
         return (MVCController) springContext.getBean(clazz);
     }
 
