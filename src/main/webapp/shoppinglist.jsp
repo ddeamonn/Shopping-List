@@ -45,6 +45,18 @@
         element2.setAttribute("value", "");
         element2.setAttribute("name", inpPrice);
         newCell2.appendChild(element2);
+
+        // Insert a cell in the row at index 0
+        var newCell3  = newRow.insertCell(3);
+
+        // Append a delete button to the cell
+        //var element2  = document.createElement("input");
+        //Assign different attributes to the element.
+       // element2.setAttribute("type", "text");
+        //element2.setAttribute("value", "");
+        //element2.setAttribute("name", inpPrice);
+        newCell3.innerHTML = "<b>EUR</b>";
+        newCell3.style.textAlign = "center";
     }
 
     function deleteLastRow(tableId) {
@@ -60,6 +72,8 @@
         document.getElementById(tableID).deleteRow(d);
     }
 </script>
+
+<a href="/reports.jsp"><b>Reports</b></a>
 
 <form action="/doViewShoplist" method="post">
 <table>
@@ -105,12 +119,14 @@
             <th>Products</th>
             <th>Quantity</th>
             <th>Price</th>
+            <th>Currency</th>
         </tr>
         <tbody>
         <tr>
             <td><input type="text" name="productName"></td>
             <td><input type="text" name="productQty"></td>
             <td><input type="text" name="productPrice"></td>
+            <td align="center"><b>EUR</b></td>
         </tr>
         </tbody>
         </table>
