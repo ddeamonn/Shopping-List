@@ -38,7 +38,6 @@ public class ShoplistController implements MVCController {
                 modelAndView = doRedirectToAuthorisationPage();
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
             modelAndView = doRedirectToErrorPage();
         }
 
@@ -56,12 +55,9 @@ public class ShoplistController implements MVCController {
     }
 
     private ModelAndView doRedirectToUserPage() {
-
         UserDTO userDTO = session.getSessionUser();
 
         Collection<ShoplistEntityDTO> shoplistEntity = shoplistManager.findUserShoplistOrders(userDTO);
-
-        System.out.println("User entities:" + shoplistEntity.size());
         return new ModelAndView(shoplistManager.findUserShoplistOrders(userDTO), "/shoppinglist.jsp");
     }
 
