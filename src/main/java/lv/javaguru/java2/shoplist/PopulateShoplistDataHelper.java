@@ -41,6 +41,7 @@ public class PopulateShoplistDataHelper {
                 .createShoplistEntity()
                 .withShoplistName(shoplistName)
                 .withAddedTime(DateUtils.getCurrentTimestamp())
+                .withUser(session.getSessionUser())
                 .build();
 
         int i = 0;
@@ -58,7 +59,6 @@ public class PopulateShoplistDataHelper {
 
             orderItemDTO.setProductPrice(productPrice);
             orderItemDTOs.add(orderItemDTO);
-            shoplistEntityDTO.setUserDTO(session.getSessionUser());
             i++;
         }
 
