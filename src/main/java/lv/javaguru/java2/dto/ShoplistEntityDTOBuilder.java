@@ -13,10 +13,11 @@ import java.util.Collection;
  */
 @Component
 public class ShoplistEntityDTOBuilder {
-    String shoplistName;
-    Long shoplistID;
+    private String shoplistName;
+    private Long shoplistID;
     private Timestamp addedTime;
     private Collection<OrderItemDTO> orderItemDTOs;
+    private UserDTO user;
 
     private ShoplistEntityDTOBuilder() {};
 
@@ -30,6 +31,8 @@ public class ShoplistEntityDTOBuilder {
         shoplistEntityDTO.setOrderItemsDTO(orderItemDTOs);
         shoplistEntityDTO.setShoplistID(shoplistID);
         shoplistEntityDTO.setAddedTime(addedTime);
+        shoplistEntityDTO.setUserDTO(user);
+
         return shoplistEntityDTO;
     }
 
@@ -50,6 +53,11 @@ public class ShoplistEntityDTOBuilder {
 
     public ShoplistEntityDTOBuilder withAddedTime(Timestamp addedTime) {
         this.addedTime = addedTime;
+        return this;
+    }
+
+    public ShoplistEntityDTOBuilder withUser(UserDTO userDTO) {
+        this.user = userDTO;
         return this;
     }
 }
