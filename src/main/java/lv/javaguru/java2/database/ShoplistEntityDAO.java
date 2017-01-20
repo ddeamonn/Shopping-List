@@ -5,6 +5,7 @@ import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.domain.User;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public interface ShoplistEntityDAO {
@@ -24,4 +25,6 @@ public interface ShoplistEntityDAO {
     Collection<ShoplistEntity> getByUser(User user);
 
     ShoplistEntity getByNameAndUser(String name, User user);
+
+    Collection<ShoplistEntity> getByUserAndPeriod(User user, Date startDate, Date endDate);
 }

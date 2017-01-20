@@ -41,18 +41,17 @@ public class FindShoplistHelper {
     @Qualifier("ShoplistEntityWithOrderItemToDTO")
     DataTransformer<ShoplistEntityDTO, ShoplistEntity> shoplistEntityWithOrderItemToDTO;
 
-    @Transactional
+    @Transactional(readOnly = true)
     Collection<ShoplistEntityDTO> findAllUserShoplistOrders(UserDTO userDTO) {
 
         User user = userDTOTransformer.transform(userDTO);
         Collection<ShoplistEntity> shoplistEntities  = shoplistEntityDAO.getByUser(user);
-
         Collection<ShoplistEntityDTO> shoplistEntityDTOs = new HashSet<>();
 
-        for (ShoplistEntity shoplistEntity : shoplistEntities) {
+        shoplistEntities.forEach(shoplistEntity -> {
             ShoplistEntityDTO shoplistEntityDTO = shoplistEntityToDTOTransformer.transform(shoplistEntity);
             shoplistEntityDTOs.add(shoplistEntityDTO);
-        }
+        });
 
         return shoplistEntityDTOs;
     }
@@ -61,5 +60,20 @@ public class FindShoplistHelper {
         ShoplistEntity shoplistEntity = shoplistEntityDAO.getWithOrderItemsById(shoplistEntiryID);
 
         return shoplistEntityWithOrderItemToDTO.transform(shoplistEntity);
+    }
+
+
+    Collection<ShoplistEntityDTO> findShoplistEntityByUserAndPeriod(UserDTO userDTO, Date startDate, Date endDate) {
+
+        User user = userDTOTransformer.transform(userDTO);
+        Collection<ShoplistEntity> shoplistEntities  = shoplistEntityDAO.getByUserAndPeriod(user, startDate, endDate);
+        Collection<ShoplistEntityDTO> shoplistEntityDTOs = new HashSet<>();
+
+        shoplistEntities.forEach(shoplistEntity -> {
+            ShoplistEntityDTO shoplistEntityDTO = shoplistEntityToDTOTransformer.transform(shoplistEntity);
+            shoplistEntityDTOs.add(shoplistEntityDTO);
+        });
+
+        return shoplistEntityDTOs;
     }
 }

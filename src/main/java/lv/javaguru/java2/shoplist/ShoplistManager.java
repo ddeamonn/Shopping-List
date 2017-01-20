@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,5 +44,9 @@ public class ShoplistManager {
 
     public ShoplistEntityDTO findShoplistByID(Long shoplistID) {
         return findShoplistHelper.findShoplistEntityByID(shoplistID);
+    }
+
+    public Collection<ShoplistEntityDTO> findUserShoplistOrdersByPeriod(UserDTO user, Date startDate, Date endDate) {
+        return findShoplistHelper.findShoplistEntityByUserAndPeriod(user, startDate, endDate);
     }
 }
