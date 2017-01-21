@@ -1,4 +1,4 @@
-package lv.javaguru.java2.authorisation;
+package lv.javaguru.java2.authorization;
 
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Component
 @Qualifier("LoginAuthorisation")
-public class LoginAuthorisationService implements AuthorisationService {
+public class LoginAuthorizationService implements AuthorizationService {
 
     @Autowired
     @Qualifier("JPAUser")
@@ -30,10 +30,10 @@ public class LoginAuthorisationService implements AuthorisationService {
     DataTransformer<UserDTO, User> userToDTOTransformer;
 
     @Override
-    public boolean authorise(AuthorisationContext context) {
+    public boolean authorize(AuthorizationContext context) {
 
         // TODO
-        // Password and Login Autorisation  should be implemented here
+        // Password and Login authorization  should be implemented here
 
         List<User> users = userDAO.getAll();
         User mockUser = users.get(1);
@@ -43,7 +43,7 @@ public class LoginAuthorisationService implements AuthorisationService {
 
         session.setSessionUser(mockUserDTO);
 
-        System.out.println("Authorised " + mockUser);
+        System.out.println("Authorized " + mockUser);
 
         return true;
     }

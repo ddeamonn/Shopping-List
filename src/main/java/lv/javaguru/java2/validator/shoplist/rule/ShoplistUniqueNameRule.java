@@ -19,7 +19,7 @@ import javax.persistence.NoResultException;
  */
 @Component
 @Qualifier("UniqueUserRule")
-public class UniqueShoplistNameRule implements ShoplistInputDataRule {
+public class ShoplistUniqueNameRule implements ShoplistInputDataRule {
 
     private final static String ERROR_MESSAGE = "Shoppinglist name already is in use";
 

@@ -1,10 +1,8 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
-import lv.javaguru.java2.authorisation.AuthorisationContext;
-import lv.javaguru.java2.authorisation.AuthorisationService;
-import lv.javaguru.java2.dto.ShoplistEntityDTO;
+import lv.javaguru.java2.authorization.AuthorizationContext;
+import lv.javaguru.java2.authorization.AuthorizationService;
 import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.registration.RegistrationService;
 import lv.javaguru.java2.servlet.mvc.MVCController;
 import lv.javaguru.java2.servlet.mvc.MVCModel;
 import lv.javaguru.java2.servlet.mvc.ModelAndView;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
 
 /**
  * Created by DMC on 1/4/2017.
@@ -26,7 +23,7 @@ public class DoAuthorisationController implements MVCController {
 
     @Autowired
     @Qualifier("LoginAuthorisation")
-    AuthorisationService authorisation;
+    AuthorizationService authorisation;
 
     @Autowired
     Session session;
@@ -37,9 +34,9 @@ public class DoAuthorisationController implements MVCController {
     @Override
     public MVCModel processPost(HttpServletRequest req) {
 
-        AuthorisationContext context = new AuthorisationContext();
+        AuthorizationContext context = new AuthorizationContext();
         context.setHashNumber("123344");
-        authorisation.authorise(context);
+        authorisation.authorize(context);
 
         ModelAndView modelAndView = doRedirectToUserPage();
         String view = modelAndView.getView();

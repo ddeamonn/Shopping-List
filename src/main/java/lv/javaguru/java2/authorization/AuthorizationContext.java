@@ -1,9 +1,9 @@
-package lv.javaguru.java2.authorisation;
+package lv.javaguru.java2.authorization;
 
 /**
  * Created by DMC on 12/27/2016.
  */
-public class AuthorisationContext {
+public class AuthorizationContext {
     String login;
     String password;
     String hashNumber;
