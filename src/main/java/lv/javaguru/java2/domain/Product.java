@@ -82,6 +82,34 @@ public class Product {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (productId != null ? !productId.equals(product.productId) : product.productId != null) return false;
+        if (productName != null ? !productName.equals(product.productName) : product.productName != null) return false;
+        if (addedTime != null ? !addedTime.equals(product.addedTime) : product.addedTime != null) return false;
+        if (addedIP != null ? !addedIP.equals(product.addedIP) : product.addedIP != null) return false;
+        if (productCategory != null ? !productCategory.equals(product.productCategory) : product.productCategory != null)
+            return false;
+        return addedCountry != null ? addedCountry.equals(product.addedCountry) : product.addedCountry == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = productId != null ? productId.hashCode() : 0;
+        result = 31 * result + (productName != null ? productName.hashCode() : 0);
+        result = 31 * result + (addedTime != null ? addedTime.hashCode() : 0);
+        result = 31 * result + (addedIP != null ? addedIP.hashCode() : 0);
+        result = 31 * result + (productCategory != null ? productCategory.hashCode() : 0);
+        result = 31 * result + (addedCountry != null ? addedCountry.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Product{" +
                 "productId=" + productId +

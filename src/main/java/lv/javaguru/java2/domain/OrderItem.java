@@ -73,6 +73,32 @@ public class OrderItem implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrderItem orderItem = (OrderItem) o;
+
+        if (orderID != null ? !orderID.equals(orderItem.orderID) : orderItem.orderID != null) return false;
+        if (product != null ? !product.equals(orderItem.product) : orderItem.product != null) return false;
+        if (shoplistEntity != null ? !shoplistEntity.equals(orderItem.shoplistEntity) : orderItem.shoplistEntity != null)
+            return false;
+        if (productQty != null ? !productQty.equals(orderItem.productQty) : orderItem.productQty != null) return false;
+        return productPrice != null ? productPrice.equals(orderItem.productPrice) : orderItem.productPrice == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = orderID != null ? orderID.hashCode() : 0;
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        result = 31 * result + (shoplistEntity != null ? shoplistEntity.hashCode() : 0);
+        result = 31 * result + (productQty != null ? productQty.hashCode() : 0);
+        result = 31 * result + (productPrice != null ? productPrice.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "OrderItem{" +
                 "orderID=" + orderID +
