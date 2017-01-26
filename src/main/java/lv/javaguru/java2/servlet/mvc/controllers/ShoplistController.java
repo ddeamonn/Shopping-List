@@ -1,25 +1,23 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 
-import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.product.ProductManager;
-import lv.javaguru.java2.servlet.mvc.MVCController;
-import lv.javaguru.java2.servlet.mvc.MVCModel;
-import lv.javaguru.java2.servlet.mvc.ModelAndView;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.shoplist.ShoplistManager;
-import lv.javaguru.java2.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
-import java.util.List;
 
-@Component
-public class ShoplistController implements MVCController {
+//import lv.javaguru.java2.servlet.mvc.ModelAndView;
+
+@Controller
+public class ShoplistController {
 
     @Autowired
     ShoplistManager shoplistManager;
@@ -27,8 +25,8 @@ public class ShoplistController implements MVCController {
     @Autowired
     Session session;
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
+    @RequestMapping(value = "", method = { RequestMethod.GET } )
+    public ModelAndView processGet(HttpServletRequest req) {
 
         ModelAndView modelAndView;
         try {
@@ -41,27 +39,22 @@ public class ShoplistController implements MVCController {
             modelAndView = doRedirectToErrorPage();
         }
 
-        return new MVCModel(modelAndView.getView(), modelAndView.getData());
-    }
-
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
-       return new MVCModel("/error.jsp", "Incorrect request");
+        return modelAndView;
     }
 
 
     private ModelAndView doRedirectToAuthorisationPage() {
-        return new ModelAndView("Welcome.", "/login.jsp");
+        return new ModelAndView("login", "login", "Welcome");
     }
 
     private ModelAndView doRedirectToUserPage() {
         UserDTO userDTO = session.getSessionUser();
 
         Collection<ShoplistEntityDTO> shoplistEntity = shoplistManager.findUserShoplistOrders(userDTO);
-        return new ModelAndView(shoplistManager.findUserShoplistOrders(userDTO), "/shoppinglist.jsp");
+        return new ModelAndView("shoppinglist", "orders", shoplistManager.findUserShoplistOrders(userDTO));
     }
 
     private ModelAndView doRedirectToErrorPage() {
-        return new ModelAndView("Shoplist validation error occurred", "/error.jsp");
+        return new ModelAndView("error", "error", "Error");
     }
 }

@@ -4,7 +4,7 @@
     <title>JSP page</title>
 </head>
 <body>
-    <h1>${requestScope.data}</h1>
+    <h1>${requestScope.info}</h1>
     <a href="/">Return to back</a>
 </body>
 </html>

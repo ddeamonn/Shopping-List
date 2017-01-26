@@ -4,13 +4,13 @@ import lv.javaguru.java2.data.InputDataParser;
 import lv.javaguru.java2.data.formatter.DataFormatter;
 import lv.javaguru.java2.data.registration.RegistrationInputData;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.servlet.mvc.ModelAndView;
 import lv.javaguru.java2.user.BuildUserHelper;
 import lv.javaguru.java2.validator.ValidationException;
 import lv.javaguru.java2.validator.register.RegistrationInputDataValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -73,14 +73,14 @@ public class RegistrationService {
     }
 
     private ModelAndView doRedirectToResultPage() {
-        return new ModelAndView("User registered", "/addShoplistResult.jsp");
+        return new ModelAndView("addShoplistResult", "info", "User registered");
     }
 
     private ModelAndView doRedirectToValidationErrorPage(String errorMessage) {
-        return new ModelAndView(errorMessage, "/error.jsp");
+        return new ModelAndView("error", "error", errorMessage);
     }
 
     private ModelAndView doRedirectToErrorPage() {
-        return new ModelAndView("Registration validation error occurred", "/error.jsp");
+        return new ModelAndView("error", "error" , "Registration validation error occurred");
     }
 }

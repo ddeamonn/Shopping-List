@@ -83,7 +83,7 @@
     <tr>
         <td>
             <select name="orders">
-                <c:forEach var="order" items="${requestScope.data}">
+                <c:forEach var="order" items="${requestScope.orders}">
                     <option value="${order.shoplistID}">${order.shoplistName}</option>
                 </c:forEach>
             </select>

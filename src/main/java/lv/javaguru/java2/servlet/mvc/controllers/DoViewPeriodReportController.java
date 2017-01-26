@@ -1,23 +1,19 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import lv.javaguru.java2.data.InputDataParser;
 import lv.javaguru.java2.data.formatter.DataFormatter;
 import lv.javaguru.java2.data.report.ReportInputData;
-import lv.javaguru.java2.data.shoplist.ShoplistInputData;
-import lv.javaguru.java2.domain.ShoplistEntity;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
-import lv.javaguru.java2.servlet.mvc.MVCController;
-import lv.javaguru.java2.servlet.mvc.MVCModel;
-import lv.javaguru.java2.servlet.mvc.ModelAndView;
 import lv.javaguru.java2.session.Session;
 import lv.javaguru.java2.shoplist.ShoplistManager;
 import lv.javaguru.java2.validator.ValidationException;
 import lv.javaguru.java2.validator.report.ReportInputDataValidator;
-import lv.javaguru.java2.validator.shoplist.ShoplistIDValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -28,8 +24,8 @@ import java.util.Map;
  * Created by DMC on 1/4/2017.
  */
 
-@Component
-public class DoViewPeriodReportController implements MVCController {
+@Controller
+public class DoViewPeriodReportController {
 
     @Autowired
     Session session;
@@ -49,7 +45,8 @@ public class DoViewPeriodReportController implements MVCController {
     @Qualifier("InputDataReportByPeriodFormatter")
     DataFormatter<ReportInputData, ReportInputData> reportInputDataFormatter;
 
-    public MVCModel processPost(HttpServletRequest req) {
+    @RequestMapping(value = "doViewPeriodReport", method = {RequestMethod.POST})
+    public ModelAndView processPost(HttpServletRequest req) {
 
         ModelAndView modelAndView;
 
@@ -71,26 +68,18 @@ public class DoViewPeriodReportController implements MVCController {
             modelAndView = doRedirectToErrorPage();
         }
 
-        Object data = modelAndView.getData();
-        String view = modelAndView.getView();
-
-        return new MVCModel(view, data);
-    }
-
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/error.jsp", "Incorrect request");
+        return modelAndView;
     }
 
     private ModelAndView doRedirectToReportPage(Object data) {
-        return new ModelAndView(data, "/viewreportbyperiod.jsp");
+        return new ModelAndView("viewreportbyperiod", "report", data);
     }
 
     private ModelAndView doRedirectToValidationErrorPage(String errorMessage) {
-        return new ModelAndView(errorMessage, "/error.jsp");
+        return new ModelAndView("error", "error", errorMessage);
     }
 
     private ModelAndView doRedirectToErrorPage() {
-        return new ModelAndView("Report validation error occurred", "/error.jsp");
+        return new ModelAndView("error", "error", "Report validation error occurred");
     }
 }

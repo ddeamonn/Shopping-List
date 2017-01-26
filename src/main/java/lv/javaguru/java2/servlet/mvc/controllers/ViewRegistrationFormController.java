@@ -1,32 +1,23 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 
-import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.product.ProductManager;
-import lv.javaguru.java2.servlet.mvc.MVCController;
-import lv.javaguru.java2.servlet.mvc.MVCModel;
-import lv.javaguru.java2.servlet.mvc.ModelAndView;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Component
-public class ViewRegistrationFormController implements MVCController {
+@Controller
+public class ViewRegistrationFormController {
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
-        ModelAndView modelAndView = doRedirectToRegistrationPage();
-        return new MVCModel(modelAndView.getView(), modelAndView.getData());
-    }
-
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
-       return new MVCModel("/error.jsp", "Incorrect request");
+    @RequestMapping(value = "registration", method = { RequestMethod.GET } )
+    public ModelAndView processGet(HttpServletRequest req) {
+        return doRedirectToRegistrationPage();
     }
 
     private ModelAndView doRedirectToRegistrationPage() {
-        return new ModelAndView(null, "/registration.jsp");
+        return new ModelAndView("registration","registration",null);
     }
 
 }

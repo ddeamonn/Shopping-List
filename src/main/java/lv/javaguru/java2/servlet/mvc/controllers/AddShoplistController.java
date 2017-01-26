@@ -3,24 +3,22 @@ package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.data.InputDataParser;
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
-import lv.javaguru.java2.domain.*;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
-import lv.javaguru.java2.dto.UserDTO;
-import lv.javaguru.java2.servlet.mvc.MVCController;
-import lv.javaguru.java2.servlet.mvc.MVCModel;
-import lv.javaguru.java2.servlet.mvc.ModelAndView;
 import lv.javaguru.java2.shoplist.ShoplistManager;
 import lv.javaguru.java2.validator.ValidationException;
 import lv.javaguru.java2.validator.shoplist.ShoplistInputDataValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-@Component
-public class AddShoplistController implements MVCController {
+@Controller
+public class AddShoplistController {
 
     @Autowired
     @Qualifier("shoplistInput")
@@ -32,8 +30,8 @@ public class AddShoplistController implements MVCController {
     @Autowired
     ShoplistManager shoplistManager;
 
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
+    @RequestMapping(value = "addShoplist", method = {RequestMethod.POST})
+    public ModelAndView processPost(HttpServletRequest req) {
 
         ModelAndView modelAndView;
 
@@ -52,26 +50,19 @@ public class AddShoplistController implements MVCController {
             modelAndView = doRedirectToErrorPage();
         }
 
-        Object data = modelAndView.getData();
-        String view = modelAndView.getView();
-        return new MVCModel(view, data);
-    }
-
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
-       return new MVCModel("/error.jsp", "Incorrect request");
+        return modelAndView;
     }
 
     private ModelAndView doRedirectToResultPage() {
-        return new ModelAndView("Shopping list saved", "/addShoplistResult.jsp");
+        return new ModelAndView("addShoplistResult", "info", "Shopping list saved");
     }
 
     private ModelAndView doRedirectToValidationErrorPage(String errorMessage) {
-        return new ModelAndView(errorMessage, "/error.jsp");
+        return new ModelAndView("error", "error", errorMessage);
     }
 
     private ModelAndView doRedirectToErrorPage() {
-        return new ModelAndView("Shoplist validation error occurred", "/error.jsp");
+        return new ModelAndView("error","error","Shoplist validation error occurred");
     }
 
 }

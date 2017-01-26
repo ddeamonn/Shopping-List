@@ -1,4 +1,3 @@
-
 <form action="/addProduct" method="post">
 <table>
     <tr>

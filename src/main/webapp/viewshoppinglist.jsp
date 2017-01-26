@@ -11,7 +11,7 @@
 <h1>Shopping list record</h1>
     <table>
 
-        <tr><td>Shoplist Name:</td><td><input type="text" name="shoplistName" value="${requestScope.data.shoplistName}" readonly></td>
+        <tr><td>Shoplist Name:</td><td><input type="text" name="shoplistName" value="${requestScope.record.shoplistName}" readonly></td>
 
         <tr><td colspan="2">
 
@@ -23,7 +23,7 @@
         </tr>
         <tbody>
 
-        <c:forEach var="order" items="${requestScope.data.orderItemsDTO}">
+        <c:forEach var="order" items="${requestScope.record.orderItemsDTO}">
             <tr>
                 <td><input type="text" name="productName" value="${order.product.productName}" readonly></td>
                 <td><input type="text" name="productQty" value="${order.productQty}" readonly></td>

@@ -1,51 +1,31 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
-import lv.javaguru.java2.data.InputDataParser;
-import lv.javaguru.java2.data.registration.RegistrationInputData;
-import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.data.formatter.DataFormatter;
-import lv.javaguru.java2.registration.Registration;
 import lv.javaguru.java2.registration.RegistrationService;
-import lv.javaguru.java2.servlet.mvc.MVCController;
-import lv.javaguru.java2.servlet.mvc.MVCModel;
-import lv.javaguru.java2.servlet.mvc.ModelAndView;
-import lv.javaguru.java2.user.BuildUserHelper;
-import lv.javaguru.java2.validator.ValidationException;
-import lv.javaguru.java2.validator.register.RegistrationInputDataValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * Created by DMC on 1/4/2017.
  */
 
-@Component
-public class DoRegistrationController implements MVCController {
+@Controller
+public class DoRegistrationController {
 
     @Autowired
     RegistrationService registrationService;
 
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
+    @RequestMapping(value = "doRegistration", method = { RequestMethod.POST } )
+    public ModelAndView processPost(HttpServletRequest req) {
 
         registrationService.parseAndCollectInputData(req.getParameterMap());
         registrationService.process();
 
-        ModelAndView modelAndView = registrationService.getModelAndView();
-
-        String view = modelAndView.getView();
-
-        Object data = modelAndView.getData();
-
-        return new MVCModel(view, data);
+        return registrationService.getModelAndView();
     }
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/error.jsp", "Incorrect request");
-    }
 }
