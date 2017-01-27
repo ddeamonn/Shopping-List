@@ -133,7 +133,7 @@
 
         </td></tr>
         <tr>
-            <td colspan="2"><input type="submit" value="save shop"><td>
+            <td colspan="2"><input type="submit" value="save" name="save"><td>
         </tr>
     </table>
 </form>

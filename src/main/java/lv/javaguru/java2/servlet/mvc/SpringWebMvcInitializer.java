@@ -1,4 +1,4 @@
-package lv.javaguru.java2.servlet.mvc.controllers;
+package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.config.WebMVCConfig;

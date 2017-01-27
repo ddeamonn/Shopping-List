@@ -371,7 +371,7 @@ a.login:hover {
 	text-decoration: none;
 }
 
-a.login: active {
+a.login:active {
 	color: #0c7fb0;
 	text-decoration: none;
 }
@@ -381,7 +381,7 @@ a.report:hover {
 	text-decoration: none;
 }
 
-a.report: active {
+a.report:active {
 	color: #ff5c33;
 	text-decoration: none;
 }
@@ -396,7 +396,7 @@ a.text:hover {
 	text-decoration: none;
 }
 
-a.text: active {
+a.text:active {
 	color: #ff5c33;
 	text-decoration: none;
 }
