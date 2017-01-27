@@ -37,8 +37,7 @@ public class DoDeleteShoplistController {
 
         try {
             ShoplistInputData inputData = inputDataParser.parse(req.getParameterMap());
-            
-            //inputDataValidator.validate(inputData);
+            inputDataValidator.validate(inputData);
 
             ShoplistEntityDTO shoplistEntityDTO = shoplistManager.populateShoplistFromInputData(inputData);
             shoplistManager.deleteShoplist(shoplistEntityDTO);
