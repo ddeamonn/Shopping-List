@@ -32,6 +32,9 @@ public class OrderItem implements Serializable {
     @Column(name = "prd_price", nullable = true)
     BigDecimal productPrice;
 
+    @Column(name = "ord_item_status", nullable = true)
+    String purchaseStatus;
+
     public Long getOrderID() {
         return orderID;
     }
@@ -70,6 +73,14 @@ public class OrderItem implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public String getPurchaseStatus() {
+        return purchaseStatus;
+    }
+
+    public void setPurchaseStatus(String purchaseStatus) {
+        this.purchaseStatus = purchaseStatus;
     }
 
     @Override

@@ -29,6 +29,7 @@ public class OrderItemEntitytoDTOTransformer implements DataTransformer<OrderIte
         orderItemDTO.setProduct(productDTO);
         orderItemDTO.setProductPrice(orderItem.getProductPrice());
         orderItemDTO.setProductQty(orderItem.getProductQty());
+        orderItemDTO.setPurchaseStatus(orderItem.getPurchaseStatus());
 
         return orderItemDTO;
     }

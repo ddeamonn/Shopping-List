@@ -1,6 +1,7 @@
 package lv.javaguru.java2.data.formatter;
 
 import lv.javaguru.java2.config.SpringConfig;
+import lv.javaguru.java2.config.WebMVCConfig;
 import lv.javaguru.java2.data.formatter.formatters.RegistrationPasswordHashFormatter;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * Created by DMC on 1/4/2017.
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = {SpringConfig.class, WebMVCConfig.class} )
+@WebAppConfiguration
 public class RegistrationPasswordHashFormatterTest {
 
     @Autowired

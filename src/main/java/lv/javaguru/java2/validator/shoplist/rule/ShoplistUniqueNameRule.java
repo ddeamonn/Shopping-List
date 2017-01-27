@@ -37,6 +37,9 @@ public class ShoplistUniqueNameRule implements ShoplistInputDataRule {
     public boolean validate(ShoplistInputData shoplistInputData) {
 
         try {
+            if (shoplistInputData.getShoplistID() != null) {
+                return true;
+            }
             String shoplistName = shoplistInputData.getShoplistName();
             UserDTO userDTO = session.getSessionUser();
             User user = userDTOTransformer.transform(userDTO);

@@ -31,14 +31,22 @@ public class PopulateShoplistDataHelper {
 
     ShoplistEntityDTO populateFromInputData(ShoplistInputData inputData) {
         String shoplistName = inputData.getShoplistName();
-        String shopListID = inputData.getShoplistID();
+        String inputShopListID = inputData.getShoplistID();
 
         List<String> inputProductNames = (List<String>)inputData.getProductNames();
         List<String> inputQtyOfProducts = (List<String>)inputData.getProductQtys();
         List<String> inputPriceOfProducts = (List<String>)inputData.getProductPrices();
+        List<String> inputPurchaseStatuses = (List<String>)inputData.getPurchaseStatuses();
+        List<String> inputOrderItemIDs = (List<String>)inputData.getOrderItemsIDs();
+
+        Long shopListID = null;
+        if (inputShopListID != null) {
+            shopListID = Long.parseLong(inputShopListID);
+        }
 
         ShoplistEntityDTO shoplistEntityDTO = ShoplistEntityDTOBuilder
                 .createShoplistEntity()
+                .withShoplistID(shopListID)
                 .withShoplistName(shoplistName)
                 .withAddedTime(DateUtils.getCurrentTimestamp())
                 .withUser(session.getSessionUser())
@@ -46,24 +54,38 @@ public class PopulateShoplistDataHelper {
 
         int i = 0;
         List<OrderItemDTO> orderItemDTOs = new ArrayList<>();
-        while (i < inputProductNames.size()) {
-            String productName = inputProductNames.get(i);
+        if (inputProductNames != null ) {
+            while (i < inputProductNames.size()) {
+                String productName = inputProductNames.get(i);
 
-            OrderItemDTO orderItemDTO = new OrderItemDTO();
-            orderItemDTO.setProduct(findOrPrepareProduct(productName));
-            Integer productQty = Integer.parseInt(inputQtyOfProducts.get(i));
-            orderItemDTO.setProductQty(productQty);
+                OrderItemDTO orderItemDTO = new OrderItemDTO();
 
-            BigDecimal productPrice = new BigDecimal(inputPriceOfProducts.get(i));
-            productPrice = productPrice.setScale(2,BigDecimal.ROUND_HALF_UP);
+                if (inputOrderItemIDs != null) {
+                    String orderItemID = inputOrderItemIDs.get(i);
+                    if (orderItemID != null) {
+                        orderItemDTO.setOrderID(Long.parseLong(orderItemID));
+                    }
+                }
 
-            orderItemDTO.setProductPrice(productPrice);
-            orderItemDTOs.add(orderItemDTO);
-            i++;
+                orderItemDTO.setProduct(findOrPrepareProduct(productName));
+                Integer productQty = Integer.parseInt(inputQtyOfProducts.get(i));
+                orderItemDTO.setProductQty(productQty);
+
+                BigDecimal productPrice = new BigDecimal(inputPriceOfProducts.get(i));
+                productPrice = productPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+                orderItemDTO.setProductPrice(productPrice);
+
+                if (inputPurchaseStatuses != null) {
+                    String purchaseStatus = inputPurchaseStatuses.get(i);
+                    orderItemDTO.setPurchaseStatus(purchaseStatus);
+                }
+
+                orderItemDTOs.add(orderItemDTO);
+                i++;
+            }
+
+            shoplistEntityDTO.setOrderItemsDTO(orderItemDTOs);
         }
-
-        shoplistEntityDTO.setOrderItemsDTO(orderItemDTOs);
-
         return shoplistEntityDTO;
     }
 

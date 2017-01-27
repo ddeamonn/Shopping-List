@@ -15,5 +15,7 @@ public interface OrderItemDAO {
 
     void update(OrderItem orderItem);
 
+    void updateStatus(OrderItem orderItem);
+
     List<OrderItem> getAll();
 }

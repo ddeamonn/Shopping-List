@@ -36,7 +36,7 @@ public class ShoplistEntityWithOrderItemToDTOTransformer implements DataTransfor
         Collection<OrderItemDTO> orderItemDTOs = new ArrayList<>();
         for (OrderItem orderItem : orderItems) {
             OrderItemDTO orderItemDTO = orderItemToDTOtransformer.transform(orderItem);
-           orderItemDTOs.add(orderItemDTO);
+            orderItemDTOs.add(orderItemDTO);
         }
 
         shoplistEntityDTO.setOrderItemsDTO(orderItemDTOs);

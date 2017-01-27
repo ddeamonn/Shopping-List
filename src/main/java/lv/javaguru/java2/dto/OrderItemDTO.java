@@ -24,6 +24,8 @@ public class OrderItemDTO implements Serializable {
 
     BigDecimal productPrice;
 
+    String purchaseStatus;
+
     public Long getOrderID() {
         return orderID;
     }
@@ -80,14 +82,24 @@ public class OrderItemDTO implements Serializable {
         this.productName = productName;
     }
 
+    public String getPurchaseStatus() {
+        return purchaseStatus;
+    }
+
+    public void setPurchaseStatus(String purchaseStatus) {
+        this.purchaseStatus = purchaseStatus;
+    }
+
     @Override
     public String toString() {
         return "OrderItemDTO{" +
                 "orderID=" + orderID +
                 ", product=" + product +
+                ", productName='" + productName + '\'' +
                 ", shoplistEntity=" + shoplistEntity +
                 ", productQty=" + productQty +
                 ", productPrice=" + productPrice +
+                ", purchaseStatus='" + purchaseStatus + '\'' +
                 '}';
     }
 }

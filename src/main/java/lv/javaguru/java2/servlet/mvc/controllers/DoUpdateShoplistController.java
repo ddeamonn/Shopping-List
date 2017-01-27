@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
-public class AddShoplistController {
+public class DoUpdateShoplistController {
 
     @Autowired
     @Qualifier("shoplistInput")
@@ -30,7 +30,7 @@ public class AddShoplistController {
     @Autowired
     ShoplistManager shoplistManager;
 
-    @RequestMapping(value = "addShoplist", method = {RequestMethod.POST})
+    @RequestMapping(value = "doUpdateShoplist", method = {RequestMethod.POST})
     public ModelAndView processPost(HttpServletRequest req) {
 
         ModelAndView modelAndView;
@@ -38,10 +38,10 @@ public class AddShoplistController {
         try {
             ShoplistInputData inputData = inputDataParser.parse(req.getParameterMap());
 
-            inputDataValidator.validate(inputData);
+            //inputDataValidator.validate(inputData);
 
             ShoplistEntityDTO shoplistEntityDTO = shoplistManager.populateShoplistFromInputData(inputData);
-            shoplistManager.createShoplist(shoplistEntityDTO);
+            shoplistManager.updateShoplistOrderItemStatus(shoplistEntityDTO);
 
             modelAndView = doRedirectToResultPage();
         } catch (ValidationException exception) {
@@ -55,7 +55,7 @@ public class AddShoplistController {
     }
 
     private ModelAndView doRedirectToResultPage() {
-        return new ModelAndView("addShoplistResult", "info", "Shopping list saved");
+        return new ModelAndView("addShoplistResult", "info", "Shopping list updated");
     }
 
     private ModelAndView doRedirectToValidationErrorPage(String errorMessage) {

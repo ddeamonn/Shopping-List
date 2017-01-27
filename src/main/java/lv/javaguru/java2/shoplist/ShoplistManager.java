@@ -30,6 +30,15 @@ public class ShoplistManager {
     @Autowired
     FindShoplistHelper findShoplistHelper;
 
+    @Autowired
+    UpdateShoplistHelper updateShoplistHelper;
+
+    @Autowired
+    UpdateShoplistOrderItemStatusHelper updateShoplistOrderItemStatusHelper;
+
+    @Autowired
+    DeleteShoplistHelper deleteShoplistHelper;
+
     public ShoplistEntityDTO populateShoplistFromInputData(ShoplistInputData inputData) {
         return dataHelper.populateFromInputData(inputData);
     }
@@ -48,5 +57,17 @@ public class ShoplistManager {
 
     public Collection<ShoplistEntityDTO> findUserShoplistOrdersByPeriod(UserDTO user, Date startDate, Date endDate) {
         return findShoplistHelper.findShoplistEntityByUserAndPeriod(user, startDate, endDate);
+    }
+
+    public void updateShoplist(ShoplistEntityDTO shoplist) throws RuntimeException {
+        updateShoplistHelper.update(shoplist);
+    }
+
+    public void updateShoplistOrderItemStatus(ShoplistEntityDTO shoplist) throws RuntimeException {
+        updateShoplistOrderItemStatusHelper.updateStatus(shoplist);
+    }
+
+    public void deleteShoplist(ShoplistEntityDTO shoplist) throws RuntimeException  {
+        deleteShoplistHelper.delete(shoplist);
     }
 }

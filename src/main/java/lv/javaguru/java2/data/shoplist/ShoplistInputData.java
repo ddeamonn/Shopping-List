@@ -11,6 +11,8 @@ public class ShoplistInputData {
     Collection<String>  productNames;
     Collection<String> productQtys;
     Collection<String> productPrices;
+    Collection<String> purchaseStatuses;
+    Collection<String> orderItemsIDs;
 
     public String getShoplistID() {
         return shoplistID;
@@ -50,5 +52,33 @@ public class ShoplistInputData {
 
     public void setProductPrices(Collection<String> productPrices) {
         this.productPrices = productPrices;
+    }
+
+    public Collection<String> getPurchaseStatuses() {
+        return purchaseStatuses;
+    }
+
+    public void setPurchaseStatuses(Collection<String> purchaseStatuses) {
+        this.purchaseStatuses = purchaseStatuses;
+    }
+
+    public Collection<String> getOrderItemsIDs() {
+        return orderItemsIDs;
+    }
+
+    public void setOrderItemsIDs(Collection<String> orderItemsIDs) {
+        this.orderItemsIDs = orderItemsIDs;
+    }
+
+    @Override
+    public String toString() {
+        return "ShoplistInputData{" +
+                "shoplistID='" + shoplistID + '\'' +
+                ", shoplistName='" + shoplistName + '\'' +
+                ", productNames=" + productNames +
+                ", productQtys=" + productQtys +
+                ", productPrices=" + productPrices +
+                ", purchaseStatuses=" + purchaseStatuses +
+                '}';
     }
 }

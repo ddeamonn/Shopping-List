@@ -59,16 +59,18 @@ public class ShoplistWithOrderItemsDTOtoEntityTransformer implements DataTransfo
 
         List<OrderItem> shoplistOrderItems = new ArrayList<>();
         Collection<OrderItemDTO> orderItemsDTO = shoplistEntityDTO.getOrderItemsDTO();
-        orderItemsDTO.forEach(orderItemDTO ->
-        {
-            OrderItem orderItem = orderDTOToEntityTransformer.transform(orderItemDTO);
-            orderItem.setShoplistEntity(shoplistEntity);
-            ProductDTO productDTO = orderItemDTO.getProduct();
-            Product product = productDtoToEntityTransformer.transform(productDTO);
-           // Product product = findOrderProduct(orderItemDTO);
-            orderItem.setProduct(product);
-            shoplistOrderItems.add(orderItem);
-        });
+        if (orderItemsDTO != null ) {
+            orderItemsDTO.forEach(orderItemDTO ->
+            {
+                OrderItem orderItem = orderDTOToEntityTransformer.transform(orderItemDTO);
+                orderItem.setShoplistEntity(shoplistEntity);
+                ProductDTO productDTO = orderItemDTO.getProduct();
+                Product product = productDtoToEntityTransformer.transform(productDTO);
+                // Product product = findOrderProduct(orderItemDTO);
+                orderItem.setProduct(product);
+                shoplistOrderItems.add(orderItem);
+            });
+        }
 
         return shoplistOrderItems;
     }

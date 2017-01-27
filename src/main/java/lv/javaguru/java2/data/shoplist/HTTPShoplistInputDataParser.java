@@ -24,7 +24,15 @@ public class HTTPShoplistInputDataParser implements InputDataParser<Map, Shoplis
 
         ShoplistInputData shoplistInputData = new ShoplistInputData();
 
+        String[] buttonUpdate = (String[])requestMap.get("update");
+        String[] buttonSave = (String[])requestMap.get("save");
+        String[] buttonDelete = (String[])requestMap.get("delete");
+
         String[] shoplistID = (String[])requestMap.get("orders");
+        if (shoplistID != null)
+            shoplistInputData.setShoplistID(shoplistID[shoplistID.length-1]);
+
+        shoplistID = (String[])requestMap.get("shoplistID");
         if (shoplistID != null)
             shoplistInputData.setShoplistID(shoplistID[shoplistID.length-1]);
 
@@ -36,6 +44,10 @@ public class HTTPShoplistInputDataParser implements InputDataParser<Map, Shoplis
         if(productNames != null)
             shoplistInputData.setProductNames(new ArrayList<String>(Arrays.asList(productNames)));
 
+        String[] orderItemIDs = (String[])requestMap.get("orderItemID");
+        if (orderItemIDs != null)
+            shoplistInputData.setOrderItemsIDs(new ArrayList<String>(Arrays.asList(orderItemIDs)));
+
         String[] productQty = (String[])requestMap.get("productQty");
         if (productQty != null)
             shoplistInputData.setProductQtys(new ArrayList<String>(Arrays.asList(productQty)));
@@ -43,6 +55,25 @@ public class HTTPShoplistInputDataParser implements InputDataParser<Map, Shoplis
         String[] productPrices = (String[])requestMap.get("productPrice");
         if (productPrices != null)
             shoplistInputData.setProductPrices(new ArrayList<String>(Arrays.asList(productPrices)));
+
+        if (buttonUpdate != null) {
+            ArrayList purchaseStatuses = new ArrayList(productNames.length);
+
+            for (int i = 0; i < productNames.length; i++) {
+                String[] inputPurchaseStatusArr = (String[])requestMap.get("productStatus" + i);
+                String inputPurchaseStatus;
+                if (inputPurchaseStatusArr == null) {
+                    inputPurchaseStatus = "off";
+                } else {
+                    inputPurchaseStatus = "on";
+                }
+
+                purchaseStatuses.add(inputPurchaseStatus);
+            }
+
+            if (purchaseStatuses != null)
+                shoplistInputData.setPurchaseStatuses(purchaseStatuses);
+        }
 
         return shoplistInputData;
     }

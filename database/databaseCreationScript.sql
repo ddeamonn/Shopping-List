@@ -220,6 +220,10 @@ CREATE TABLE `shopping_list_details` (
 ALTER TABLE `java2`.`users`
     ADD COLUMN `usr_added_time` DATETIME NULL DEFAULT NULL COMMENT '' AFTER `usr_language`;
 
+ALTER TABLE `java2`.`order_item`
+    ADD COLUMN `ord_item_status` VARCHAR(3) NULL DEFAULT 'off' COMMENT '' AFTER `prd_price`;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
