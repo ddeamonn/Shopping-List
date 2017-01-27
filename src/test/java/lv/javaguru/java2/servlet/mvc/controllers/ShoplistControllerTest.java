@@ -1,6 +1,7 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.config.SpringConfig;
+import lv.javaguru.java2.config.WebMVCConfig;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.dto.UserDTO;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,8 @@ import java.util.List;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = {SpringConfig.class, WebMVCConfig.class} )
+@WebAppConfiguration
 public class ShoplistControllerTest {
 
     @Autowired

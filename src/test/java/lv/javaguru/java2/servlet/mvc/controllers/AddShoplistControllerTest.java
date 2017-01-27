@@ -1,6 +1,7 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
 
 import lv.javaguru.java2.config.SpringConfig;
+import lv.javaguru.java2.config.WebMVCConfig;
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
 import lv.javaguru.java2.database.ShoplistEntityDAO;
 import lv.javaguru.java2.database.UserDAO;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +34,8 @@ import static org.junit.Assert.assertNotEquals;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = {SpringConfig.class, WebMVCConfig.class} )
+@WebAppConfiguration
 public class AddShoplistControllerTest {
 
     private ApplicationContext springContext;

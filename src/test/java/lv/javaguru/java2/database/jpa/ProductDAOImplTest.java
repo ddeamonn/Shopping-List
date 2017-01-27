@@ -1,6 +1,7 @@
 package lv.javaguru.java2.database.jpa;
 
 import lv.javaguru.java2.config.SpringConfig;
+import lv.javaguru.java2.config.WebMVCConfig;
 import lv.javaguru.java2.data.product.ProductInputData;
 import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.domain.Product;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import static lv.javaguru.java2.domain.ProductBuilder.createProduct;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +22,8 @@ import static org.junit.Assert.assertNotNull;
  * Created by DMC on 1/10/2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = {SpringConfig.class, WebMVCConfig.class} )
+@WebAppConfiguration
 public class ProductDAOImplTest {
 
     @Autowired
