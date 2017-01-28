@@ -1,11 +1,6 @@
 package lv.javaguru.java2.shoplist;
 
-import lv.javaguru.java2.data.formatter.DataFormatter;
 import lv.javaguru.java2.data.shoplist.ShoplistInputData;
-import lv.javaguru.java2.database.OrderItemDAO;
-import lv.javaguru.java2.database.ProductDAO;
-import lv.javaguru.java2.database.ShoplistEntityDAO;
-import lv.javaguru.java2.domain.*;
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by DMC on 11/25/2016.
@@ -34,7 +28,7 @@ public class ShoplistManager {
     UpdateShoplistHelper updateShoplistHelper;
 
     @Autowired
-    UpdateShoplistOrderItemStatusHelper updateShoplistOrderItemStatusHelper;
+    UpdateShoplistOrderItemHelper updateShoplistOrderItemStatusHelper;
 
     @Autowired
     DeleteShoplistHelper deleteShoplistHelper;

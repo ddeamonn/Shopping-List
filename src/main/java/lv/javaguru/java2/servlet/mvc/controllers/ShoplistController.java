@@ -49,8 +49,6 @@ public class ShoplistController {
 
     private ModelAndView doRedirectToUserPage() {
         UserDTO userDTO = session.getSessionUser();
-
-        Collection<ShoplistEntityDTO> shoplistEntity = shoplistManager.findUserShoplistOrders(userDTO);
         return new ModelAndView("shoppinglist", "orders", shoplistManager.findUserShoplistOrders(userDTO));
     }
 

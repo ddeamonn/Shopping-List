@@ -13,14 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 @Component
-@Qualifier("JPAShoplist")
+@Qualifier("JPAOrderItem")
 public class OrderItemDAOImpl extends GenericHibernateDAOImpl<OrderItem> implements OrderItemDAO {
 
-    @Override
-    @Transactional
-    public void updateStatus(OrderItem orderItem) {
-        OrderItem dbOrderItem = getById(orderItem.getOrderID());
-        dbOrderItem.setPurchaseStatus(orderItem.getPurchaseStatus());
-        update(dbOrderItem);
-    }
 }

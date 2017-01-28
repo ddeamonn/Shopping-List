@@ -52,9 +52,10 @@ public class PopulateShoplistDataHelper {
                 .withUser(session.getSessionUser())
                 .build();
 
-        int i = 0;
-        List<OrderItemDTO> orderItemDTOs = new ArrayList<>();
+
         if (inputProductNames != null ) {
+            List<OrderItemDTO> orderItemDTOs = new ArrayList<>();
+            int i = 0;
             while (i < inputProductNames.size()) {
                 String productName = inputProductNames.get(i);
 

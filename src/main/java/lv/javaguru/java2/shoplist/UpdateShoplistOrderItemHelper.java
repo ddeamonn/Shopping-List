@@ -23,7 +23,7 @@ import java.util.Collection;
  */
 
 @Component
-public class UpdateShoplistOrderItemStatusHelper {
+public class UpdateShoplistOrderItemHelper {
 
     @Autowired
     @Qualifier("JPAProduct")
@@ -58,10 +58,19 @@ public class UpdateShoplistOrderItemStatusHelper {
             orderItemDTOs.forEach(orderItemDTO ->
             {
                 OrderItem orderItem = orderItemDtoToEntity.transform(orderItemDTO);
-                orderItemDAO.updateStatus(orderItem);
+                orderItemDAO.update(merge(orderItem));
             });
         }
 
         return true;
+    }
+
+    private OrderItem merge(OrderItem orderItem) {
+        OrderItem persistedOrderItem = orderItemDAO.getById(orderItem.getOrderID());
+        persistedOrderItem.setPurchaseStatus(orderItem.getPurchaseStatus());
+        persistedOrderItem.setProductPrice(orderItem.getProductPrice());
+        persistedOrderItem.setProductQty(orderItem.getProductQty());
+
+        return persistedOrderItem;
     }
 }

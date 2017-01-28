@@ -1,5 +1,7 @@
 package lv.javaguru.java2.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -10,7 +12,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "order_item")
-
 public class OrderItem implements Serializable {
 
     @Id

@@ -42,9 +42,9 @@
                     </c:choose>
                 </td>
                 <td><input type="text" name="productName" value="${order.product.productName}" readonly></td>
-                <td><input type="text" name="productQty" value="${order.productQty}" readonly></td>
+                <td><input type="text" name="productQty" value="${order.productQty}"></td>
                 <td>
-                    <input type="text" name="productPrice" value="${order.productPrice}" readonly>
+                    <input type="text" name="productPrice" value="${order.productPrice}">
                     <input type="hidden" name="orderItemID" value="${order.orderID}" readonly>
                 </td>
                 <td align="center"><b>EUR</b></td>
