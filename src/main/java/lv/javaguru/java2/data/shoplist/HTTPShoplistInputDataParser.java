@@ -23,7 +23,6 @@ public class HTTPShoplistInputDataParser implements InputDataParser<Map, Shoplis
     @Override
     public ShoplistInputData parse(Map requestMap) {
 
-        System.out.println("requestMap:"+requestMap);
         ShoplistInputData shoplistInputData = new ShoplistInputData();
 
         String[] buttonUpdate = (String[])requestMap.get("update");
