@@ -40,7 +40,7 @@ public class DoUpdateShoplistController {
             inputDataValidator.validate(inputData);
 
             ShoplistEntityDTO shoplistEntityDTO = shoplistManager.populateShoplistFromInputData(inputData);
-            shoplistManager.updateShoplistOrderItemStatus(shoplistEntityDTO);
+            shoplistManager.updateShoplistOrderItems(shoplistEntityDTO);
 
             modelAndView = doRedirectToResultPage();
         } catch (ValidationException exception) {

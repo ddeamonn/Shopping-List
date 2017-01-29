@@ -46,19 +46,13 @@ public class DeleteShoplistHelper {
         if (orderItemDTOs != null) {
             orderItemDTOs.forEach(orderItemDTO ->
             {
-                OrderItem orderItem = orderItemDtoToEntity.transform(orderItemDTO);
-                orderItemDAO.delete(orderItem.getOrderID());
+                orderItemDAO.delete(orderItemDTO.getOrderID());
             });
         }
 
-        System.out.println("shoplistEntityDTO:" + shoplistEntityDTO);
         ShoplistEntity shoplistEntity = shoplistWithOrderItemsDtoToEntity.transform(shoplistEntityDTO);
-        System.out.println("shoplistEntity:" + shoplistEntity);
         shoplistEntityDAO.delete(shoplistEntity.getShoplistID());
-        return true;
-    }
 
-    private boolean isNewProduct(ProductDTO productDTO) {
-        return productDTO.getProductId() == null;
+        return true;
     }
 }

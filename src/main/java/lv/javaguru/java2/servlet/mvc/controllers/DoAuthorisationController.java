@@ -43,12 +43,7 @@ public class DoAuthorisationController {
         return  doRedirectToUserPage();
 
     }
-/*
-    @RequestMapping(value =  "doLogging", method = {RequestMethod.POST} )
-    public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/error.jsp", "Incorrect request");
-    }
-*/
+
     private ModelAndView doRedirectToUserPage() {
 
         UserDTO userDTO = session.getSessionUser();

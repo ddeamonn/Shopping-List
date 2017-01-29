@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * Created by DMC on 12/20/2016.
  */
-public class OrderItemDTO implements Serializable {
+public class OrderItemDTO {
 
     Long orderID;
 

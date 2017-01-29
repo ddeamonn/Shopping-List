@@ -12,6 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "order_item")
+@DynamicUpdate
 public class OrderItem implements Serializable {
 
     @Id

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,6 +23,7 @@ public class HTTPShoplistInputDataParser implements InputDataParser<Map, Shoplis
     @Override
     public ShoplistInputData parse(Map requestMap) {
 
+        System.out.println("requestMap:"+requestMap);
         ShoplistInputData shoplistInputData = new ShoplistInputData();
 
         String[] buttonUpdate = (String[])requestMap.get("update");
@@ -56,25 +58,27 @@ public class HTTPShoplistInputDataParser implements InputDataParser<Map, Shoplis
         if (productPrices != null)
             shoplistInputData.setProductPrices(new ArrayList<String>(Arrays.asList(productPrices)));
 
-        if (buttonUpdate != null) {
-            ArrayList purchaseStatuses = new ArrayList(productNames.length);
-
+        if (productNames !=null) {
+            List<String> purchaseStatuses = new ArrayList();
             for (int i = 0; i < productNames.length; i++) {
-                String[] inputPurchaseStatusArr = (String[])requestMap.get("productStatus" + i);
-                String inputPurchaseStatus;
-                if (inputPurchaseStatusArr == null) {
-                    inputPurchaseStatus = "off";
-                } else {
-                    inputPurchaseStatus = "on";
-                }
-
-                purchaseStatuses.add(inputPurchaseStatus);
+                purchaseStatuses.add(getPurchaseStatus(requestMap, i));
             }
 
-            if (purchaseStatuses != null)
-                shoplistInputData.setPurchaseStatuses(purchaseStatuses);
+            shoplistInputData.setPurchaseStatuses(purchaseStatuses);
         }
 
         return shoplistInputData;
+    }
+
+    private String getPurchaseStatus(Map requestMap, int i) {
+        String[] inputPurchaseStatusArr = (String[])requestMap.get("productStatus" + i);
+        String inputPurchaseStatus;
+        if (inputPurchaseStatusArr == null) {
+            inputPurchaseStatus = "off";
+        } else {
+            inputPurchaseStatus = "on";
+        }
+
+        return inputPurchaseStatus;
     }
 }

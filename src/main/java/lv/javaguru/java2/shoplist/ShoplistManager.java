@@ -57,8 +57,8 @@ public class ShoplistManager {
         updateShoplistHelper.update(shoplist);
     }
 
-    public void updateShoplistOrderItemStatus(ShoplistEntityDTO shoplist) throws RuntimeException {
-        updateShoplistOrderItemStatusHelper.updateStatus(shoplist);
+    public void updateShoplistOrderItems(ShoplistEntityDTO shoplist) throws RuntimeException {
+        updateShoplistOrderItemStatusHelper.update(shoplist);
     }
 
     public void deleteShoplist(ShoplistEntityDTO shoplist) throws RuntimeException  {

@@ -51,7 +51,7 @@ public class UpdateShoplistOrderItemHelper {
     DataTransformer<OrderItem, OrderItemDTO> orderItemDtoToEntity;
 
     @Transactional
-    boolean updateStatus(ShoplistEntityDTO shoplistEntityDTO) throws RuntimeException{
+    boolean update(ShoplistEntityDTO shoplistEntityDTO) throws RuntimeException{
 
         Collection<OrderItemDTO> orderItemDTOs =  shoplistEntityDTO.getOrderItemsDTO();
         if (orderItemDTOs != null) {
