@@ -1,6 +1,4 @@
 package lv.javaguru.java2.servlet.mvc.controllers;
-
-
 import lv.javaguru.java2.dto.ShoplistEntityDTO;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.session.Session;
@@ -13,8 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
-
-//import lv.javaguru.java2.servlet.mvc.ModelAndView;
 
 @Controller
 public class ShoplistController {
@@ -42,14 +38,12 @@ public class ShoplistController {
         return modelAndView;
     }
 
-
     private ModelAndView doRedirectToAuthorisationPage() {
-        return new ModelAndView("login", "login", "Welcome");
+        return new ModelAndView("startpage", "login", "Welcome");
     }
 
     private ModelAndView doRedirectToUserPage() {
-        UserDTO userDTO = session.getSessionUser();
-        return new ModelAndView("shoppinglist", "orders", shoplistManager.findUserShoplistOrders(userDTO));
+        return new ModelAndView("shoppinglist", "user", session.getSessionUser());
     }
 
     private ModelAndView doRedirectToErrorPage() {

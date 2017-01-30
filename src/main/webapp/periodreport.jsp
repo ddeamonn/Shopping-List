@@ -4,11 +4,15 @@
 
 <html>
 <head>
+    <link href= <c:url value="/resources/css/styles.css" /> rel="stylesheet" type="text/css">
     <link href= <c:url value="/resources/css/ion.calendar.css" /> rel="stylesheet" type="text/css">
     <title>Reports</title>
 </head>
 
 <body>
+
+    <%@include file="menu.jsp" %>
+
     <h1>Report by period</h1>
     <form action="/doViewPeriodReport" method="post">
         <table>

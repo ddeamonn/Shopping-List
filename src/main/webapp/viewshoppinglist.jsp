@@ -4,6 +4,7 @@
 
 <html>
 <head>
+    <link href= <c:url value="/resources/css/styles.css" /> rel="stylesheet" type="text/css">
     <title>Shopping list record</title>
 </head>
 <body>

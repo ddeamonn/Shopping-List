@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
+    <link href= <c:url value="/resources/css/styles.css" /> rel="stylesheet" type="text/css">
     <title>shoplist report viewer</title>
 </head>
 <body>

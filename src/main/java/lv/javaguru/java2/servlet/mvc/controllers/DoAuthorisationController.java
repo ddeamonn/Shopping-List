@@ -37,10 +37,9 @@ public class DoAuthorisationController {
     public ModelAndView processPost(HttpServletRequest req) {
 
         AuthorizationContext context = new AuthorizationContext();
-        context.setHashNumber("123344");
         authorisation.authorize(context);
 
-        return  doRedirectToUserPage();
+        return doRedirectToUserPage();
 
     }
 

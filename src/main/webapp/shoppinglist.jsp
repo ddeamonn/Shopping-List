@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <link href= <c:url value="/resources/css/styles.css" /> rel="stylesheet" type="text/css">
     <title>Shopping list page</title>
 </head>
 <body>
@@ -27,6 +28,7 @@
         element0.setAttribute("value", "on");
         element0.setAttribute("name", "productStatus");
 
+        newCell0.style.textAlign = "center";
         newCell0.appendChild(element0);
 
         // Insert a cell in the row at index 0
@@ -105,31 +107,14 @@
     }
 </script>
 
-<a href="/reports.jsp"><b>Reports</b></a>
+<%@include file="menu.jsp" %>
 
-<form action="/doViewShoplist" method="post">
-<table>
-    <tr>
-        <td colspan="2"><b>User Orders:</b></td>
-    </tr>
-    <tr>
-        <td>
-            <select name="orders">
-                <c:forEach var="order" items="${requestScope.orders}">
-                    <option value="${order.shoplistID}">${order.shoplistName}</option>
-                </c:forEach>
-            </select>
-        </td>
-        <td><input type="submit" value="view order"><td>
-    </tr>
-</table>
-</form>
 
-<h1>New shopping list</h1>
 <form action="/addShoplist" method="post">
-    <table>
+    <h4 align="center">New shopping list</h4>
+    <table align="center" frame="box" >
 
-        <tr><td colspan="2">Shoplist Name:<input type="text" name="shoplistName"></td>
+        <tr><td align="center" colspan="2" >Shoplist Name:<input type="text" name="shoplistName"></td>
         <tr><td colspan="2">
             <table><tr>
             <td><input type="button" id="more_fields"
@@ -144,7 +129,7 @@
             </td>
         </tr>
 
-        <tr><td colspan="2">
+        <tr><td>
 
         <table id="products">
         <tr>
@@ -156,7 +141,7 @@
         </tr>
         <tbody>
         <tr>
-            <td><input type="checkbox" name="productStatus0" value="on"></td>
+            <td align="center"><input type="checkbox" name="productStatus0" value="on"></td>
             <td><input type="text" name="productName"></td>
             <td><input type="text" name="productQty" value = "0"></td>
             <td><input type="text" name="productPrice" value = "0.00"></td>
@@ -167,7 +152,7 @@
 
         </td></tr>
         <tr>
-            <td colspan="2"><input type="submit" value="save" name="save"><td>
+            <td><input type="submit" value="save" name="save"><td>
         </tr>
     </table>
 </form>
