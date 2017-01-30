@@ -7,9 +7,9 @@
     <title>shoplist report viewer</title>
 </head>
 <body>
-    <h1>list of shops</h1>
+    <h4 align="center">list of shops</h4>
     <form action="/doViewShoplist" method="post">
-        <table>
+        <table align="center">
             <tr>
                 <td colspan="2"><b>User Orders:</b></td>
             </tr>

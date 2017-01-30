@@ -13,9 +13,9 @@
 
     <%@include file="menu.jsp" %>
 
-    <h1>Report by period</h1>
+    <h4 align="center">Report by period</h4>
     <form action="/doViewPeriodReport" method="post">
-        <table>
+        <table align="center">
             <tr>
             <td>start date:</td>
          	<td><input type="text" value="" name="startDate" id="startDate" data-lang="en" data-years="2015-2035" data-format="YYYY-MM-DD" required />

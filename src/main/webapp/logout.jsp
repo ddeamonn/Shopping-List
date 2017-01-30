@@ -3,12 +3,16 @@
 <html>
 <head>
     <link href= <c:url value="/resources/css/styles.css" /> rel="stylesheet" type="text/css">
-    <title>JSP page</title>
+    <title>Log out</title>
 </head>
 <body>
-    <%@include file="menu.jsp" %>
-
-    <h1>${requestScope.info}</h1>
-    <a href="/">Return to home page</a>
+<table align="center">
+    <tr>
+        <td>
+            <a href="/">Home</a>
+        </td>
+    </tr>
+</table>
+    <h1>Session closed</h1>
 </body>
 </html>

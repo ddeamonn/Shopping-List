@@ -7,8 +7,7 @@
 </head>
 <body>
     <%@include file="menu.jsp" %>
-
     <h1>${requestScope.info}</h1>
-    <a href="/">Return to home page</a>
+    <a href="/doViewshoplists">Return to orders page</a>
 </body>
 </html>

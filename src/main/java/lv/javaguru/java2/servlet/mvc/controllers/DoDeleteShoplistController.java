@@ -54,7 +54,7 @@ public class DoDeleteShoplistController {
     }
 
     private ModelAndView doRedirectToResultPage() {
-        return new ModelAndView("addShoplistResult", "info", "Shopping list deleted");
+        return new ModelAndView("orderResult", "info", "Shopping list deleted");
     }
 
     private ModelAndView doRedirectToValidationErrorPage(String errorMessage) {

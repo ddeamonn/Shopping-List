@@ -54,7 +54,7 @@ public class DoUpdateShoplistController {
     }
 
     private ModelAndView doRedirectToResultPage() {
-        return new ModelAndView("addShoplistResult", "info", "Shopping list updated");
+        return new ModelAndView("orderResult", "info", "Shopping list updated");
     }
 
     private ModelAndView doRedirectToValidationErrorPage(String errorMessage) {

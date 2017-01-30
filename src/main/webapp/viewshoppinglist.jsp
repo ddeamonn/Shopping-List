@@ -9,9 +9,11 @@
 </head>
 <body>
 
-<h1>Shopping list record</h1>
+<%@include file="menu.jsp" %>
+
+<h4 align="center">Shopping list:</h4>
 <form method="post">
-    <table>
+    <table align="center" frame="box" >
 
         <tr><td align="right">Shoplist Name:</td>
             <td>
