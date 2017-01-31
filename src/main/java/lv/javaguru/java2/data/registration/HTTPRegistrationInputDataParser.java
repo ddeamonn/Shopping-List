@@ -28,8 +28,14 @@ public class HTTPRegistrationInputDataParser implements InputDataParser<Map, Reg
         String[] mail = (String[])requestMap.get("customerMail");
         inputData.setEmail(mail[mail.length-1]);
 
+        String[] repeatMail = (String[])requestMap.get("repeatCustomerMail");
+        inputData.setRepeatEmail(repeatMail[repeatMail.length-1]);
+
         String[] password = (String[])requestMap.get("customerPassword");
         inputData.setPassword(password[password.length-1]);
+
+        String[] repeatPassword = (String[])requestMap.get("repeatCustomerPassword");
+        inputData.setRepeatPassword(repeatPassword[repeatPassword.length-1]);
 
         return inputData;
     }
