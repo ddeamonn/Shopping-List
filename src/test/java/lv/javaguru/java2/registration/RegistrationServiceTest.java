@@ -6,12 +6,16 @@ import lv.javaguru.java2.data.registration.RegistrationInputData;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.user.BuildUserHelper;
+import lv.javaguru.java2.validator.ValidationException;
+import lv.javaguru.java2.validator.register.rule.RegistrationCorrectPassword;
+import lv.javaguru.java2.validator.register.rule.RegistrationInputDataRule;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -39,7 +43,9 @@ public class RegistrationServiceTest {
 
         RegistrationInputData inputData = new RegistrationInputData();
         inputData.setEmail("emailunique@mail2.lv");
+        inputData.setRepeatEmail("emailunique@mail2.lv");
         inputData.setPassword("password");
+        inputData.setRepeatPassword("password");
 
         User user = buildUserHelper
                 .createUser()
@@ -59,4 +65,5 @@ public class RegistrationServiceTest {
 
         Assert.assertEquals(dbUser.getEmail(), user.getEmail());
     }
+
 }

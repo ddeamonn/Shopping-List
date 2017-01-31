@@ -16,9 +16,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by DMC on 1/16/2017.
@@ -59,9 +62,6 @@ public class ShoplistControllerTest {
     public void userLoggedInTest () {
         ModelAndView modelAndView = controller.processGet(req);
 
-        //Object data  = modelAndView.getData();
-        //String view = modelAndView.getJspName();
-
-        //assertEquals("/shoppinglist.jsp", view);
+        assertEquals("shoppinglist", modelAndView.getViewName());
     }
 }
