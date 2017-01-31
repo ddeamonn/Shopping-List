@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 public class DoAuthorisationController {
 
     @Autowired
-    @Qualifier("LoginAuthorisation")
+    @Qualifier("MockLoginAuthorisation")
     AuthorizationService authorisation;
 
     @Autowired

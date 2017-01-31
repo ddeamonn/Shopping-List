@@ -15,14 +15,29 @@ import java.util.List;
  * Created by DMC on 12/27/2016.
  */
 @Component
-@Qualifier("LoginAuthorisation")
-public class LoginAuthorizationService implements AuthorizationService {
+@Qualifier("MockLoginAuthorisation")
+public class MockLoginAuthorizationService implements AuthorizationService {
+
+    @Autowired
+    @Qualifier("JPAUser")
+    UserDAO userDAO;
+
+    @Autowired
+    Session session;
+
+    @Autowired
+    @Qualifier("UserToDTOTransformer")
+    DataTransformer<UserDTO, User> userToDTOTransformer;
 
     @Override
     public boolean authorize(AuthorizationContext context) {
 
-        // TODO
-        // Password and Login authorization  should be implemented here
+        List<User> users = userDAO.getAll();
+        User mockUser = users.get(users.size() - 1);
+
+        UserDTO mockUserDTO = userToDTOTransformer.transform(mockUser);
+
+        session.setSessionUser(mockUserDTO);
 
         return true;
     }
