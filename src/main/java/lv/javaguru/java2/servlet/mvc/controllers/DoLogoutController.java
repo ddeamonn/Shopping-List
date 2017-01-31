@@ -18,12 +18,17 @@ public class DoLogoutController {
 
     @RequestMapping(value = "doLogout", method = { RequestMethod.GET } )
     public ModelAndView processGet(HttpServletRequest req) {
+        logout(req);
         return doRedirectToLogoutResultPage();
     }
 
     private ModelAndView doRedirectToLogoutResultPage() {
-        session.setSessionUser(null);
         return new ModelAndView("logout","info",null);
+    }
+
+    private void logout(HttpServletRequest req) {
+        session.setSessionUser(null);
+        req.getSession().invalidate();
     }
 
 }
