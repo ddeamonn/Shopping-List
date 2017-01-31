@@ -7,7 +7,10 @@
     <title>shoplist report viewer</title>
 </head>
 <body>
-    <h4 align="center">list of shops</h4>
+
+    <%@include file="menu.jsp" %>
+
+    <h4 align="center">List of shops by period</h4>
     <form action="/doViewShoplist" method="post">
         <table align="center">
             <tr>
