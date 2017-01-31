@@ -73,7 +73,7 @@ public class RegistrationService {
     }
 
     private ModelAndView doRedirectToResultPage() {
-        return new ModelAndView("addShoplistResult", "info", "User registered");
+        return new ModelAndView("registrationResult", "info", "User registered");
     }
 
     private ModelAndView doRedirectToValidationErrorPage(String errorMessage) {

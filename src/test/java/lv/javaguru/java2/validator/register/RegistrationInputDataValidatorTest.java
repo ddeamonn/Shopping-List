@@ -7,6 +7,8 @@ import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.user.BuildUserHelper;
 import lv.javaguru.java2.validator.ValidationException;
+import lv.javaguru.java2.validator.register.rule.RegistrationCorrectEmail;
+import lv.javaguru.java2.validator.register.rule.RegistrationCorrectPassword;
 import lv.javaguru.java2.validator.register.rule.RegistrationInputDataRule;
 import lv.javaguru.java2.validator.register.rule.ValidEmailFormatRule;
 import org.junit.Assert;
@@ -46,6 +48,9 @@ public class RegistrationInputDataValidatorTest {
         inputData.setEmail("user@user.lv");
         inputData.setPassword("password");
 
+        inputData.setRepeatEmail("user@user.lv");
+        inputData.setRepeatPassword("password");
+
         User user = null;
         try {
             user = userDAO.getUserByEmail(inputData.getEmail());
@@ -73,6 +78,9 @@ public class RegistrationInputDataValidatorTest {
         RegistrationInputData inputData = new RegistrationInputData();
         inputData.setEmail("user@uniqueemail.com");
         inputData.setPassword("password");
+        inputData.setRepeatEmail("user@uniqueemail.com");
+        inputData.setRepeatPassword("password");
+
         User dbUser = userDAO.getUserByEmail(inputData.getEmail());
 
         if (dbUser != null) {
@@ -116,6 +124,49 @@ public class RegistrationInputDataValidatorTest {
         inputData.setEmail("mail@gmail.com");
 
         RegistrationInputDataRule rule = new ValidEmailFormatRule();
+        boolean result = rule.validate(inputData);
+        Assert.assertTrue(result);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void passwordAndRepeatPasswordDiffers() {
+        RegistrationInputData inputData = new RegistrationInputData();
+        inputData.setPassword("password");
+        inputData.setRepeatPassword("repeatpasswrod");
+
+        RegistrationInputDataRule rule = new RegistrationCorrectPassword();
+        rule.validate(inputData);
+    }
+
+    @Test
+    public void passwordAndRepeatPasswordEquals() {
+        RegistrationInputData inputData = new RegistrationInputData();
+        inputData.setPassword("password");
+        inputData.setRepeatPassword("password");
+
+        RegistrationInputDataRule rule = new RegistrationCorrectPassword();
+        boolean result = rule.validate(inputData);
+
+        Assert.assertTrue(result);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void emailAndRepeatEmailDiffers() {
+        RegistrationInputData inputData = new RegistrationInputData();
+        inputData.setEmail("email@email.com");
+        inputData.setRepeatEmail("repeatemail@eamil.com");
+
+        RegistrationInputDataRule rule = new RegistrationCorrectEmail();
+        rule.validate(inputData);
+    }
+
+    @Test
+    public void emailAndRepeatEmailEquals() {
+        RegistrationInputData inputData = new RegistrationInputData();
+        inputData.setEmail("email@email.com");
+        inputData.setRepeatEmail("email@email.com");
+
+        RegistrationInputDataRule rule = new RegistrationCorrectEmail();
         boolean result = rule.validate(inputData);
         Assert.assertTrue(result);
     }
