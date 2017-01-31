@@ -46,9 +46,11 @@ public class DeleteShoplistHelper {
         if (orderItemDTOs != null) {
             orderItemDTOs.forEach(orderItemDTO ->
             {
-                orderItemDAO.delete(orderItemDTO.getOrderID());
+                if (orderItemDTO.getOrderID() != null)
+                    orderItemDAO.delete(orderItemDTO.getOrderID());
             });
         }
+
 
         ShoplistEntity shoplistEntity = shoplistWithOrderItemsDtoToEntity.transform(shoplistEntityDTO);
         shoplistEntityDAO.delete(shoplistEntity.getShoplistID());
